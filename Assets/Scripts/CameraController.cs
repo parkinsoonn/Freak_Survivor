@@ -30,7 +30,8 @@ public class CameraController : MonoBehaviour
         if (target != null)
         {
             Vector3 desiredPosition = target.position + offset;
-            basePosition = Vector3.Lerp(basePosition, desiredPosition, smoothSpeed * Time.deltaTime);
+            // Üstel yumuşatma: kare hızından bağımsız aynı takip hissi
+            basePosition = Vector3.Lerp(basePosition, desiredPosition, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
 
             Vector3 shakeOffset = Vector3.zero;
             if (currentShakeDuration > 0)

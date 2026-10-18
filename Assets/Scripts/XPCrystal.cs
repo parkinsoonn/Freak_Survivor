@@ -1,13 +1,13 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class XPKristali : MonoBehaviour
+public class XPCrystal : MonoBehaviour
 {
-    public int xpDegeri = 1; 
+    [FormerlySerializedAs("xpDegeri")] public int xpValue = 1;
     private GameManager gameManager;
 
     void Start()
     {
-        
         gameManager = FindAnyObjectByType<GameManager>();
     }
 
@@ -15,13 +15,11 @@ public class XPKristali : MonoBehaviour
     {
         if (hitInfo.CompareTag("Player"))
         {
-            
             if (gameManager != null)
             {
-                gameManager.AddXP(xpDegeri);
+                gameManager.AddXP(xpValue);
             }
             Destroy(gameObject);
         }
     }
 }
-        

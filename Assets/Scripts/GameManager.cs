@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     [Header("UI Panelleri")]
     public GameObject gameOverPanel;
-    public GameObject pausePanel; // YENİ: Pause panelimizi atayacağımız boşluk
-    public GameObject levelUpPanel; // YENİ: Seviye atlama panelimiz
+    public GameObject pausePanel; // Pause panelimizi atayacağımız boşluk
+    public GameObject levelUpPanel; // Seviye atlama panelimiz
 
     [Header("Skor Sistemi")]
     public int score = 0;
@@ -20,16 +21,20 @@ public class GameManager : MonoBehaviour
     // Oyun durumunu kontrol eden kilitler
     private bool isPaused = false;
     private bool isGameOver = false;
+    private bool isLevelingUp = false;
 
     [Header("XP ve Seviye Sistemi")]
-    public int mevcutXP = 0;
-    public int mevcutSeviye = 1;
-    public int sonrakiSeviyeIcinGerekenXP = 5; // İlk seviye için 5 XP yetsin
+    [FormerlySerializedAs("mevcutXP")] public int currentXP = 0;
+    [FormerlySerializedAs("mevcutSeviye")] public int currentLevel = 1;
+    [FormerlySerializedAs("sonrakiSeviyeIcinGerekenXP")] public int xpToNextLevel = 5; // İlk seviye için 5 XP yetsin
 
-    public TextMeshProUGUI seviyeYazisi; // Ekranda LEVEL: 1 yazması için
+    [FormerlySerializedAs("seviyeYazisi")] public TextMeshProUGUI levelText; // Ekranda LEVEL: 1 yazması için
 
     [Header("Seviye Atlama Sesleri")]
     public AudioClip levelUpSound; // Seviye atlandığında çalacak şatafatlı ses
+
+    private PlayerController playerController;
+    private PlayerHealth playerHealth;
 
     void Start()
     {
@@ -37,19 +42,20 @@ public class GameManager : MonoBehaviour
         UpdateScoreText();
         bgmSource = GetComponent<AudioSource>();
 
-        // YENİ: Oyuna girerken kaydedilmiş ses ayarını hafızadan çek ve uygula
+        playerController = FindAnyObjectByType<PlayerController>();
+        playerHealth = FindAnyObjectByType<PlayerHealth>();
+
+        // Oyuna girerken kaydedilmiş ses ayarını hafızadan çek ve uygula
         AudioListener.volume = PlayerPrefs.GetFloat("GameVolume", 1f);
 
-        UpdateSeviyeText();
-
+        UpdateLevelText();
     }
 
     void Update()
     {
-        // YENİ: Eğer oyun bitmişse (Game Over), ESC tuşu hiçbir işe yaramasın
-        if (isGameOver) return;
+        // Oyun bitmişse ya da seviye atlama ekranı açıksa ESC hiçbir işe yaramasın
+        if (isGameOver || isLevelingUp) return;
 
-        // YENİ: ESC tuşuna basıldığını algıla
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -63,40 +69,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // YENİ: Oyunu Duraklatma Fonksiyonu
+    // Oyunu Duraklatma Fonksiyonu
     public void PauseGame()
     {
-        pausePanel.SetActive(true);
+        if (pausePanel != null) pausePanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
 
         if (bgmSource != null) bgmSource.Pause();
 
-        // YENİ: ESC menüsü açıldığında UI yazılarını gizle
-        if (scoreText != null) scoreText.gameObject.SetActive(false);
-        if (seviyeYazisi != null) seviyeYazisi.gameObject.SetActive(false);
-
-        // YENİ: Pause menüsü açıldığında Dash UI'ı gizle
-        FindAnyObjectByType<PlayerController>().SetDashUIVisibility(false);
+        // ESC menüsü açıldığında HUD'u gizle
+        SetHUDVisibility(false);
     }
 
     public void ResumeGame()
     {
-        pausePanel.SetActive(false);
+        if (pausePanel != null) pausePanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
 
         if (bgmSource != null) bgmSource.UnPause();
 
-        // YENİ: Oyuna devam edildiğinde UI yazılarını tekrar görünür yap
-        if (scoreText != null) scoreText.gameObject.SetActive(true);
-        if (seviyeYazisi != null) seviyeYazisi.gameObject.SetActive(true);
-
-        // YENİ: Oyuna dönüldüğünde Dash UI'ı tekrar göster
-        FindAnyObjectByType<PlayerController>().SetDashUIVisibility(true);
+        // Oyuna devam edildiğinde HUD'u tekrar görünür yap
+        SetHUDVisibility(true);
     }
 
-    // YENİ: Ana Menüye Dönme Fonksiyonu
+    // Ana Menüye Dönme Fonksiyonu
     public void LoadMainMenu()
     {
         Time.timeScale = 1f; // ÇOK ÖNEMLİ: Zamanı normale döndürmezsek ana menü de donuk kalır!
@@ -119,15 +117,13 @@ public class GameManager : MonoBehaviour
 
     public void ShowGameOver()
     {
+        if (isGameOver) return;
+
         isGameOver = true;
-        gameOverPanel.SetActive(true);
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
 
-        // YENİ: Oyun bittiğinde hem Skoru hem de Level'ı gizle
-        if (scoreText != null) scoreText.gameObject.SetActive(false);
-        if (seviyeYazisi != null) seviyeYazisi.gameObject.SetActive(false);
-
-        // YENİ: Oyun bittiğinde Dash UI'ı gizle
-        FindAnyObjectByType<PlayerController>().SetDashUIVisibility(false);
+        // Oyun bittiğinde Skor, Level ve Dash UI'ı gizle
+        SetHUDVisibility(false);
 
         if (bgmSource != null)
         {
@@ -147,111 +143,93 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    
-    public void AddXP(int miktar)
+    public void AddXP(int amount)
     {
-        mevcutXP += miktar;
+        currentXP += amount;
 
-        
-        UpdateSeviyeText();
+        UpdateLevelText();
 
-        
-        if (mevcutXP >= sonrakiSeviyeIcinGerekenXP)
+        if (currentXP >= xpToNextLevel)
         {
-            SeviyeAtla();
+            LevelUp();
         }
     }
 
-    void SeviyeAtla()
+    void LevelUp()
     {
-        
-        mevcutXP -= sonrakiSeviyeIcinGerekenXP;
-        mevcutSeviye++;
-        sonrakiSeviyeIcinGerekenXP = mevcutSeviye * 5;
+        currentXP -= xpToNextLevel;
+        currentLevel++;
+        xpToNextLevel = currentLevel * 5;
 
-        UpdateSeviyeText();
+        UpdateLevelText();
 
         if (levelUpPanel != null)
         {
+            isLevelingUp = true;
             levelUpPanel.SetActive(true);
 
-            if (scoreText != null) scoreText.gameObject.SetActive(false);
-            if (seviyeYazisi != null) seviyeYazisi.gameObject.SetActive(false);
+            SetHUDVisibility(false);
 
-            
-            FindAnyObjectByType<PlayerController>().SetDashUIVisibility(false);
-
-            
             if (bgmSource != null)
             {
-                bgmSource.Pause(); 
+                bgmSource.Pause();
             }
 
-            if (levelUpSound != null)
+            if (levelUpSound != null && Camera.main != null)
             {
-                
                 AudioSource.PlayClipAtPoint(levelUpSound, Camera.main.transform.position);
             }
 
-            Time.timeScale = 0f; 
+            Time.timeScale = 0f;
         }
     }
 
-    
-    int comboHesapla()
+    void UpdateLevelText()
     {
-        return sonrakiSeviyeIcinGerekenXP;
-    }
-
-    void UpdateSeviyeText()
-    {
-        if (seviyeYazisi != null)
+        if (levelText != null)
         {
-            seviyeYazisi.text = "LEVEL: " + mevcutSeviye.ToString() + " (XP: " + mevcutXP + "/" + sonrakiSeviyeIcinGerekenXP + ")";
+            levelText.text = "LEVEL: " + currentLevel.ToString() + " (XP: " + currentXP + "/" + xpToNextLevel + ")";
         }
     }
 
-    
     public void ChooseSpeedUpgrade()
     {
-        
-        FindAnyObjectByType<PlayerController>().IncreaseSpeed(1f);
+        if (playerController != null) playerController.IncreaseSpeed(1f);
         ResumeAfterUpgrade();
     }
 
-    
     public void ChooseFireRateUpgrade()
     {
-
-        FindAnyObjectByType<PlayerController>().IncreaseFireRate(0.03f);
+        if (playerController != null) playerController.IncreaseFireRate(0.03f);
         ResumeAfterUpgrade();
     }
 
-    
     public void ChooseHealUpgrade()
     {
-        FindAnyObjectByType<PlayerHealth>().HealPlayer();
-
+        if (playerHealth != null) playerHealth.HealPlayer();
         ResumeAfterUpgrade();
     }
 
-    
     void ResumeAfterUpgrade()
     {
-        levelUpPanel.SetActive(false);
+        isLevelingUp = false;
+        if (levelUpPanel != null) levelUpPanel.SetActive(false);
 
-        if (scoreText != null) scoreText.gameObject.SetActive(true);
-        if (seviyeYazisi != null) seviyeYazisi.gameObject.SetActive(true);
+        SetHUDVisibility(true);
 
-        
-        FindAnyObjectByType<PlayerController>().SetDashUIVisibility(true);
-
-        
         if (bgmSource != null)
         {
             bgmSource.UnPause();
         }
 
         Time.timeScale = 1f;
+    }
+
+    // Skor, Level ve Dash UI'ını birlikte gösterip gizler
+    void SetHUDVisibility(bool isVisible)
+    {
+        if (scoreText != null) scoreText.gameObject.SetActive(isVisible);
+        if (levelText != null) levelText.gameObject.SetActive(isVisible);
+        if (playerController != null) playerController.SetDashUIVisibility(isVisible);
     }
 }

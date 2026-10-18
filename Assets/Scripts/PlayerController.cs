@@ -13,12 +13,13 @@ public class PlayerController : MonoBehaviour
     [Header("Ateş Etme Ayarları")]
     public float fireRate = 0.5f;
     private float nextFireTime = 0f;
-    
+    // Oyun durduğunda (menü butonuna tıklarken) basılı tutulan tık, bırakılana kadar ateş etmesin
+    private bool fireLocked = false;
+
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public AudioClip shootSound; 
+    public AudioClip shootSound;
 
-    
     [Range(0f, 1f)] public float shootVolume = 0.5f;
 
     [Header("Dash Ayarları")]
@@ -32,7 +33,6 @@ public class PlayerController : MonoBehaviour
     public Image dashIconImage;
     public TextMeshProUGUI dashCooldownText;
 
-    
     private Rigidbody2D rb2d;
     private PlayerHealth playerHealth;
     private Camera cam;
@@ -41,10 +41,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
         rb2d = GetComponent<Rigidbody2D>();
         playerHealth = GetComponent<PlayerHealth>();
-        cam = Camera.main; 
+        cam = Camera.main;
 
         if (dashCooldownText != null) dashCooldownText.text = "";
         audioSource = GetComponent<AudioSource>();
@@ -52,7 +51,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+        // Pause, seviye atlama ve Game Over ekranlarında oyuncu girdisi işlenmesin
+        if (Time.timeScale == 0f)
+        {
+            fireLocked = true;
+            return;
+        }
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -61,7 +66,10 @@ public class PlayerController : MonoBehaviour
             mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
+        bool fireHeld = Input.GetButton("Fire1");
+        if (!fireHeld) fireLocked = false;
+
+        if (fireHeld && !fireLocked && Time.time >= nextFireTime)
         {
             Shoot();
             nextFireTime = Time.time + fireRate;
@@ -77,21 +85,18 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(PerformDash());
         }
-
-        
-        Vector2 lookDir = mousePos - rb2d.position;
-        
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
-        rb2d.rotation = angle;
     }
 
     void FixedUpdate()
     {
-        
         if (!isDashing)
         {
             rb2d.linearVelocity = movement.normalized * moveSpeed;
         }
+
+        Vector2 lookDir = mousePos - rb2d.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
+        rb2d.MoveRotation(angle);
     }
 
     IEnumerator PerformDash()
@@ -134,15 +139,16 @@ public class PlayerController : MonoBehaviour
 
     void UpdateDashUI()
     {
-        if (dashCooldownTimer > 0)
+        bool onCooldown = dashCooldownTimer > 0;
+
+        if (dashCooldownText != null)
         {
-            dashCooldownText.text = dashCooldownTimer.ToString("F1") + "s";
-            dashIconImage.color = new Color(0.3f, 0.3f, 0.3f, 0.6f);
+            dashCooldownText.text = onCooldown ? dashCooldownTimer.ToString("F1") + "s" : "READY";
         }
-        else
+
+        if (dashIconImage != null)
         {
-            dashCooldownText.text = "READY";
-            dashIconImage.color = Color.white;
+            dashIconImage.color = onCooldown ? new Color(0.3f, 0.3f, 0.3f, 0.6f) : Color.white;
         }
     }
 
@@ -152,7 +158,6 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
-            
             if (shootSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(shootSound, shootVolume);
