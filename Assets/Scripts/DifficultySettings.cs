@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum Difficulty { Easy, Normal, Hard }
 
-// Ana menüde seçilen zorluk; inspector değerleri "Normal" kabul edilip bu çarpanlarla ölçeklenir
+// Ana menüde seçilen zorluk; inspector değerleri temel kabul edilip bu çarpanlarla ölçeklenir
 public static class DifficultySettings
 {
     private const string PrefsKey = "Difficulty";
@@ -23,12 +23,12 @@ public static class DifficultySettings
         }
     }
 
-    public static float EnemySpeedMultiplier => Pick(0.8f, 1f, 1.25f);
+    public static float EnemySpeedMultiplier => Pick(0.85f, 1.1f, 1.4f);
 
     // Başlangıç ve minimum spawn aralığına uygulanır (küçük = daha sık düşman)
-    public static float SpawnIntervalMultiplier => Pick(1.3f, 1f, 0.7f);
+    public static float SpawnIntervalMultiplier => Pick(1.2f, 0.85f, 0.6f);
 
-    public static float RampRateMultiplier => Pick(0.7f, 1f, 1.5f);
+    public static float RampRateMultiplier => Pick(0.8f, 1.25f, 1.8f);
 
     public static float MultiShotDropChance => Pick(0.03f, 0.02f, 0.01f);
 
