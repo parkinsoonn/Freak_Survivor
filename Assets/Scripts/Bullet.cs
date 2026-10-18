@@ -13,6 +13,9 @@ public class Bullet : MonoBehaviour
     [Header("XP Ayarı")]
     [FormerlySerializedAs("xpKristalPrefab")] public GameObject xpCrystalPrefab;
 
+    [Header("Power-up")]
+    public GameObject multiShotPickupPrefab; // Düşme şansı DifficultySettings.MultiShotDropChance
+
     [Header("Ayarlar")]
     public float speed = 20f; // Merminin uçuş hızı
     private Rigidbody2D rb2d;
@@ -59,6 +62,13 @@ public class Bullet : MonoBehaviour
         if (xpCrystalPrefab != null)
         {
             Instantiate(xpCrystalPrefab, hitInfo.transform.position, Quaternion.identity);
+        }
+
+        if (multiShotPickupPrefab != null && Random.value < DifficultySettings.MultiShotDropChance)
+        {
+            // XP kristaliyle üst üste binmesin diye biraz kaydır
+            Vector3 dropPosition = hitInfo.transform.position + (Vector3)(Random.insideUnitCircle.normalized * 0.5f);
+            Instantiate(multiShotPickupPrefab, dropPosition, Quaternion.identity);
         }
 
         if (deathEffect != null)

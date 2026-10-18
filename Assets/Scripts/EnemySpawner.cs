@@ -17,6 +17,11 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null) player = playerObject.transform;
+
+        // Seçilen zorluğa göre spawn sıklığını ölçekle
+        spawnInterval *= DifficultySettings.SpawnIntervalMultiplier;
+        minSpawnInterval *= DifficultySettings.SpawnIntervalMultiplier;
+        difficultyRampRate *= DifficultySettings.RampRateMultiplier;
     }
 
     void Update()

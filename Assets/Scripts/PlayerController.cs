@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     // Oyun durduğunda (menü butonuna tıklarken) basılı tutulan tık, bırakılana kadar ateş etmesin
     private bool fireLocked = false;
 
+    [Header("Çoklu Atış")]
+    public int bulletCount = 1;
+    public float spreadAngle = 10f; // Mermiler arası açı
+    public float maxSpreadAngle = 60f; // Yelpazenin toplam genişliği bunu geçmez
+
     public GameObject bulletPrefab;
     public Transform firePoint;
     public AudioClip shootSound;
@@ -125,6 +130,11 @@ public class PlayerController : MonoBehaviour
         moveSpeed += amount;
     }
 
+    public void AddBullet()
+    {
+        bulletCount++;
+    }
+
     public void IncreaseFireRate(float amount)
     {
         fireRate -= amount;
@@ -156,7 +166,13 @@ public class PlayerController : MonoBehaviour
     {
         if (bulletPrefab != null && firePoint != null)
         {
-            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            // Mermi sayısı arttıkça aralarındaki açı daralır, yelpaze maxSpreadAngle'ı geçmez
+            float step = bulletCount > 1 ? Mathf.Min(spreadAngle, maxSpreadAngle / (bulletCount - 1)) : 0f;
+            for (int i = 0; i < bulletCount; i++)
+            {
+                float offset = (i - (bulletCount - 1) / 2f) * step;
+                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * Quaternion.Euler(0f, 0f, offset));
+            }
 
             if (shootSound != null && audioSource != null)
             {
