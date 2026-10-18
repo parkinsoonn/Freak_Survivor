@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenuController : MonoBehaviour
 {
     [Header("Ayarlar")]
     public Slider volumeSlider;
+
+    [Header("Zorluk")]
+    public TextMeshProUGUI difficultyText;
 
     private bool isMuted = false;
     private float lastVolume = 1f; 
@@ -23,6 +27,34 @@ public class MainMenuController : MonoBehaviour
         
         if (savedVolume == 0f) isMuted = true;
         else lastVolume = savedVolume;
+
+        UpdateDifficultyText();
+    }
+
+    public void NextDifficulty()
+    {
+        ChangeDifficulty(1);
+    }
+
+    public void PreviousDifficulty()
+    {
+        ChangeDifficulty(-1);
+    }
+
+    void ChangeDifficulty(int direction)
+    {
+        int count = System.Enum.GetValues(typeof(Difficulty)).Length;
+        int next = ((int)DifficultySettings.Current + direction + count) % count;
+        DifficultySettings.Current = (Difficulty)next;
+        UpdateDifficultyText();
+    }
+
+    void UpdateDifficultyText()
+    {
+        if (difficultyText != null)
+        {
+            difficultyText.text = DifficultySettings.DisplayName(DifficultySettings.Current);
+        }
     }
 
     public void SetVolume(float volume)

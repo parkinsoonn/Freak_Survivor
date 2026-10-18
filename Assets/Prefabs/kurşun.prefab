@@ -181,4 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   deathEffect: {fileID: 6695688127437738722, guid: 060a28f1823bde44baab462b82273bb8, type: 3}
   enemyDeathSound: {fileID: 8300000, guid: b23ea86d0d090d840ae711ba2af961fb, type: 3}
-  xpKristalPrefab: {fileID: 6231822207957777195, guid: 6078e5c0ed8d08f4ebf8d64376b40ec7, type: 3}
+  xpCrystalPrefab: {fileID: 6231822207957777195, guid: 6078e5c0ed8d08f4ebf8d64376b40ec7, type: 3}
+  multiShotPickupPrefab: {fileID: 1619786941460373757, guid: 4e588a7d2e20c9949bc7bf12c2bf10b9, type: 3}
+  speed: 20

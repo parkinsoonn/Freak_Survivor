@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        speed *= DifficultySettings.EnemySpeedMultiplier;
 
         PlayerController player = FindAnyObjectByType<PlayerController>();
         if (player != null)

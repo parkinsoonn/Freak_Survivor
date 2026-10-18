@@ -169,4 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a19588456a8e804f9f4d6b6dc491808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  speed: 3
+  speed: 3.5
+  despawnDistance: 30
+  isDead: 0
