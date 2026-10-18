@@ -15,7 +15,8 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null) player = playerObject.transform;
     }
 
     void Update()
@@ -33,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (player == null) return;
+        if (player == null || enemyPrefabs == null || enemyPrefabs.Length == 0) return;
 
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
         Vector2 spawnPosition = (Vector2)player.position + (randomDirection * spawnRadius);

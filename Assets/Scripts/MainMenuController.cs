@@ -68,11 +68,13 @@ public class MainMenuController : MonoBehaviour
     public void PlayGame()
     {
         Time.timeScale = 1f;
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Game");
     }
 
     public void QuitGame()
     {
+        PlayerPrefs.Save();
         Application.Quit();
 
 #if UNITY_EDITOR
