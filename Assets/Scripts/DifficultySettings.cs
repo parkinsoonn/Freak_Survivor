@@ -32,6 +32,10 @@ public static class DifficultySettings
 
     public static float MultiShotDropChance => Pick(0.03f, 0.02f, 0.01f);
 
+    public static float MagnetDropChance => Pick(0.0225f, 0.015f, 0.0075f);
+
+    public static float SaberDropChance => Pick(0.015f, 0.01f, 0.005f);
+
     private static float Pick(float easy, float normal, float hard)
     {
         switch (Current)
