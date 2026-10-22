@@ -33,8 +33,18 @@ public class GameManager : MonoBehaviour
     [Header("Seviye Atlama Sesleri")]
     public AudioClip levelUpSound; // Seviye atlandığında çalacak şatafatlı ses
 
+    [Header("Düşman Ölümü ve Drop'lar")]
+    public GameObject deathEffect;
+    public AudioClip enemyDeathSound;
+    public GameObject xpCrystalPrefab;
+    public GameObject multiShotPickupPrefab;
+    public GameObject magnetPickupPrefab;
+    public GameObject saberPickupPrefab;
+
     private PlayerController playerController;
     private PlayerHealth playerHealth;
+    private CameraController cameraController;
+    private SaberOrbit saberOrbit;
 
     void Start()
     {
@@ -44,6 +54,10 @@ public class GameManager : MonoBehaviour
 
         playerController = FindAnyObjectByType<PlayerController>();
         playerHealth = FindAnyObjectByType<PlayerHealth>();
+        cameraController = FindAnyObjectByType<CameraController>();
+        saberOrbit = FindAnyObjectByType<SaberOrbit>();
+
+        if (bgmSource != null) bgmSource.loop = true; // Müzik hiç bitmesin
 
         // Oyuna girerken kaydedilmiş ses ayarını hafızadan çek ve uygula
         AudioListener.volume = PlayerPrefs.GetFloat("GameVolume", 1f);
@@ -143,13 +157,49 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // Mermi, kılıç ve bombanın ortak öldürme yolu. Düşman zaten öldüyse false döner.
+    public bool KillEnemy(EnemyController enemy, bool feedback = true)
+    {
+        if (enemy == null || enemy.isDead) return false;
+        enemy.isDead = true;
+
+        Vector3 position = enemy.transform.position;
+        AddScore(10);
+
+        if (feedback)
+        {
+            if (cameraController != null) cameraController.TriggerShake(0.08f, 0.08f);
+            if (enemyDeathSound != null) AudioSource.PlayClipAtPoint(enemyDeathSound, position);
+        }
+
+        if (xpCrystalPrefab != null) Instantiate(xpCrystalPrefab, position, Quaternion.identity);
+
+        TryDrop(multiShotPickupPrefab, DifficultySettings.MultiShotDropChance, position);
+        TryDrop(magnetPickupPrefab, DifficultySettings.MagnetDropChance, position);
+        // Kılıçlar doluysa (3) kılıç item'ı artık düşmesin
+        if (saberOrbit == null || !saberOrbit.IsFull) TryDrop(saberPickupPrefab, DifficultySettings.SaberDropChance, position);
+
+        if (deathEffect != null) Instantiate(deathEffect, new Vector3(position.x, position.y, -1f), Quaternion.identity);
+
+        Destroy(enemy.gameObject);
+        return true;
+    }
+
+    void TryDrop(GameObject prefab, float chance, Vector3 position)
+    {
+        if (prefab == null || Random.value >= chance) return;
+        // XP kristaliyle üst üste binmesin diye biraz kaydır
+        Instantiate(prefab, position + (Vector3)(Random.insideUnitCircle.normalized * 0.5f), Quaternion.identity);
+    }
+
     public void AddXP(int amount)
     {
         currentXP += amount;
 
         UpdateLevelText();
 
-        if (currentXP >= xpToNextLevel)
+        // Seviye ekranı açıkken gelen XP birikir; seçim yapılınca ResumeAfterUpgrade tekrar kontrol eder
+        if (!isLevelingUp && currentXP >= xpToNextLevel)
         {
             LevelUp();
         }
@@ -223,6 +273,8 @@ public class GameManager : MonoBehaviour
         }
 
         Time.timeScale = 1f;
+
+        if (currentXP >= xpToNextLevel) LevelUp();
     }
 
     // Skor, Level ve Dash UI'ını birlikte gösterip gizler

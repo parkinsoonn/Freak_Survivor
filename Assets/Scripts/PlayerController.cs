@@ -37,6 +37,19 @@ public class PlayerController : MonoBehaviour
     [Header("Dash UI Ayarları")]
     public Image dashIconImage;
     public TextMeshProUGUI dashCooldownText;
+    public TrailRenderer dashTrail;
+
+    [Header("Atom Bombası")]
+    public float nukeCooldown = 60f;
+    private float nukeCooldownTimer = 0f;
+    public Image nukeIconImage;
+    public TextMeshProUGUI nukeCooldownText;
+    public Image nukeFlashImage; // Tam ekran beyaz flaş
+    public GameObject nukeEffect;
+    public AudioClip nukeSound;
+
+    private GameManager gameManager;
+    private CameraController cameraController;
 
     private Rigidbody2D rb2d;
     private PlayerHealth playerHealth;
@@ -51,7 +64,12 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
 
         if (dashCooldownText != null) dashCooldownText.text = "";
+        if (nukeCooldownText != null) nukeCooldownText.text = "";
+        if (dashTrail != null) dashTrail.emitting = false;
         audioSource = GetComponent<AudioSource>();
+
+        gameManager = FindAnyObjectByType<GameManager>();
+        cameraController = FindAnyObjectByType<CameraController>();
     }
 
     void Update()
@@ -90,6 +108,17 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(PerformDash());
         }
+
+        if (nukeCooldownTimer > 0)
+        {
+            nukeCooldownTimer -= Time.deltaTime;
+            UpdateCooldownUI(nukeCooldownTimer, nukeIconImage, nukeCooldownText);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && nukeCooldownTimer <= 0)
+        {
+            StartCoroutine(PerformNuke());
+        }
     }
 
     void FixedUpdate()
@@ -117,12 +146,51 @@ public class PlayerController : MonoBehaviour
             dashDirection = transform.up;
         }
 
-        rb2d.linearVelocity = dashDirection * dashSpeed;
-        yield return new WaitForSeconds(dashDuration);
+        if (dashTrail != null) dashTrail.emitting = true;
+
+        // Hız dash boyunca yüksek kalır, sadece sonda yürüme hızına yumuşakça iner (ani durma yok)
+        for (float t = 0f; t < dashDuration; t += Time.fixedDeltaTime)
+        {
+            float eased = Mathf.Pow(t / dashDuration, 3f);
+            rb2d.linearVelocity = dashDirection * Mathf.Lerp(dashSpeed, moveSpeed, eased);
+            yield return new WaitForFixedUpdate();
+        }
 
         if (playerHealth != null) playerHealth.isInvincible = false;
+        if (dashTrail != null) dashTrail.emitting = false;
         isDashing = false;
-        rb2d.linearVelocity = Vector2.zero;
+    }
+
+    IEnumerator PerformNuke()
+    {
+        nukeCooldownTimer = nukeCooldown;
+
+        if (gameManager != null)
+        {
+            foreach (EnemyController enemy in FindObjectsByType<EnemyController>())
+            {
+                gameManager.KillEnemy(enemy, false);
+            }
+        }
+
+        // Tek tek ses/sarsıntı yerine tek büyük patlama
+        if (cameraController != null) cameraController.TriggerShake(0.5f, 0.6f);
+        if (nukeSound != null) AudioSource.PlayClipAtPoint(nukeSound, transform.position);
+        if (nukeEffect != null)
+        {
+            GameObject fx = Instantiate(nukeEffect, new Vector3(transform.position.x, transform.position.y, -1f), Quaternion.identity);
+            fx.transform.localScale *= 4f;
+        }
+
+        if (nukeFlashImage == null) yield break;
+
+        nukeFlashImage.gameObject.SetActive(true);
+        for (float t = 0f; t < 0.6f; t += Time.deltaTime)
+        {
+            nukeFlashImage.color = new Color(1f, 1f, 1f, 1f - t / 0.6f);
+            yield return null;
+        }
+        nukeFlashImage.gameObject.SetActive(false);
     }
 
     public void IncreaseSpeed(float amount)
@@ -145,20 +213,27 @@ public class PlayerController : MonoBehaviour
     {
         if (dashIconImage != null) dashIconImage.gameObject.SetActive(isVisible);
         if (dashCooldownText != null) dashCooldownText.gameObject.SetActive(isVisible);
+        if (nukeIconImage != null) nukeIconImage.gameObject.SetActive(isVisible);
+        if (nukeCooldownText != null) nukeCooldownText.gameObject.SetActive(isVisible);
     }
 
     void UpdateDashUI()
     {
-        bool onCooldown = dashCooldownTimer > 0;
+        UpdateCooldownUI(dashCooldownTimer, dashIconImage, dashCooldownText);
+    }
 
-        if (dashCooldownText != null)
+    void UpdateCooldownUI(float timer, Image icon, TextMeshProUGUI text)
+    {
+        bool onCooldown = timer > 0;
+
+        if (text != null)
         {
-            dashCooldownText.text = onCooldown ? dashCooldownTimer.ToString("F1") + "s" : "READY";
+            text.text = onCooldown ? timer.ToString("F1") + "s" : "READY";
         }
 
-        if (dashIconImage != null)
+        if (icon != null)
         {
-            dashIconImage.color = onCooldown ? new Color(0.3f, 0.3f, 0.3f, 0.6f) : Color.white;
+            icon.color = onCooldown ? new Color(0.3f, 0.3f, 0.3f, 0.6f) : Color.white;
         }
     }
 
