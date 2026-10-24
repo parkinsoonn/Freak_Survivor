@@ -1,0 +1,8 @@
+{"frames":[
+  {"filename":"balcik_0","frame":{"x":0,"y":0,"w":160,"h":160},"duration":150},
+  {"filename":"balcik_1","frame":{"x":160,"y":0,"w":160,"h":160},"duration":150},
+  {"filename":"balcik_2","frame":{"x":320,"y":0,"w":160,"h":160},"duration":150},
+  {"filename":"balcik_3","frame":{"x":480,"y":0,"w":160,"h":160},"duration":150}
+],
+"meta":{"image":"dekor_balcik_sheet.png","size":{"w":640,"h":160},"scale":"10",
+"frameTags":[{"name":"balcik","from":0,"to":3,"direction":"forward"}]}}

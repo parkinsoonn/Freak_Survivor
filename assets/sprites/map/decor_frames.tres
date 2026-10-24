@@ -1,0 +1,102 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b2eu3ynbcowb"]
+
+[ext_resource type="Texture2D" uid="uid://d33ma3x5g21a" path="res://assets/sprites/map/dekor_balcik_sheet.png" id="balcik_sheet"]
+[ext_resource type="Texture2D" uid="uid://65jjo02hv422" path="res://assets/sprites/map/dekor_catlak.png" id="catlak"]
+[ext_resource type="Texture2D" uid="uid://bv2xtmpjpo3j7" path="res://assets/sprites/map/dekor_fare_deligi.png" id="fare_deligi"]
+[ext_resource type="Texture2D" uid="uid://bglc3adv24avb" path="res://assets/sprites/map/dekor_goz_kalinti.png" id="goz_kalinti"]
+[ext_resource type="Texture2D" uid="uid://c5x1c7su6l6v3" path="res://assets/sprites/map/dekor_izgara.png" id="izgara"]
+[ext_resource type="Texture2D" uid="uid://dsq6ymaj2cqhy" path="res://assets/sprites/map/dekor_kafes.png" id="kafes"]
+[ext_resource type="Texture2D" uid="uid://pgc4rgtkvedp" path="res://assets/sprites/map/dekor_kemik.png" id="kemik"]
+[ext_resource type="Texture2D" uid="uid://bpbw4cq5unya6" path="res://assets/sprites/map/dekor_sargi.png" id="sargi"]
+
+[sub_resource type="AtlasTexture" id="balcik_0"]
+atlas = ExtResource("balcik_sheet")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="balcik_1"]
+atlas = ExtResource("balcik_sheet")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="balcik_2"]
+atlas = ExtResource("balcik_sheet")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="balcik_3"]
+atlas = ExtResource("balcik_sheet")
+region = Rect2(480, 0, 160, 160)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("balcik_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("balcik_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("balcik_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("balcik_3")
+}],
+"loop": 1,
+"name": &"balcik",
+"speed": 6.6667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("catlak")
+}],
+"loop": 1,
+"name": &"catlak",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("fare_deligi")
+}],
+"loop": 1,
+"name": &"fare_deligi",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("goz_kalinti")
+}],
+"loop": 1,
+"name": &"goz_kalinti",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("izgara")
+}],
+"loop": 1,
+"name": &"izgara",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("kafes")
+}],
+"loop": 1,
+"name": &"kafes",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("kemik")
+}],
+"loop": 1,
+"name": &"kemik",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("sargi")
+}],
+"loop": 1,
+"name": &"sargi",
+"speed": 5.0
+}]
