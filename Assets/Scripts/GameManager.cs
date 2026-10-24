@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
     [Header("Skor Sistemi")]
     public int score = 0;
     public TextMeshProUGUI scoreText;
+
+    [Header("ESC Menüsü")]
+    public Slider volumeSlider;
 
     [Header("Ses Ayarları")]
     public AudioClip gameOverSound;
@@ -41,6 +45,9 @@ public class GameManager : MonoBehaviour
     public GameObject magnetPickupPrefab;
     public GameObject saberPickupPrefab;
 
+    [Header("İmleç")]
+    public Texture2D crosshairCursor;
+
     private PlayerController playerController;
     private PlayerHealth playerHealth;
     private CameraController cameraController;
@@ -50,6 +57,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         UpdateScoreText();
+        // Hotspot nişangahın ortası
+        if (crosshairCursor != null) Cursor.SetCursor(crosshairCursor, new Vector2(crosshairCursor.width / 2, crosshairCursor.height / 2), CursorMode.Auto);
         bgmSource = GetComponent<AudioSource>();
 
         playerController = FindAnyObjectByType<PlayerController>();
@@ -61,8 +70,16 @@ public class GameManager : MonoBehaviour
 
         // Oyuna girerken kaydedilmiş ses ayarını hafızadan çek ve uygula
         AudioListener.volume = PlayerPrefs.GetFloat("GameVolume", 1f);
+        if (volumeSlider != null) volumeSlider.SetValueWithoutNotify(AudioListener.volume);
 
         UpdateLevelText();
+    }
+
+    // ESC menüsündeki ses slider'ı; ana menüyle aynı ayarı kullanır
+    public void SetVolume(float volume)
+    {
+        AudioListener.volume = volume;
+        PlayerPrefs.SetFloat("GameVolume", volume);
     }
 
     void Update()
@@ -101,6 +118,7 @@ public class GameManager : MonoBehaviour
         if (pausePanel != null) pausePanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        PlayerPrefs.Save();
 
         if (bgmSource != null) bgmSource.UnPause();
 
@@ -112,6 +130,8 @@ public class GameManager : MonoBehaviour
     public void LoadMainMenu()
     {
         Time.timeScale = 1f; // ÇOK ÖNEMLİ: Zamanı normale döndürmezsek ana menü de donuk kalır!
+        PlayerPrefs.Save();
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); // Ana menüde normal imleç
         SceneManager.LoadScene("MainMenu"); // Ana menü sahnesini yükle
     }
 
@@ -157,6 +177,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // Mermi ve kılıç isabeti: canı 1 azaltır, bittiyse öldürür. Düşman zaten öldüyse false döner.
+    public bool HitEnemy(EnemyController enemy)
+    {
+        if (enemy == null || enemy.isDead) return false;
+        if (enemy.TakeHit()) KillEnemy(enemy);
+        return true;
+    }
+
     // Mermi, kılıç ve bombanın ortak öldürme yolu. Düşman zaten öldüyse false döner.
     public bool KillEnemy(EnemyController enemy, bool feedback = true)
     {
@@ -172,7 +200,7 @@ public class GameManager : MonoBehaviour
             if (enemyDeathSound != null) AudioSource.PlayClipAtPoint(enemyDeathSound, position);
         }
 
-        if (xpCrystalPrefab != null) Instantiate(xpCrystalPrefab, position, Quaternion.identity);
+        if (xpCrystalPrefab != null) Instantiate(xpCrystalPrefab, position, Quaternion.identity).GetComponent<XPCrystal>().xpValue = enemy.xpReward;
 
         TryDrop(multiShotPickupPrefab, DifficultySettings.MultiShotDropChance, position);
         TryDrop(magnetPickupPrefab, DifficultySettings.MagnetDropChance, position);
@@ -250,7 +278,7 @@ public class GameManager : MonoBehaviour
 
     public void ChooseFireRateUpgrade()
     {
-        if (playerController != null) playerController.IncreaseFireRate(0.03f);
+        if (playerController != null) playerController.IncreaseFireRate(0.015f);
         ResumeAfterUpgrade();
     }
 
