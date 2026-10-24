@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_controller.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/golem_walk.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="frame0"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="frame1"]
+atlas = ExtResource("2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="frame2"]
+atlas = ExtResource("2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="frame3"]
+atlas = ExtResource("2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("frame0")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame1")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame2")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.6667
+}]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(102.4, 64)
+
+[node name="golem" type="RigidBody2D"]
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1")
+speed = 1.5
+despawn_distance = 200.0
+health = 40
+xp_reward = 5
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("frames")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6.4)
+shape = SubResource("shape")

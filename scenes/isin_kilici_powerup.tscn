@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/power_up_pickup.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/isin_kilici.png" id="2"]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 14.56
+
+[node name="isin_kilici_powerup" type="Area2D"]
+monitorable = false
+script = ExtResource("1")
+type = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.091, 0.091)
+texture = ExtResource("2")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")

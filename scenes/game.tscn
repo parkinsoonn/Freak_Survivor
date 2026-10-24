@@ -1,0 +1,534 @@
+[gd_scene format=3 uid="uid://c17fuu8pfdbpf"]
+
+[ext_resource type="AudioStream" uid="uid://dqb3td6rvkrvv" path="res://assets/audio/enemy_death.mp3" id="a_enemy_death"]
+[ext_resource type="AudioStream" uid="uid://ckyqkptskdven" path="res://assets/audio/death.mp3" id="a_game_over"]
+[ext_resource type="AudioStream" uid="uid://cby8dujclqs0" path="res://assets/audio/level_up.mp3" id="a_level_up"]
+[ext_resource type="AudioStream" uid="uid://vdtxa3vrfkkh" path="res://assets/audio/bg_music.mp3" id="a_music"]
+[ext_resource type="AudioStream" uid="uid://buh1nuysfoowx" path="res://assets/audio/gun_shot.mp3" id="a_shot"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/map/decor_frames.tres" id="f_decor"]
+[ext_resource type="PackedScene" path="res://scenes/bullet.tscn" id="p_bullet"]
+[ext_resource type="PackedScene" path="res://scenes/death_effect.tscn" id="p_death_effect"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/fare.tscn" id="p_fare"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/goblin.tscn" id="p_goblin"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/golem.tscn" id="p_golem"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/goz.tscn" id="p_goz"]
+[ext_resource type="PackedScene" path="res://scenes/miknatis.tscn" id="p_magnet"]
+[ext_resource type="PackedScene" path="res://scenes/mermi_powerup.tscn" id="p_multi_shot"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/mumyavari.tscn" id="p_mumyavari"]
+[ext_resource type="PackedScene" path="res://scenes/isin_kilici.tscn" id="p_saber"]
+[ext_resource type="PackedScene" path="res://scenes/isin_kilici_powerup.tscn" id="p_saber_pickup"]
+[ext_resource type="PackedScene" path="res://scenes/xp.tscn" id="p_xp"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/zombi.tscn" id="p_zombi"]
+[ext_resource type="Script" uid="uid://dqucgx4cag7j7" path="res://scripts/infinite_background.gd" id="s_background"]
+[ext_resource type="Script" uid="uid://c3byfsqsl0y3p" path="res://scripts/camera_controller.gd" id="s_camera"]
+[ext_resource type="Script" uid="uid://dnmdaicvkp3wd" path="res://scripts/decor_scatter.gd" id="s_decor"]
+[ext_resource type="Script" uid="uid://cpavgu8xtb7rm" path="res://scripts/game_manager.gd" id="s_game_manager"]
+[ext_resource type="Script" uid="uid://bjerw6sbaljy0" path="res://scripts/player_health.gd" id="s_health"]
+[ext_resource type="Script" uid="uid://b30be7vkr64uk" path="res://scripts/player_controller.gd" id="s_player"]
+[ext_resource type="Script" uid="uid://blfmk0v3kupmj" path="res://scripts/saber_orbit.gd" id="s_saber_orbit"]
+[ext_resource type="Script" uid="uid://b8g1gh5ktlsq7" path="res://scripts/enemy_spawner.gd" id="s_spawner"]
+[ext_resource type="Script" uid="uid://bht0umigatto2" path="res://scripts/tint_button.gd" id="s_tint"]
+[ext_resource type="Script" uid="uid://du36c3nhbi6qb" path="res://scripts/trail.gd" id="s_trail"]
+[ext_resource type="Texture2D" uid="uid://gqcwagvpyrn5" path="res://assets/sprites/nisangah.png" id="t_cursor"]
+[ext_resource type="Texture2D" uid="uid://b7ob32c6hvrn5" path="res://assets/sprites/dasharkaplan.png" id="t_dash"]
+[ext_resource type="Texture2D" uid="uid://ds2fpnj0ooh7k" path="res://assets/sprites/map/zemin_ucube.png" id="t_ground"]
+[ext_resource type="Texture2D" uid="uid://dwqd8gug0ai4n" path="res://assets/sprites/healthBar.png" id="t_health"]
+[ext_resource type="Texture2D" uid="uid://gen3wle3ih5p" path="res://assets/sprites/MENU_RESUME.png" id="t_menu_resume"]
+[ext_resource type="Texture2D" uid="uid://c3nyjpkpj755l" path="res://assets/sprites/atom_bomba.png" id="t_nuke"]
+[ext_resource type="Texture2D" uid="uid://b8c02j4mm756x" path="res://assets/sprites/GAME_PAUSED_YAZI.png" id="t_paused"]
+[ext_resource type="Texture2D" uid="uid://dwts7mtultequ" path="res://assets/sprites/asker.png" id="t_player"]
+[ext_resource type="Texture2D" uid="uid://cubkqyp3o7bui" path="res://assets/sprites/hoparlor.png" id="t_speaker"]
+[ext_resource type="Texture2D" uid="uid://du7d65pxt5u6v" path="res://assets/sprites/TRY_AGAIN.png" id="t_try_again"]
+[ext_resource type="Texture2D" uid="uid://dlytsk363dtfu" path="res://assets/sprites/heal_speed_attack-export.png" id="t_upgrades"]
+[ext_resource type="Texture2D" uid="uid://cta7cayvcko8e" path="res://assets/sprites/YOU_DIED_YAZI.png" id="t_you_died"]
+
+[sub_resource type="RectangleShape2D" id="player_shape"]
+size = Vector2(54.17, 68.04)
+
+[sub_resource type="Curve" id="dash_width"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="dash_color"]
+colors = PackedColorArray(0.7019608, 0.9019608, 1, 0, 0.7019608, 0.9019608, 1, 0.6)
+
+[sub_resource type="AtlasTexture" id="health_bar"]
+atlas = ExtResource("t_health")
+region = Rect2(60, 30, 460, 110)
+
+[sub_resource type="AtlasTexture" id="resume"]
+atlas = ExtResource("t_menu_resume")
+region = Rect2(39, 269, 362, 162)
+
+[sub_resource type="AtlasTexture" id="menu"]
+atlas = ExtResource("t_menu_resume")
+region = Rect2(49, 49, 342, 162)
+
+[sub_resource type="Gradient" id="knob_color"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.98)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="knob"]
+gradient = SubResource("knob_color")
+width = 20
+height = 36
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="knob_color_hover"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.98)
+colors = PackedColorArray(0.9607843, 0.9607843, 0.9607843, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="knob_hover"]
+gradient = SubResource("knob_color_hover")
+width = 20
+height = 36
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="slider_track"]
+content_margin_top = 9.0
+content_margin_bottom = 9.0
+bg_color = Color(0.86, 0.86, 0.86, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="slider_fill"]
+content_margin_top = 9.0
+content_margin_bottom = 9.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="AtlasTexture" id="try_again"]
+atlas = ExtResource("t_try_again")
+region = Rect2(29, 89, 472, 152)
+
+[sub_resource type="AtlasTexture" id="speed_upgrade"]
+atlas = ExtResource("t_upgrades")
+region = Rect2(29, 39, 452, 162)
+
+[sub_resource type="AtlasTexture" id="fire_rate_upgrade"]
+atlas = ExtResource("t_upgrades")
+region = Rect2(29, 259, 452, 202)
+
+[sub_resource type="AtlasTexture" id="heal_upgrade"]
+atlas = ExtResource("t_upgrades")
+region = Rect2(29, 529, 452, 162)
+
+[node name="Game" type="Node2D" unique_id=1667207943]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1699051052]
+z_index = -10
+texture_repeat = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("t_ground")
+region_enabled = true
+region_rect = Rect2(0, 0, 7680, 7680)
+script = ExtResource("s_background")
+tile_size = Vector2(320, 320)
+
+[node name="Decor" type="Node2D" parent="." unique_id=1553077203]
+z_index = -9
+script = ExtResource("s_decor")
+decor_frames = ExtResource("f_decor")
+
+[node name="GameManager" type="Node" parent="." unique_id=1860428368 node_paths=PackedStringArray("game_over_panel", "pause_panel", "level_up_panel", "score_text", "volume_slider", "music", "level_text")]
+process_mode = 3
+script = ExtResource("s_game_manager")
+game_over_panel = NodePath("../UI/GameOverPanel")
+pause_panel = NodePath("../UI/PausePanel")
+level_up_panel = NodePath("../UI/LevelUpPanel")
+score_text = NodePath("../UI/ScoreText")
+volume_slider = NodePath("../UI/PausePanel/PauseVolumeSlider")
+game_over_sound = ExtResource("a_game_over")
+music = NodePath("Music")
+level_text = NodePath("../UI/LevelText")
+level_up_sound = ExtResource("a_level_up")
+death_effect = ExtResource("p_death_effect")
+enemy_death_sound = ExtResource("a_enemy_death")
+xp_crystal_scene = ExtResource("p_xp")
+multi_shot_pickup_scene = ExtResource("p_multi_shot")
+magnet_pickup_scene = ExtResource("p_magnet")
+saber_pickup_scene = ExtResource("p_saber_pickup")
+crosshair_cursor = ExtResource("t_cursor")
+
+[node name="Music" type="AudioStreamPlayer" parent="GameManager" unique_id=1186071052]
+process_mode = 1
+stream = ExtResource("a_music")
+volume_db = -20.0
+autoplay = true
+
+[node name="SpawnManager" type="Node" parent="." unique_id=425893368]
+script = ExtResource("s_spawner")
+enemy_scenes = Array[PackedScene]([ExtResource("p_fare"), ExtResource("p_goz"), ExtResource("p_mumyavari"), ExtResource("p_zombi"), ExtResource("p_goblin")])
+spawn_interval = 0.8
+min_spawn_interval = 0.3
+mini_boss_scene = ExtResource("p_golem")
+mini_boss_interval = 30.0
+
+[node name="Player" type="RigidBody2D" parent="." unique_id=1998920266 node_paths=PackedStringArray("dash_icon", "dash_cooldown_text", "nuke_icon", "nuke_cooldown_text", "nuke_flash")]
+position = Vector2(-64.64, 105.6)
+gravity_scale = 0.0
+lock_rotation = true
+continuous_cd = 2
+script = ExtResource("s_player")
+fire_rate = 0.2
+bullet_scene = ExtResource("p_bullet")
+shoot_sound = ExtResource("a_shot")
+shoot_volume = 0.1
+dash_cooldown = 1.0
+dash_icon = NodePath("../UI/DashIcon")
+dash_cooldown_text = NodePath("../UI/DashIcon/DashCooldownText")
+nuke_icon = NodePath("../UI/NukeIcon")
+nuke_cooldown_text = NodePath("../UI/NukeIcon/NukeCooldownText")
+nuke_flash = NodePath("../UI/NukeFlash")
+nuke_effect = ExtResource("p_death_effect")
+nuke_sound = ExtResource("a_enemy_death")
+
+[node name="Visual" type="Node2D" parent="Player" unique_id=2130435828]
+
+[node name="Sprite" type="Sprite2D" parent="Player/Visual" unique_id=1620009305]
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("t_player")
+region_enabled = true
+region_rect = Rect2(79, 79, 162, 212)
+
+[node name="FirePoint" type="Marker2D" parent="Player/Visual" unique_id=774302179]
+position = Vector2(-11.17, 41.36)
+
+[node name="Shape" type="CollisionShape2D" parent="Player" unique_id=2119678262]
+shape = SubResource("player_shape")
+
+[node name="Health" type="Node" parent="Player" unique_id=288893415 node_paths=PackedStringArray("health_bar")]
+script = ExtResource("s_health")
+health_bar = NodePath("../../UI/Healthbar")
+health_regions = Array[Rect2]([Rect2(60, 650, 460, 110), Rect2(60, 490, 460, 110), Rect2(60, 340, 460, 110), Rect2(60, 190, 460, 110), Rect2(60, 30, 460, 110)])
+
+[node name="SaberOrbit" type="Node2D" parent="Player" unique_id=164857793]
+script = ExtResource("s_saber_orbit")
+saber_scene = ExtResource("p_saber")
+
+[node name="DashTrail" type="Line2D" parent="Player" unique_id=1565581710]
+z_index = -1
+width = 38.4
+width_curve = SubResource("dash_width")
+gradient = SubResource("dash_color")
+script = ExtResource("s_trail")
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="Player" unique_id=165727783]
+max_polyphony = 8
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1562472083 node_paths=PackedStringArray("target")]
+zoom = Vector2(1.2054, 1.2054)
+script = ExtResource("s_camera")
+target = NodePath("../Player")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1167825435]
+process_mode = 3
+
+[node name="Healthbar" type="TextureRect" parent="UI" unique_id=1103924565]
+offset_left = 11.11
+offset_top = -50.74
+offset_right = 370.36
+offset_bottom = 185.68
+mouse_filter = 2
+texture = SubResource("health_bar")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ScoreText" type="Label" parent="UI" unique_id=466480194]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 17.0
+offset_right = 33.39
+offset_bottom = 158.74
+theme_override_font_sizes/font_size = 36
+text = "SCORE: 0"
+
+[node name="LevelText" type="Label" parent="UI" unique_id=383908411]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_top = 18.0
+offset_right = 338.23
+offset_bottom = 158.74
+theme_override_font_sizes/font_size = 36
+text = "LEVEL: 1"
+
+[node name="DashIcon" type="TextureRect" parent="UI" unique_id=353393938]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -191.0
+offset_right = -10.0
+offset_bottom = -41.0
+mouse_filter = 2
+texture = ExtResource("t_dash")
+expand_mode = 1
+
+[node name="DashCooldownText" type="Label" parent="UI/DashIcon" unique_id=327816314]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.5
+offset_top = -100.9
+offset_right = 149.5
+offset_bottom = -50.9
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NukeIcon" type="TextureRect" parent="UI" unique_id=1025224972]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -191.0
+offset_right = 160.0
+offset_bottom = -41.0
+mouse_filter = 2
+texture = ExtResource("t_nuke")
+expand_mode = 1
+
+[node name="NukeCooldownText" type="Label" parent="UI/NukeIcon" unique_id=1113572038]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.5
+offset_top = -100.9
+offset_right = 149.5
+offset_bottom = -50.9
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NukeFlash" type="ColorRect" parent="UI" unique_id=1991056432]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="PausePanel" type="ColorRect" parent="UI" unique_id=1942524004]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.98039216)
+
+[node name="GamePaused" type="TextureRect" parent="UI/PausePanel" unique_id=903690414]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.96
+offset_top = -395.32
+offset_right = 259.82
+offset_bottom = -139.12
+texture = ExtResource("t_paused")
+expand_mode = 1
+
+[node name="ResumeButton" type="TextureButton" parent="UI/PausePanel" unique_id=1324286600]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.35
+offset_top = -52.63
+offset_right = 155.21
+offset_bottom = 86.06
+texture_normal = SubResource("resume")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("s_tint")
+
+[node name="MainMenuButton" type="TextureButton" parent="UI/PausePanel" unique_id=167085496]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.35
+offset_top = 116.87
+offset_right = 155.21
+offset_bottom = 245.19
+texture_normal = SubResource("menu")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("s_tint")
+
+[node name="PauseVolumeIcon" type="TextureRect" parent="UI/PausePanel" unique_id=1599897390]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.86
+offset_top = 316.07
+offset_right = -70.14
+offset_bottom = 403.93
+texture = ExtResource("t_speaker")
+expand_mode = 1
+
+[node name="PauseVolumeSlider" type="HSlider" parent="UI/PausePanel" unique_id=1310432328]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.14
+offset_top = 342.0
+offset_right = 130.14
+offset_bottom = 378.0
+theme_override_icons/grabber = SubResource("knob")
+theme_override_icons/grabber_highlight = SubResource("knob_hover")
+theme_override_styles/slider = SubResource("slider_track")
+theme_override_styles/grabber_area = SubResource("slider_fill")
+theme_override_styles/grabber_area_highlight = SubResource("slider_fill")
+max_value = 1.0
+step = 0.001
+
+[node name="GameOverPanel" type="ColorRect" parent="UI" unique_id=1974404913]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="YouDied" type="TextureRect" parent="UI/GameOverPanel" unique_id=1349933848]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -322.4
+offset_top = -371.52
+offset_right = 327.29
+texture = ExtResource("t_you_died")
+expand_mode = 1
+
+[node name="TryAgainButton" type="TextureButton" parent="UI/GameOverPanel" unique_id=1404900859]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.94
+offset_top = 35.98
+offset_right = 159.83
+offset_bottom = 158.02
+texture_normal = SubResource("try_again")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("s_tint")
+
+[node name="MainMenuButton" type="TextureButton" parent="UI/GameOverPanel" unique_id=482858773]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.33
+offset_top = 183.5
+offset_right = 129.33
+offset_bottom = 308.5
+texture_normal = SubResource("menu")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("s_tint")
+
+[node name="LevelUpPanel" type="ColorRect" parent="UI" unique_id=844929754]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.92156863)
+
+[node name="Title" type="Label" parent="UI/LevelUpPanel" unique_id=1368510112]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -290.5
+offset_top = 110.66
+offset_right = 288.5
+offset_bottom = 363.34
+theme_override_font_sizes/font_size = 180
+text = "LEVEL UP!"
+horizontal_alignment = 1
+
+[node name="SpeedButton" type="TextureButton" parent="UI/LevelUpPanel" unique_id=2000397315]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -66.4
+offset_right = 150.0
+offset_bottom = 43.6
+texture_normal = SubResource("speed_upgrade")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("s_tint")
+
+[node name="FireRateButton" type="TextureButton" parent="UI/LevelUpPanel" unique_id=1168197482]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 111.0
+offset_right = 150.0
+offset_bottom = 221.0
+texture_normal = SubResource("fire_rate_upgrade")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("s_tint")
+
+[node name="HealButton" type="TextureButton" parent="UI/LevelUpPanel" unique_id=1810011935]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 292.0
+offset_right = 150.0
+offset_bottom = 402.0
+texture_normal = SubResource("heal_upgrade")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("s_tint")
+
+[connection signal="pressed" from="UI/PausePanel/ResumeButton" to="GameManager" method="resume_game"]
+[connection signal="pressed" from="UI/PausePanel/MainMenuButton" to="GameManager" method="load_main_menu"]
+[connection signal="pressed" from="UI/GameOverPanel/TryAgainButton" to="GameManager" method="restart_game"]
+[connection signal="pressed" from="UI/GameOverPanel/MainMenuButton" to="GameManager" method="load_main_menu"]
+[connection signal="pressed" from="UI/LevelUpPanel/SpeedButton" to="GameManager" method="choose_speed_upgrade"]
+[connection signal="pressed" from="UI/LevelUpPanel/FireRateButton" to="GameManager" method="choose_fire_rate_upgrade"]
+[connection signal="pressed" from="UI/LevelUpPanel/HealButton" to="GameManager" method="choose_heal_upgrade"]

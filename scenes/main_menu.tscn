@@ -1,0 +1,230 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/main_menu_controller.gd" id="s_menu"]
+[ext_resource type="Texture2D" path="res://assets/sprites/logo.png" id="t_logo"]
+[ext_resource type="Texture2D" path="res://assets/sprites/QUIT_PLAY.png" id="t_quit_play"]
+[ext_resource type="Texture2D" path="res://assets/sprites/hoparlor.png" id="t_speaker"]
+[ext_resource type="AudioStream" path="res://assets/audio/main_menu.mp3" id="a_music"]
+[ext_resource type="Script" path="res://scripts/tint_button.gd" id="s_tint"]
+
+[sub_resource type="AtlasTexture" id="play"]
+atlas = ExtResource("t_quit_play")
+region = Rect2(90, 90, 340, 160)
+
+[sub_resource type="AtlasTexture" id="quit"]
+atlas = ExtResource("t_quit_play")
+region = Rect2(90, 380, 340, 160)
+
+[sub_resource type="StyleBoxFlat" id="arrow_button"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="slider_track"]
+bg_color = Color(0.86, 0.86, 0.86, 1)
+content_margin_top = 5
+content_margin_bottom = 5
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="slider_fill"]
+bg_color = Color(1, 1, 1, 1)
+content_margin_top = 5
+content_margin_bottom = 5
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Gradient" id="knob_color"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.98)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="knob_color_hover"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.98)
+colors = PackedColorArray(0.9607843, 0.9607843, 0.9607843, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="knob"]
+gradient = SubResource("knob_color")
+width = 20
+height = 20
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="GradientTexture2D" id="knob_hover"]
+gradient = SubResource("knob_color_hover")
+width = 20
+height = 20
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="menu_panel"]
+bg_color = Color(0.4479867, 0.46226418, 0.26820046, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="no_focus"]
+
+[sub_resource type="AtlasTexture" id="logo"]
+atlas = ExtResource("t_logo")
+region = Rect2(39, 39, 242, 242)
+
+[node name="MainMenu" type="Node"]
+
+[node name="MenuManager" type="Node" parent="." node_paths=PackedStringArray("volume_slider", "music", "difficulty_text")]
+script = ExtResource("s_menu")
+volume_slider = NodePath("../UI/Canvas/VolumeSlider")
+music = NodePath("../MenuBGM")
+difficulty_text = NodePath("../UI/Canvas/DifficultySelector/Label")
+
+[node name="MenuBGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("a_music")
+volume_db = -13.98
+autoplay = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CameraBackground" type="ColorRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.19215687, 0.3019608, 0.4745098, 1)
+
+[node name="Canvas" type="Control" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+scale = Vector2(2.4, 2.4)
+mouse_filter = 2
+
+[node name="Background" type="Panel" parent="UI/Canvas"]
+offset_left = -400.0
+offset_top = -225.0
+offset_right = 400.0
+offset_bottom = 225.0
+theme_override_styles/panel = SubResource("menu_panel")
+
+[node name="Logo" type="TextureRect" parent="UI/Canvas"]
+offset_left = -75.0
+offset_top = -172.0
+offset_right = 75.0
+offset_bottom = -22.0
+texture = SubResource("logo")
+expand_mode = 1
+
+[node name="DifficultySelector" type="Control" parent="UI/Canvas"]
+mouse_filter = 2
+
+[node name="PrevButton" type="Button" parent="UI/Canvas/DifficultySelector"]
+script = ExtResource("s_tint")
+offset_left = -108.6
+offset_top = -4.5
+offset_right = -72.6
+offset_bottom = 31.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("arrow_button")
+theme_override_styles/hover = SubResource("arrow_button")
+theme_override_styles/pressed = SubResource("arrow_button")
+theme_override_styles/focus = SubResource("no_focus")
+text = "<"
+
+[node name="Label" type="Label" parent="UI/Canvas/DifficultySelector"]
+offset_left = -70.6
+offset_top = -3.8
+offset_right = 69.4
+offset_bottom = 32.2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "NORMAL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="UI/Canvas/DifficultySelector"]
+script = ExtResource("s_tint")
+offset_left = 71.4
+offset_top = -4.5
+offset_right = 107.4
+offset_bottom = 31.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("arrow_button")
+theme_override_styles/hover = SubResource("arrow_button")
+theme_override_styles/pressed = SubResource("arrow_button")
+theme_override_styles/focus = SubResource("no_focus")
+text = ">"
+
+[node name="PlayButton" type="TextureButton" parent="UI/Canvas"]
+script = ExtResource("s_tint")
+offset_left = -68.71
+offset_top = 47.76
+offset_right = 67.51
+offset_bottom = 106.24
+texture_normal = SubResource("play")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="QuitButton" type="TextureButton" parent="UI/Canvas"]
+script = ExtResource("s_tint")
+offset_left = -68.71
+offset_top = 120.74
+offset_right = 67.51
+offset_bottom = 177.66
+texture_normal = SubResource("quit")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SpeakerButton" type="TextureButton" parent="UI/Canvas"]
+script = ExtResource("s_tint")
+offset_left = 232.01
+offset_top = -219.51
+offset_right = 280.19
+offset_bottom = -170.7
+texture_normal = ExtResource("t_speaker")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VolumeSlider" type="HSlider" parent="UI/Canvas"]
+offset_left = 283.82
+offset_top = -205.4
+offset_right = 383.98
+offset_bottom = -185.4
+max_value = 1.0
+step = 0.001
+theme_override_icons/grabber = SubResource("knob")
+theme_override_icons/grabber_highlight = SubResource("knob_hover")
+theme_override_styles/slider = SubResource("slider_track")
+theme_override_styles/grabber_area = SubResource("slider_fill")
+theme_override_styles/grabber_area_highlight = SubResource("slider_fill")
+
+[node name="Credits" type="Label" parent="UI/Canvas"]
+offset_left = 243.92
+offset_top = 163.44
+offset_right = 520.08
+offset_bottom = 252.56
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "by  parkinson
+ and  oridantes"
+
+[connection signal="pressed" from="UI/Canvas/DifficultySelector/PrevButton" to="MenuManager" method="previous_difficulty"]
+[connection signal="pressed" from="UI/Canvas/DifficultySelector/NextButton" to="MenuManager" method="next_difficulty"]
+[connection signal="pressed" from="UI/Canvas/PlayButton" to="MenuManager" method="play_game"]
+[connection signal="pressed" from="UI/Canvas/QuitButton" to="MenuManager" method="quit_game"]
+[connection signal="pressed" from="UI/Canvas/SpeakerButton" to="MenuManager" method="toggle_mute"]
