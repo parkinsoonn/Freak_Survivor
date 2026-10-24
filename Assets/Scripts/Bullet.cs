@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         if (hasHit || gameManager == null || !hitInfo.CompareTag("Enemy")) return;
 
         // Bu düşmanı aynı karede başka bir mermi zaten öldürdüyse mermi boşa harcanmasın
-        if (gameManager.KillEnemy(hitInfo.GetComponent<EnemyController>()))
+        if (gameManager.HitEnemy(hitInfo.GetComponent<EnemyController>()))
         {
             hasHit = true;
             Destroy(gameObject);

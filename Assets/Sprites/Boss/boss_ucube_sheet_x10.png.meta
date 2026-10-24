@@ -1,0 +1,1677 @@
+fileFormatVersion: 2
+guid: bfb44c14e42d05e4f9adb80fabb4b12a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3175116091165396602
+    second: boss_ucube_sheet_x10_0
+  - first:
+      213: -7831809505529501042
+    second: boss_ucube_sheet_x10_1
+  - first:
+      213: 7112671218227806975
+    second: boss_ucube_sheet_x10_2
+  - first:
+      213: -571425685711522237
+    second: boss_ucube_sheet_x10_3
+  - first:
+      213: -4016433594877839541
+    second: boss_ucube_sheet_x10_4
+  - first:
+      213: 6308779654458989189
+    second: boss_ucube_sheet_x10_5
+  - first:
+      213: -6425991420369156026
+    second: boss_ucube_sheet_x10_6
+  - first:
+      213: -1255329673145283161
+    second: boss_ucube_sheet_x10_7
+  - first:
+      213: -6205637075561271815
+    second: boss_ucube_sheet_x10_8
+  - first:
+      213: 7480805979230988207
+    second: boss_ucube_sheet_x10_9
+  - first:
+      213: -6454561422649894524
+    second: boss_ucube_sheet_x10_10
+  - first:
+      213: -6865456726456860480
+    second: boss_ucube_sheet_x10_11
+  - first:
+      213: 2058704684140109637
+    second: boss_ucube_sheet_x10_12
+  - first:
+      213: 8817395896385649272
+    second: boss_ucube_sheet_x10_13
+  - first:
+      213: -49979674213566574
+    second: boss_ucube_sheet_x10_14
+  - first:
+      213: 8558786093258287885
+    second: boss_ucube_sheet_x10_15
+  - first:
+      213: 3278368001413718317
+    second: boss_ucube_sheet_x10_16
+  - first:
+      213: 1810287171464715614
+    second: boss_ucube_sheet_x10_17
+  - first:
+      213: 8141354292680907598
+    second: boss_ucube_sheet_x10_18
+  - first:
+      213: 2553737898682640110
+    second: boss_ucube_sheet_x10_19
+  - first:
+      213: -2504992821837506410
+    second: boss_ucube_sheet_x10_20
+  - first:
+      213: -6070040725426955114
+    second: boss_ucube_sheet_x10_21
+  - first:
+      213: -906588446381120734
+    second: boss_ucube_sheet_x10_22
+  - first:
+      213: 7940462529521216268
+    second: boss_ucube_sheet_x10_23
+  - first:
+      213: -9216451909107248176
+    second: boss_ucube_sheet_x10_24
+  - first:
+      213: -3012811969549149312
+    second: boss_ucube_sheet_x10_25
+  - first:
+      213: -4280617315931518030
+    second: boss_ucube_sheet_x10_26
+  - first:
+      213: 7081104264677974283
+    second: boss_ucube_sheet_x10_27
+  - first:
+      213: 5452369888275355132
+    second: boss_ucube_sheet_x10_28
+  - first:
+      213: -1006491715833674717
+    second: boss_ucube_sheet_x10_29
+  - first:
+      213: 825696522967004151
+    second: boss_ucube_sheet_x10_30
+  - first:
+      213: 1462369688889585939
+    second: boss_ucube_sheet_x10_31
+  - first:
+      213: -1398986106767331742
+    second: boss_ucube_sheet_x10_32
+  - first:
+      213: -9110595881154377648
+    second: boss_ucube_sheet_x10_33
+  - first:
+      213: 2639082877474469999
+    second: boss_ucube_sheet_x10_34
+  - first:
+      213: 1072284545318347671
+    second: boss_ucube_sheet_x10_35
+  - first:
+      213: 5696024954573779050
+    second: boss_ucube_sheet_x10_36
+  - first:
+      213: -7265638410630112069
+    second: boss_ucube_sheet_x10_37
+  - first:
+      213: -4923351576115729733
+    second: boss_ucube_sheet_x10_38
+  - first:
+      213: -6413256331303879511
+    second: boss_ucube_sheet_x10_39
+  - first:
+      213: -5867438980392102465
+    second: boss_ucube_sheet_x10_40
+  - first:
+      213: -5504822865258879092
+    second: boss_ucube_sheet_x10_41
+  - first:
+      213: -1666521863751266488
+    second: boss_ucube_sheet_x10_42
+  - first:
+      213: -2599255337554274035
+    second: boss_ucube_sheet_x10_43
+  - first:
+      213: -4505498017501352331
+    second: boss_ucube_sheet_x10_44
+  - first:
+      213: -8931346933698374909
+    second: boss_ucube_sheet_x10_45
+  - first:
+      213: 169344432461480101
+    second: boss_ucube_sheet_x10_46
+  - first:
+      213: 1129482740373458065
+    second: boss_ucube_sheet_x10_47
+  - first:
+      213: 6653337400396891369
+    second: boss_ucube_sheet_x10_48
+  - first:
+      213: 4528444485752621784
+    second: boss_ucube_sheet_x10_49
+  - first:
+      213: 6871767886322046355
+    second: boss_ucube_sheet_x10_50
+  - first:
+      213: -5790154840576308375
+    second: boss_ucube_sheet_x10_51
+  - first:
+      213: -4260740590010536612
+    second: boss_ucube_sheet_x10_52
+  - first:
+      213: -6003619780710888055
+    second: boss_ucube_sheet_x10_53
+  - first:
+      213: -8569401471102111539
+    second: boss_ucube_sheet_x10_54
+  - first:
+      213: 7307690033692875820
+    second: boss_ucube_sheet_x10_55
+  - first:
+      213: 54760557081714963
+    second: boss_ucube_sheet_x10_56
+  - first:
+      213: 5881479866673841880
+    second: boss_ucube_sheet_x10_57
+  - first:
+      213: -5601494655193147195
+    second: boss_ucube_sheet_x10_58
+  - first:
+      213: 3880156238344075027
+    second: boss_ucube_sheet_x10_59
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_0
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 2669
+        width: 82
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 681b571dcb8bfe3d0800000000000000
+      internalID: -3175116091165396602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_1
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 2639
+        width: 162
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8ae26adfb2df4390800000000000000
+      internalID: -7831809505529501042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_2
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 2619
+        width: 222
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff20d96d9c845b260800000000000000
+      internalID: 7112671218227806975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_3
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 2609
+        width: 242
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34671abcd53e118f0800000000000000
+      internalID: -571425685711522237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_4
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 2609
+        width: 242
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b477c59ece2c248c0800000000000000
+      internalID: -4016433594877839541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_5
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 2579
+        width: 282
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58a5d3e9ba94d8750800000000000000
+      internalID: 6308779654458989189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_6
+      rect:
+        serializedVersion: 2
+        x: 1929
+        y: 2579
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 648403b79da42d6a0800000000000000
+      internalID: -6425991420369156026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_7
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 2579
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ad0b24305c249ee0800000000000000
+      internalID: -1255329673145283161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_8
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 2259
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fd2d2a65f521e9a0800000000000000
+      internalID: -6205637075561271815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_9
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 2259
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa76ea1376921d760800000000000000
+      internalID: 7480805979230988207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_10
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 2259
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4895306759acc66a0800000000000000
+      internalID: -6454561422649894524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_11
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 2259
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c009b66b7ff8b0a0800000000000000
+      internalID: -6865456726456860480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_12
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1919
+        width: 302
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54f9a93b00df19c10800000000000000
+      internalID: 2058704684140109637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_13
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 1929
+        width: 302
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87abd08e9dead5a70800000000000000
+      internalID: 8817395896385649272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_14
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1929
+        width: 302
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 297b28840cf6e4ff0800000000000000
+      internalID: -49979674213566574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_15
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 1919
+        width: 302
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0ba63dfa9ae6c670800000000000000
+      internalID: 8558786093258287885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_16
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 1929
+        width: 302
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d21a547e35a1f7d20800000000000000
+      internalID: 3278368001413718317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_17
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 1929
+        width: 302
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5dd994579e6f1910800000000000000
+      internalID: 1810287171464715614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_18
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1619
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4bd8dd2896ebf070800000000000000
+      internalID: 8141354292680907598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_19
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 1619
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee66e6ca613b07320800000000000000
+      internalID: 2553737898682640110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_20
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1619
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 698d871fc4a7c3dd0800000000000000
+      internalID: -2504992821837506410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_21
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 1599
+        width: 302
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69c95c4ee12e2cba0800000000000000
+      internalID: -6070040725426955114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_22
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 1599
+        width: 302
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 223eaff7c962b63f0800000000000000
+      internalID: -906588446381120734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_23
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 1619
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0b6968a990323e60800000000000000
+      internalID: 7940462529521216268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_24
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1329
+        width: 302
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d3113cc1d5981080800000000000000
+      internalID: -9216451909107248176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_25
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 1339
+        width: 642
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08b5afbe9775036d0800000000000000
+      internalID: -3012811969549149312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_26
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 1279
+        width: 302
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bb04881b313894c0800000000000000
+      internalID: -4280617315931518030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_27
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 1279
+        width: 302
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0162a9bfc2254260800000000000000
+      internalID: 7081104264677974283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_28
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 1299
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf550b68685baab40800000000000000
+      internalID: 5452369888275355132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_29
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 989
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3244c58fd193802f0800000000000000
+      internalID: -1006491715833674717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_30
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 989
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f339b7ec96757b00800000000000000
+      internalID: 825696522967004151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_31
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 659
+        width: 602
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 311ff8ceb716b4410800000000000000
+      internalID: 1462369688889585939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_32
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 659
+        width: 602
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26e2d6c4c8dc59ce0800000000000000
+      internalID: -1398986106767331742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_33
+      rect:
+        serializedVersion: 2
+        x: 1259
+        y: 909
+        width: 22
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05808abe059a09180800000000000000
+      internalID: -9110595881154377648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_34
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 659
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f687ea405e7ef9420800000000000000
+      internalID: 2639082877474469999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_35
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 659
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79367dddc1581ee00800000000000000
+      internalID: 1072284545318347671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_36
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 339
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a60712174885c0f40800000000000000
+      internalID: 5696024954573779050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_37
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 339
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbc55fb4c544b2b90800000000000000
+      internalID: -7265638410630112069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_38
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 339
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bba234993ddbcabb0800000000000000
+      internalID: -4923351576115729733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_39
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 339
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ac7b1778598ff6a0800000000000000
+      internalID: -6413256331303879511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_40
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 19
+        width: 602
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb5d278955ba29ea0800000000000000
+      internalID: -5867438980392102465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_41
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 19
+        width: 302
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c87ebc415c0fa93b0800000000000000
+      internalID: -5504822865258879092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_42
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 269
+        width: 62
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84f0facc1335fd8e0800000000000000
+      internalID: -1666521863751266488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_43
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 289
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d091a8cba079debd0800000000000000
+      internalID: -2599255337554274035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_44
+      rect:
+        serializedVersion: 2
+        x: 1489
+        y: 289
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57eea9a9c614971c0800000000000000
+      internalID: -4505498017501352331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_45
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 279
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 303522bb84b7d0480800000000000000
+      internalID: -8931346933698374909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_46
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 299
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a08e853dd1a95200800000000000000
+      internalID: 169344432461480101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_47
+      rect:
+        serializedVersion: 2
+        x: 1829
+        y: 299
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19c05ef619abcaf00800000000000000
+      internalID: 1129482740373458065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_48
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 279
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e44a716d17655c50800000000000000
+      internalID: 6653337400396891369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_49
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 9
+        width: 282
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8da8c5e544448de30800000000000000
+      internalID: 4528444485752621784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_50
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 39
+        width: 282
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39599230c7c6d5f50800000000000000
+      internalID: 6871767886322046355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_51
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 259
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96bc0fc99dc35afa0800000000000000
+      internalID: -5790154840576308375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_52
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 259
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5d655cf10fced4c0800000000000000
+      internalID: -4260740590010536612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_53
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 29
+        width: 282
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d08343e9bdeaca0800000000000000
+      internalID: -6003619780710888055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_54
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 29
+        width: 282
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc0bf31c3ce531980800000000000000
+      internalID: -8569401471102111539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_55
+      rect:
+        serializedVersion: 2
+        x: 2259
+        y: 29
+        width: 282
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2c1dea2e512a6560800000000000000
+      internalID: 7307690033692875820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_56
+      rect:
+        serializedVersion: 2
+        x: 1919
+        y: 199
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 311ee80cf6c82c000800000000000000
+      internalID: 54760557081714963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_57
+      rect:
+        serializedVersion: 2
+        x: 2229
+        y: 199
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d6c4bef6c63f9150800000000000000
+      internalID: 5881479866673841880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_58
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 129
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c896f10a4e7342b0800000000000000
+      internalID: -5601494655193147195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_ucube_sheet_x10_59
+      rect:
+        serializedVersion: 2
+        x: 1909
+        y: 129
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 317b3837a8519d530800000000000000
+      internalID: 3880156238344075027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      boss_ucube_sheet_x10_0: -3175116091165396602
+      boss_ucube_sheet_x10_1: -7831809505529501042
+      boss_ucube_sheet_x10_10: -6454561422649894524
+      boss_ucube_sheet_x10_11: -6865456726456860480
+      boss_ucube_sheet_x10_12: 2058704684140109637
+      boss_ucube_sheet_x10_13: 8817395896385649272
+      boss_ucube_sheet_x10_14: -49979674213566574
+      boss_ucube_sheet_x10_15: 8558786093258287885
+      boss_ucube_sheet_x10_16: 3278368001413718317
+      boss_ucube_sheet_x10_17: 1810287171464715614
+      boss_ucube_sheet_x10_18: 8141354292680907598
+      boss_ucube_sheet_x10_19: 2553737898682640110
+      boss_ucube_sheet_x10_2: 7112671218227806975
+      boss_ucube_sheet_x10_20: -2504992821837506410
+      boss_ucube_sheet_x10_21: -6070040725426955114
+      boss_ucube_sheet_x10_22: -906588446381120734
+      boss_ucube_sheet_x10_23: 7940462529521216268
+      boss_ucube_sheet_x10_24: -9216451909107248176
+      boss_ucube_sheet_x10_25: -3012811969549149312
+      boss_ucube_sheet_x10_26: -4280617315931518030
+      boss_ucube_sheet_x10_27: 7081104264677974283
+      boss_ucube_sheet_x10_28: 5452369888275355132
+      boss_ucube_sheet_x10_29: -1006491715833674717
+      boss_ucube_sheet_x10_3: -571425685711522237
+      boss_ucube_sheet_x10_30: 825696522967004151
+      boss_ucube_sheet_x10_31: 1462369688889585939
+      boss_ucube_sheet_x10_32: -1398986106767331742
+      boss_ucube_sheet_x10_33: -9110595881154377648
+      boss_ucube_sheet_x10_34: 2639082877474469999
+      boss_ucube_sheet_x10_35: 1072284545318347671
+      boss_ucube_sheet_x10_36: 5696024954573779050
+      boss_ucube_sheet_x10_37: -7265638410630112069
+      boss_ucube_sheet_x10_38: -4923351576115729733
+      boss_ucube_sheet_x10_39: -6413256331303879511
+      boss_ucube_sheet_x10_4: -4016433594877839541
+      boss_ucube_sheet_x10_40: -5867438980392102465
+      boss_ucube_sheet_x10_41: -5504822865258879092
+      boss_ucube_sheet_x10_42: -1666521863751266488
+      boss_ucube_sheet_x10_43: -2599255337554274035
+      boss_ucube_sheet_x10_44: -4505498017501352331
+      boss_ucube_sheet_x10_45: -8931346933698374909
+      boss_ucube_sheet_x10_46: 169344432461480101
+      boss_ucube_sheet_x10_47: 1129482740373458065
+      boss_ucube_sheet_x10_48: 6653337400396891369
+      boss_ucube_sheet_x10_49: 4528444485752621784
+      boss_ucube_sheet_x10_5: 6308779654458989189
+      boss_ucube_sheet_x10_50: 6871767886322046355
+      boss_ucube_sheet_x10_51: -5790154840576308375
+      boss_ucube_sheet_x10_52: -4260740590010536612
+      boss_ucube_sheet_x10_53: -6003619780710888055
+      boss_ucube_sheet_x10_54: -8569401471102111539
+      boss_ucube_sheet_x10_55: 7307690033692875820
+      boss_ucube_sheet_x10_56: 54760557081714963
+      boss_ucube_sheet_x10_57: 5881479866673841880
+      boss_ucube_sheet_x10_58: -5601494655193147195
+      boss_ucube_sheet_x10_59: 3880156238344075027
+      boss_ucube_sheet_x10_6: -6425991420369156026
+      boss_ucube_sheet_x10_7: -1255329673145283161
+      boss_ucube_sheet_x10_8: -6205637075561271815
+      boss_ucube_sheet_x10_9: 7480805979230988207
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

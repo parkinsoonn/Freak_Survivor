@@ -23,12 +23,15 @@ public static class DifficultySettings
         }
     }
 
-    public static float EnemySpeedMultiplier => Pick(0.85f, 1.1f, 1.4f);
+    // Oyun başındaki düşman hızı; zamanla SpeedGrowthPerMinute kadar artar (MaxSpeedBonus'a kadar)
+    public static float EnemySpeedMultiplier => Pick(0.85f, 1.05f, 1.15f);
+    public static float SpeedGrowthPerMinute => Pick(0.05f, 0.1f, 0.15f);
+    public static float MaxSpeedBonus => Pick(0.25f, 0.5f, 0.6f);
 
-    // Başlangıç ve minimum spawn aralığına uygulanır (küçük = daha sık düşman)
-    public static float SpawnIntervalMultiplier => Pick(1.2f, 0.85f, 0.6f);
-
-    public static float RampRateMultiplier => Pick(0.8f, 1.25f, 1.8f);
+    // Spawn aralığı başlangıçtan minimuma RampDuration saniyede iner (küçük = daha sık düşman)
+    public static float StartIntervalMultiplier => Pick(1.4f, 1.15f, 1f);
+    public static float MinIntervalMultiplier => Pick(1.3f, 1f, 0.7f);
+    public static float RampDuration => Pick(300f, 180f, 120f);
 
     public static float MultiShotDropChance => Pick(0.03f, 0.02f, 0.01f);
 

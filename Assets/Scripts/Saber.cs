@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Dönen ışın kılıcı; değdiği düşmanı öldürür
+// Dönen ışın kılıcı; her teması mermi gibi 1 vuruş sayılır
 public class Saber : MonoBehaviour
 {
     private GameManager gameManager;
@@ -14,7 +14,7 @@ public class Saber : MonoBehaviour
     {
         if (gameManager != null && hitInfo.CompareTag("Enemy"))
         {
-            gameManager.KillEnemy(hitInfo.GetComponent<EnemyController>());
+            gameManager.HitEnemy(hitInfo.GetComponent<EnemyController>());
         }
     }
 }

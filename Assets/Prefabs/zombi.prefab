@@ -180,5 +180,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   speed: 2.2
+  health: 2
   despawnDistance: 30
   isDead: 0
