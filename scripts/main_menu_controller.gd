@@ -70,8 +70,7 @@ func toggle_mute() -> void:
 
 
 func play_game() -> void:
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	Transition.change_scene("res://scenes/game.tscn")
 
 
 func quit_game() -> void:

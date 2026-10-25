@@ -112,8 +112,7 @@ func _exit_tree() -> void:
 
 
 func load_main_menu() -> void:
-	get_tree().paused = false # Zamanı normale döndürmezsek ana menü de donuk kalır!
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	Transition.change_scene("res://scenes/main_menu.tscn")
 
 
 func add_score(points: int) -> void:
@@ -163,8 +162,7 @@ func show_game_over() -> void:
 
 
 func restart_game() -> void:
-	get_tree().paused = false
-	get_tree().reload_current_scene()
+	Transition.change_scene(get_tree().current_scene.scene_file_path)
 
 
 # Mermi ve kılıç isabeti: canı 1 azaltır, bittiyse öldürür. Düşman zaten öldüyse false döner.

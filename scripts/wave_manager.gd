@@ -12,6 +12,10 @@ const CLEANUP_TIME := 1.0
 @export var wave_text: Label # Üst ortada "WAVE 3  0:24"
 @export var shop_panel: Control
 
+@export_group("Wave Banner'ı")
+@export var banner: Control
+@export var banner_text: Label
+
 var wave := 0
 var state := State.INTRO
 var time_left := 0.0
@@ -50,10 +54,25 @@ func _start_next_wave() -> void:
 	time_left = wave_duration(wave)
 	_update_wave_text()
 
-	await get_tree().create_timer(1.0, false).timeout
+	await _play_banner()
 
 	state = State.FIGHT
 	spawner.start_wave(wave, time_left)
+
+
+# "WAVE N" soldan kayarak girer, ~1 sn bekler, sağa çıkar
+func _play_banner() -> void:
+	banner_text.text = "WAVE %d" % wave
+	var width := banner.get_viewport_rect().size.x
+	banner.position.x = -banner.size.x
+	banner.visible = true
+
+	var tween := create_tween().set_trans(Tween.TRANS_BACK)
+	tween.tween_property(banner, "position:x", (width - banner.size.x) / 2.0, 0.45).set_ease(Tween.EASE_OUT)
+	tween.tween_interval(1.0)
+	tween.tween_property(banner, "position:x", width, 0.35).set_ease(Tween.EASE_IN)
+	await tween.finished
+	banner.visible = false
 
 
 func _end_wave() -> void:

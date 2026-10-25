@@ -18,6 +18,7 @@ config/icon="res://assets/sprites/logo.png"
 [autoload]
 
 Settings="*res://scripts/settings.gd"
+Transition="*res://scripts/transition.gd"
 
 [display]
 

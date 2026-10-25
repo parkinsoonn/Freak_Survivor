@@ -117,6 +117,9 @@ region = Rect2(29, 89, 472, 152)
 atlas = ExtResource("t_coin")
 region = Rect2(8, 8, 16, 16)
 
+[sub_resource type="StyleBoxFlat" id="banner_panel"]
+bg_color = Color(0.4479867, 0.46226418, 0.26820046, 1)
+
 [sub_resource type="CircleShape2D" id="pickup_shape"]
 radius = 128.0
 
@@ -170,11 +173,13 @@ spawn_interval = 0.8
 min_spawn_interval = 0.3
 mini_boss_scene = ExtResource("p_golem")
 
-[node name="WaveManager" type="Node" parent="." node_paths=PackedStringArray("spawner", "wave_text", "shop_panel")]
+[node name="WaveManager" type="Node" parent="." node_paths=PackedStringArray("spawner", "wave_text", "shop_panel", "banner", "banner_text")]
 script = ExtResource("s_wave")
 spawner = NodePath("../SpawnManager")
 wave_text = NodePath("../UI/WaveText")
 shop_panel = NodePath("../UI/ShopPanel")
+banner = NodePath("../UI/WaveBanner")
+banner_text = NodePath("../UI/WaveBanner/Label")
 
 [node name="Player" type="RigidBody2D" parent="." unique_id=1998920266 node_paths=PackedStringArray("dash_icon", "dash_cooldown_text", "nuke_icon", "nuke_cooldown_text", "nuke_flash")]
 position = Vector2(-64.64, 105.6)
@@ -274,6 +279,25 @@ offset_bottom = 72.0
 theme_override_font_sizes/font_size = 48
 text = "WAVE 1  0:20"
 horizontal_alignment = 1
+
+[node name="WaveBanner" type="Panel" parent="UI"]
+visible = false
+offset_left = -720.0
+offset_top = 300.0
+offset_bottom = 480.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("banner_panel")
+
+[node name="Label" type="Label" parent="UI/WaveBanner"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 128
+text = "WAVE 1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GoldCounter" type="HBoxContainer" parent="UI"]
 anchors_preset = -1
