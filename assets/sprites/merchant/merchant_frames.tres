@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://tcwcr1csembq"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/merchant/merchant_sheet.png" id="1_sheet"]
+[ext_resource type="Texture2D" uid="uid://btor8wm25j8u8" path="res://assets/sprites/merchant/merchant_sheet.png" id="1_sheet"]
 
 [sub_resource type="AtlasTexture" id="idle_0"]
 atlas = ExtResource("1_sheet")
@@ -61,7 +61,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("idle_7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 7.7
 }]

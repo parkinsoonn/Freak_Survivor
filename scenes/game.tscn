@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://vdtxa3vrfkkh" path="res://assets/audio/bg_music.mp3" id="a_music"]
 [ext_resource type="AudioStream" uid="uid://buh1nuysfoowx" path="res://assets/audio/gun_shot.mp3" id="a_shot"]
 [ext_resource type="SpriteFrames" uid="uid://b2eu3ynbcowb" path="res://assets/sprites/map/decor_frames.tres" id="f_decor"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/merchant/merchant_frames.tres" id="f_merchant"]
+[ext_resource type="SpriteFrames" uid="uid://tcwcr1csembq" path="res://assets/sprites/merchant/merchant_frames.tres" id="f_merchant"]
 [ext_resource type="PackedScene" path="res://scenes/bullet.tscn" id="p_bullet"]
 [ext_resource type="PackedScene" path="res://scenes/death_effect.tscn" id="p_death_effect"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/fare.tscn" id="p_fare"]
@@ -73,6 +73,14 @@ region = Rect2(0, 0, 180, 45)
 [sub_resource type="AtlasTexture" id="coin_icon"]
 atlas = ExtResource("t_coin")
 region = Rect2(8, 8, 16, 16)
+
+[sub_resource type="Gradient" id="cooldown_shade_color"]
+colors = PackedColorArray(0, 0, 0, 0.7, 0, 0, 0, 0.7)
+
+[sub_resource type="GradientTexture2D" id="cooldown_shade"]
+gradient = SubResource("cooldown_shade_color")
+width = 96
+height = 96
 
 [sub_resource type="AtlasTexture" id="resume"]
 atlas = ExtResource("t_menu_resume")
@@ -149,22 +157,13 @@ region = Rect2(0, 48, 84, 24)
 atlas = ExtResource("t_next_wave")
 region = Rect2(0, 24, 84, 24)
 
-[sub_resource type="Gradient" id="cooldown_shade_color"]
-offsets = PackedFloat32Array(0, 1)
-colors = PackedColorArray(0, 0, 0, 0.7, 0, 0, 0, 0.7)
-
-[sub_resource type="GradientTexture2D" id="cooldown_shade"]
-gradient = SubResource("cooldown_shade_color")
-width = 96
-height = 96
-
 [node name="Game" type="Node2D" unique_id=1667207943]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1699051052]
+physics_interpolation_mode = 2
 z_index = -10
 texture_repeat = 2
 scale = Vector2(0.5, 0.5)
-physics_interpolation_mode = 2
 texture = ExtResource("t_ground")
 region_enabled = true
 region_rect = Rect2(0, 0, 7680, 7680)
@@ -369,19 +368,21 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -847.0
-offset_top = -134.0
-offset_right = -751.0
-offset_bottom = -38.0
+offset_left = -41.0
+offset_top = -136.0
+offset_right = 55.0
+offset_bottom = -40.0
 mouse_filter = 2
 texture = ExtResource("t_dash")
 expand_mode = 1
 
-[node name="Cooldown" type="TextureProgressBar" parent="UI/DashIcon"]
+[node name="Cooldown" type="TextureProgressBar" parent="UI/DashIcon" unique_id=1578896527]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 fill_mode = 4
 texture_progress = SubResource("cooldown_shade")
@@ -391,6 +392,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 48
@@ -403,19 +406,21 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -731.0
-offset_top = -134.0
-offset_right = -635.0
-offset_bottom = -38.0
+offset_left = 64.0
+offset_top = -138.0
+offset_right = 169.0
+offset_bottom = -37.0
 mouse_filter = 2
 texture = ExtResource("t_nuke")
 expand_mode = 1
 
-[node name="Cooldown" type="TextureProgressBar" parent="UI/NukeIcon"]
+[node name="Cooldown" type="TextureProgressBar" parent="UI/NukeIcon" unique_id=739200829]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 fill_mode = 4
 texture_progress = SubResource("cooldown_shade")
@@ -425,6 +430,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 48
@@ -602,7 +609,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -650.0
+offset_left = -533.0
 offset_top = -500.0
 offset_right = 910.0
 offset_bottom = 500.0
@@ -610,9 +617,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("market_frame")
 
-[node name="Merchant" type="AnimatedSprite2D" parent="UI/ShopPanel/Frame"]
-position = Vector2(-140, 860)
-scale = Vector2(4, 4)
+[node name="Merchant" type="AnimatedSprite2D" parent="UI/ShopPanel/Frame" unique_id=213799974]
+position = Vector2(-217.00002, 724)
+scale = Vector2(8.515624, 8.5078125)
 sprite_frames = ExtResource("f_merchant")
 animation = &"idle"
 autoplay = "idle"
@@ -626,6 +633,7 @@ offset_left = -300.0
 offset_top = 24.0
 offset_right = 300.0
 offset_bottom = 134.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 112
 text = "MARKET"
@@ -641,6 +649,7 @@ offset_left = -300.0
 offset_top = 50.0
 offset_right = -60.0
 offset_bottom = 110.0
+grow_horizontal = 0
 theme_override_constants/separation = 12
 alignment = 2
 
@@ -682,6 +691,8 @@ offset_left = -168.0
 offset_top = -136.0
 offset_right = 168.0
 offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
 texture_normal = SubResource("next_wave_normal")
 texture_pressed = SubResource("next_wave_pressed")
 texture_hover = SubResource("next_wave_hover")
