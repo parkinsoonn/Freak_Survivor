@@ -27,6 +27,8 @@
 [ext_resource type="Script" uid="uid://blfmk0v3kupmj" path="res://scripts/saber_orbit.gd" id="s_saber_orbit"]
 [ext_resource type="Script" uid="uid://b8g1gh5ktlsq7" path="res://scripts/enemy_spawner.gd" id="s_spawner"]
 [ext_resource type="Script" uid="uid://bht0umigatto2" path="res://scripts/tint_button.gd" id="s_tint"]
+[ext_resource type="Script" path="res://scripts/wave_manager.gd" id="s_wave"]
+[ext_resource type="Script" path="res://scripts/shop_panel.gd" id="s_shop"]
 [ext_resource type="Script" uid="uid://du36c3nhbi6qb" path="res://scripts/trail.gd" id="s_trail"]
 [ext_resource type="Texture2D" uid="uid://gqcwagvpyrn5" path="res://assets/sprites/nisangah.png" id="t_cursor"]
 [ext_resource type="Texture2D" uid="uid://b7ob32c6hvrn5" path="res://assets/sprites/dasharkaplan.png" id="t_dash"]
@@ -135,10 +137,11 @@ z_index = -9
 script = ExtResource("s_decor")
 decor_frames = ExtResource("f_decor")
 
-[node name="GameManager" type="Node" parent="." unique_id=1860428368 node_paths=PackedStringArray("game_over_panel", "pause_panel", "score_text", "gold_counter", "gold_text", "volume_slider", "music")]
+[node name="GameManager" type="Node" parent="." unique_id=1860428368 node_paths=PackedStringArray("game_over_panel", "game_over_wave_text", "pause_panel", "score_text", "gold_counter", "gold_text", "volume_slider", "music")]
 process_mode = 3
 script = ExtResource("s_game_manager")
 game_over_panel = NodePath("../UI/GameOverPanel")
+game_over_wave_text = NodePath("../UI/GameOverPanel/WaveReached")
 pause_panel = NodePath("../UI/PausePanel")
 score_text = NodePath("../UI/ScoreText")
 gold_counter = NodePath("../UI/GoldCounter")
@@ -166,7 +169,12 @@ enemy_scenes = Array[PackedScene]([ExtResource("p_fare"), ExtResource("p_goz"), 
 spawn_interval = 0.8
 min_spawn_interval = 0.3
 mini_boss_scene = ExtResource("p_golem")
-mini_boss_interval = 30.0
+
+[node name="WaveManager" type="Node" parent="." node_paths=PackedStringArray("spawner", "wave_text", "shop_panel")]
+script = ExtResource("s_wave")
+spawner = NodePath("../SpawnManager")
+wave_text = NodePath("../UI/WaveText")
+shop_panel = NodePath("../UI/ShopPanel")
 
 [node name="Player" type="RigidBody2D" parent="." unique_id=1998920266 node_paths=PackedStringArray("dash_icon", "dash_cooldown_text", "nuke_icon", "nuke_cooldown_text", "nuke_flash")]
 position = Vector2(-64.64, 105.6)
@@ -254,6 +262,18 @@ offset_right = 33.39
 offset_bottom = 158.74
 theme_override_font_sizes/font_size = 36
 text = "SCORE: 0"
+
+[node name="WaveText" type="Label" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 18.0
+offset_right = 250.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 48
+text = "WAVE 1  0:20"
+horizontal_alignment = 1
 
 [node name="GoldCounter" type="HBoxContainer" parent="UI"]
 anchors_preset = -1
@@ -443,6 +463,21 @@ offset_right = 327.29
 texture = ExtResource("t_you_died")
 expand_mode = 1
 
+[node name="WaveReached" type="Label" parent="UI/GameOverPanel"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 72
+text = "WAVE 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TryAgainButton" type="TextureButton" parent="UI/GameOverPanel" unique_id=1404900859]
 layout_mode = 0
 anchor_left = 0.5
@@ -450,9 +485,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -154.94
-offset_top = 35.98
+offset_top = 105.98
 offset_right = 159.83
-offset_bottom = 158.02
+offset_bottom = 228.02
 texture_normal = SubResource("try_again")
 ignore_texture_size = true
 stretch_mode = 0
@@ -465,14 +500,49 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -125.33
-offset_top = 183.5
+offset_top = 253.5
 offset_right = 129.33
-offset_bottom = 308.5
+offset_bottom = 378.5
 texture_normal = SubResource("menu")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
+[node name="ShopPanel" type="ColorRect" parent="UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.92156863)
+script = ExtResource("s_shop")
+
+[node name="Title" type="Label" parent="UI/ShopPanel"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 40.0
+offset_right = 300.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 128
+text = "MARKET"
+horizontal_alignment = 1
+
+[node name="NextWaveButton" type="Button" parent="UI/ShopPanel"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = -50.0
+theme_override_font_sizes/font_size = 56
+text = "SONRAKİ WAVE"
+script = ExtResource("s_tint")
+
+[connection signal="pressed" from="UI/ShopPanel/NextWaveButton" to="WaveManager" method="next_wave"]
 [connection signal="pressed" from="UI/PausePanel/ResumeButton" to="GameManager" method="resume_game"]
 [connection signal="pressed" from="UI/PausePanel/MainMenuButton" to="GameManager" method="load_main_menu"]
 [connection signal="pressed" from="UI/GameOverPanel/TryAgainButton" to="GameManager" method="restart_game"]

@@ -4,6 +4,7 @@ extends Node
 
 @export_group("UI Panelleri")
 @export var game_over_panel: Control
+@export var game_over_wave_text: Label # Game Over'da ulaşılan wave
 @export var pause_panel: Control
 
 @export_group("Skor Sistemi")
@@ -33,9 +34,6 @@ extends Node
 @export_group("İmleç")
 @export var crosshair_cursor: Texture2D
 
-# Unity'deki Time.timeSinceLevelLoad: pause sırasında durur
-var game_time := 0.0
-
 # Oyun durumunu kontrol eden kilitler
 var _is_paused := false
 var _is_game_over := false
@@ -43,6 +41,7 @@ var _is_game_over := false
 var _player: Node
 var _camera: Node
 var _saber_orbit: Node
+var _wave_manager: Node
 
 
 func _enter_tree() -> void:
@@ -62,6 +61,7 @@ func _ready() -> void:
 	_player = get_tree().get_first_node_in_group("player")
 	_saber_orbit = _player.get_node("SaberOrbit")
 	_camera = get_tree().get_first_node_in_group("camera")
+	_wave_manager = get_tree().get_first_node_in_group("wave_manager")
 
 	if music:
 		(music.stream as AudioStreamMP3).loop = true # Müzik hiç bitmesin
@@ -77,12 +77,9 @@ func set_volume(volume: float) -> void:
 	Settings.volume = volume
 
 
-func _process(delta: float) -> void:
-	if not get_tree().paused:
-		game_time += delta
-
-	# Oyun bitmişse ESC hiçbir işe yaramasın
-	if _is_game_over:
+func _process(_delta: float) -> void:
+	# Oyun bitmişse, market ya da wave geçişi sırasında ESC hiçbir işe yaramasın
+	if _is_game_over or not _wave_manager.can_pause():
 		return
 
 	if Input.is_action_just_pressed("pause"):
@@ -98,7 +95,7 @@ func pause_game() -> void:
 	_is_paused = true
 
 	# ESC menüsü açıldığında HUD'u gizle
-	_set_hud_visibility(false)
+	set_hud_visibility(false)
 
 
 func resume_game() -> void:
@@ -107,7 +104,7 @@ func resume_game() -> void:
 	_is_paused = false
 
 	# Oyuna devam edildiğinde HUD'u tekrar görünür yap
-	_set_hud_visibility(true)
+	set_hud_visibility(true)
 
 
 func _exit_tree() -> void:
@@ -152,9 +149,10 @@ func show_game_over() -> void:
 
 	_is_game_over = true
 	if game_over_panel: game_over_panel.visible = true
+	if game_over_wave_text: game_over_wave_text.text = "WAVE %d" % _wave_manager.wave
 
 	# Oyun bittiğinde HUD'u gizle
-	_set_hud_visibility(false)
+	set_hud_visibility(false)
 
 	if music:
 		music.stop()
@@ -226,10 +224,11 @@ func _spawn(node: Node2D, position: Vector2) -> void:
 	get_parent().add_child.call_deferred(node)
 
 
-# Skor, altın ve Dash UI'ını birlikte gösterip gizler
-func _set_hud_visibility(is_visible: bool) -> void:
+# Skor, altın, wave ve Dash UI'ını birlikte gösterip gizler
+func set_hud_visibility(is_visible: bool) -> void:
 	if score_text: score_text.visible = is_visible
 	if gold_counter: gold_counter.visible = is_visible
+	if _wave_manager.wave_text: _wave_manager.wave_text.visible = is_visible
 	_player.set_dash_ui_visibility(is_visible)
 
 

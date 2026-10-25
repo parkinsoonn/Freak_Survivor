@@ -46,15 +46,15 @@ func display_name(value: Difficulty) -> String:
 		_: return "NORMAL"
 
 
-# Oyun başındaki düşman hızı; zamanla speed_growth_per_minute kadar artar (max_speed_bonus'a kadar)
+# 1. wave'deki düşman hızı; her wave'de speed_growth_per_wave kadar artar (max_speed_bonus'a kadar)
 func enemy_speed_multiplier() -> float: return _pick(0.85, 1.05, 1.15)
-func speed_growth_per_minute() -> float: return _pick(0.05, 0.1, 0.15)
+func speed_growth_per_wave() -> float: return _pick(0.03, 0.05, 0.075)
 func max_speed_bonus() -> float: return _pick(0.25, 0.5, 0.6)
 
-# Spawn aralığı başlangıçtan minimuma ramp_duration saniyede iner (küçük = daha sık düşman)
+# Spawn aralığı 1. wave'den ramp_waves. wave'e kadar minimuma iner (küçük = daha sık düşman)
 func start_interval_multiplier() -> float: return _pick(1.4, 1.15, 1.0)
 func min_interval_multiplier() -> float: return _pick(1.3, 1.0, 0.7)
-func ramp_duration() -> float: return _pick(300.0, 180.0, 120.0)
+func ramp_waves() -> float: return _pick(15.0, 10.0, 8.0)
 
 func multi_shot_drop_chance() -> float: return _pick(0.03, 0.02, 0.01)
 func magnet_drop_chance() -> float: return _pick(0.0225, 0.015, 0.0075)
