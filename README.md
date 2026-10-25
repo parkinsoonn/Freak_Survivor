@@ -1,103 +1,105 @@
 # Freak Survivor
 
-Vampire Survivors / Brotato tarzı, dalga (wave) tabanlı bir 2D pixel art hayatta kalma oyunu. Unity'den **Godot 4.7**'ye taşındı.
+A wave-based 2D pixel art survival game in the style of Vampire Survivors / Brotato, ported from Unity to **Godot 4.7**.
 
-Her dalgada süre dolana kadar canavar sürülerine karşı dayan, düşen altınları topla, dalga sonunda gezgin tüccarın marketinden karakterini, tabancanı ve ışın kılıcını geliştir. Dalgalar ilerledikçe düşmanlar hızlanır ve sıklaşır.
+Hold out against hordes of monsters until each wave's timer runs out, collect the gold they drop, then spend it at the travelling merchant's shop to upgrade your character, your pistol and your lightsaber. Enemies get faster and spawn more often as the waves go on.
 
-![Oyun](docs/oyun.png)
+![Gameplay](docs/gameplay.png)
 
-![Market](docs/market.png)
+![Shop](docs/shop.png)
 
-## Oynanış
+## Gameplay
 
-1. **Ana menü:** zorluk seç (Kolay / Normal / Zor), dili seç (TR / EN), **OYNA**.
-2. **Dalga:** "DALGA N" banner'ı geçer, sayaç başlar. Süre `min(20 + 5 × (N − 1), 60)` saniye.
-3. Öldürdüğün her düşman **altın** düşürür (golem 10, diğerleri 1). Toplama alanına giren altın sana uçar; **mıknatıs** yerdeki tüm altınları çeker.
-4. **Süre dolunca:** kalan düşmanlar silinir, toplamadığın altınlar kaybolur.
-5. **Market:** altınla geliştirme al, **SONRAKİ DALGA** ile devam et.
-6. Ölünce ulaştığın dalga Game Over ekranında görünür. Altın ve geliştirmeler o oyuna özeldir, kaydedilmez.
+1. **Main menu:** pick a difficulty (Easy / Normal / Hard) and a language (TR / EN), then **PLAY**.
+2. **Wave:** a "WAVE N" banner slides by and the timer starts. Each wave lasts `min(20 + 5 × (N − 1), 60)` seconds.
+3. Every enemy you kill drops **gold** (10 for the golem, 1 for the rest). Gold inside your pickup range flies to you; the **magnet** pulls in all gold on the ground.
+4. **When the timer runs out:** the remaining enemies are cleared and any gold you didn't pick up disappears.
+5. **Shop:** buy upgrades with your gold, then press **NEXT WAVE**.
+6. When you die, the Game Over screen shows the wave you reached. Gold and upgrades only last for the current run and are not saved.
 
-Her 5. dalganın ortasında bir **golem** (mini boss) çıkar.
+A **golem** (mini boss) appears halfway through every 5th wave.
 
-### Kontroller
+### Controls
 
-| Tuş | Eylem |
+| Key | Action |
 |---|---|
-| WASD / Ok tuşları | Hareket |
-| Fare | Nişan |
-| Sol tık (basılı tut) | Ateş |
-| Shift | Dash (kısa süre hasar almazsın) |
-| Q | Atom bombası (ekrandaki tüm düşmanlar, 60 sn bekleme) |
-| Esc | Duraklat (dalga sırasında) |
+| WASD / Arrow keys | Move |
+| Mouse | Aim |
+| Left click (hold) | Shoot |
+| Shift | Dash (briefly invulnerable) |
+| Q | Nuke (kills every enemy on screen, 60 s cooldown) |
+| Esc | Pause (during a wave) |
 
-### Market
+### Shop
 
-| Kategori | Geliştirmeler |
+| Category | Upgrades |
 |---|---|
-| **Karakter** | Hareket Hızı, Max Can, Toplama Alanı, Can Doldur (sınırsız), Dash bekleme süresi |
-| **Tabanca** | Atış Hızı, Mermi Adedi, Mermi Hızı, Mermi Boyutu |
-| **Işın Kılıcı** | Işın Kılıcı (ilk alım açar, sonra +1 kılıç), Dönüş Hızı, Kılıç Boyutu, Yörünge |
+| **Character** | Move Speed, Max Health, Pickup Range, Heal (unlimited), Dash cooldown |
+| **Pistol** | Fire Rate, Bullet Count, Bullet Speed, Bullet Size |
+| **Lightsaber** | Lightsaber (first purchase unlocks it, then +1 saber), Spin Speed, Saber Size, Orbit |
 
-Fiyat her seviyede artar: `round(base_cost × cost_growth ^ seviye)`.
+Prices go up with every level: `round(base_cost × cost_growth ^ level)`.
 
-### Düşmanlar
+### Enemies
 
-Fare, Göz, Mumyavari, Zombi, Goblin ve mini boss **Golem**. Hız ve doğma sıklığı seçilen zorluğa ve dalga numarasına göre ölçeklenir.
+Rat, Eye, Mummy, Zombie, Goblin and the **Golem** mini boss. Their speed and spawn rate scale with the chosen difficulty and the wave number.
 
-## Çalıştırma
+## Running the game
 
-1. [Godot 4.7](https://godotengine.org/) kur.
-2. Godot'da `project.godot` dosyasını aç ve **F5** ile çalıştır (ana sahne: `scenes/main_menu.tscn`).
+1. Install [Godot 4.7](https://godotengine.org/).
+2. Open `project.godot` in Godot and press **F5** (main scene: `scenes/main_menu.tscn`).
 
-**Windows build:** *Project → Export → Windows Desktop* ile `build/FreakSurvivor.exe` üretilir (`build/` git'e girmez).
+**Windows build:** *Project → Export → Windows Desktop* produces `build/FreakSurvivor.exe` (`build/` is not tracked by git).
 
-### Test
+### Tests
 
-Market fiyat/satın alma mantığı ve çeviri kontrolü:
+Shop pricing / purchase logic and a translation check:
 
 ```bash
 godot --headless -s tests/test_upgrades.gd
 ```
 
-Başarılıysa `test_upgrades: OK` yazar; başarısız bir assert'te çıkış kodu 1'dir.
+Prints `test_upgrades: OK` on success; a failed assert exits with code 1.
 
-## Proje yapısı
+## Project structure
 
 ```
-scenes/          main_menu, game, gold, bullet, isin_kilici, miknatis, enemies/
+scenes/          main_menu, game, gold, bullet, isin_kilici (lightsaber), miknatis (magnet), enemies/
 scripts/
-  game_manager.gd      skor, altın, öldürme (kill_enemy), pause / game over
-  wave_manager.gd      dalga döngüsü: INTRO → FIGHT → CLEANUP → SHOP
-  enemy_spawner.gd     dalga numarasına göre spawn aralığı, golem
-  shop_panel.gd        market arayüzü (kartlar koddan kurulur)
-  upgrades.gd          market verisi ve satın alma mantığı
-  settings.gd          zorluk, ses, dil (autoload: Settings)
-  transition.gd        sahne geçişlerinde fade (autoload: Transition)
+  game_manager.gd      score, gold, kills (kill_enemy), pause / game over
+  wave_manager.gd      wave loop: INTRO → FIGHT → CLEANUP → SHOP
+  enemy_spawner.gd     spawn rate by wave number, golem
+  shop_panel.gd        shop UI (cards are built in code)
+  upgrades.gd          shop data and purchase logic
+  settings.gd          difficulty, volume, language (autoload: Settings)
+  transition.gd        fade between scenes (autoload: Transition)
 assets/
-  sprites/ui/          market arayüz assetleri + Aseprite Lua üreteçleri
-  sprites/merchant/    tüccar
-  sprites/pickups/     altın
-  sprites/map/         zemin ve dekorlar
+  sprites/ui/          shop UI assets + Aseprite Lua generators
+  sprites/merchant/    merchant
+  sprites/pickups/     gold coin
+  sprites/map/         ground and decorations
   translations/        strings.csv (TR / EN)
 tests/           test_upgrades.gd
 ```
 
-### Yeni geliştirme eklemek
+Code comments are in Turkish.
 
-Kod değişmez, sadece veri: `scripts/upgrades.gd` içindeki `LIST`'e bir kayıt ekle. `target` sahnedeki düğüm yolu, `method` o düğümde çağrılacak fonksiyondur (`target.call(method, amount)`). Ad ve açıklamanın İngilizcesini `assets/translations/strings.csv`'ye eklemeyi unutma; test eksik çeviriyi yakalar.
+### Adding a new upgrade
 
-### Çeviri
+No code changes needed, only data: add an entry to `LIST` in `scripts/upgrades.gd`. `target` is the node path in the game scene and `method` is the function called on it (`target.call(method, amount)`). Add the English name and description to `assets/translations/strings.csv` as well; the test catches missing translations.
 
-Bütün yazılar `assets/translations/strings.csv` dosyasında (`keys,tr,en`). Anahtar Türkçe metnin kendisidir. Kodda `tr("...")`, sahnedeki Label'larda ise anahtar metin otomatik çevrilir. Dil ana menüden değişir ve kaydedilir; ilk açılışta sistem dili Türkçe değilse İngilizce başlar.
+### Translations
 
-### Pixel art assetleri
+All text lives in `assets/translations/strings.csv` (`keys,tr,en`). The key is the Turkish text itself. Code uses `tr("...")`; Labels in scenes whose text is a key are translated automatically. The language is changed from the main menu and saved; on first launch the game starts in English unless the system language is Turkish.
 
-Arayüz assetleri (market paneli, kartlar, ikonlar, butonlar, banner, parlama, tüccar, altın) Aseprite Lua scriptleriyle üretilir. Her script `.aseprite`, sprite sheet `.png`, `.json` ve önizleme `.gif` çıkarır:
+### Pixel art assets
+
+The UI assets (shop panel, cards, icons, buttons, banner, purchase flash, merchant, gold coin) are generated with Aseprite Lua scripts. Each script outputs an `.aseprite` file, a sprite sheet `.png`, a `.json` and a preview `.gif`:
 
 ```bash
 aseprite -b --script-param out=assets/sprites/ui --script assets/sprites/ui/upgrade_icons.lua
 ```
 
-## Yapımcılar
+## Credits
 
-**parkinson** ve **oridantes**
+**parkinson** and **oridantes**
