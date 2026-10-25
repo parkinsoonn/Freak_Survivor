@@ -85,7 +85,7 @@ func _ready() -> void:
 
 
 func _notification(what: int) -> void:
-	# Pause, seviye atlama ve Game Over ekranlarından dönünce basılı tık ateş etmesin
+	# Pause, market ve Game Over ekranlarından dönünce basılı tık ateş etmesin
 	if what == NOTIFICATION_UNPAUSED:
 		_fire_locked = true
 
@@ -220,9 +220,9 @@ func decrease_dash_cooldown(amount: float) -> void:
 	dash_cooldown = maxf(dash_cooldown - amount, 0.3)
 
 
-func set_dash_ui_visibility(is_visible: bool) -> void:
+func set_dash_ui_visibility(shown: bool) -> void:
 	for control in [dash_icon, dash_cooldown_text, nuke_icon, nuke_cooldown_text]:
-		if control: control.visible = is_visible
+		if control: control.visible = shown
 
 
 func _update_cooldown_ui(timer: float, icon: TextureRect, text: Label) -> void:

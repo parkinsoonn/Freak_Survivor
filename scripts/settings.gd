@@ -56,9 +56,7 @@ func start_interval_multiplier() -> float: return _pick(1.4, 1.15, 1.0)
 func min_interval_multiplier() -> float: return _pick(1.3, 1.0, 0.7)
 func ramp_waves() -> float: return _pick(15.0, 10.0, 8.0)
 
-func multi_shot_drop_chance() -> float: return _pick(0.03, 0.02, 0.01)
 func magnet_drop_chance() -> float: return _pick(0.0225, 0.015, 0.0075)
-func saber_drop_chance() -> float: return _pick(0.015, 0.01, 0.005)
 
 
 func _pick(easy: float, normal: float, hard: float) -> float:

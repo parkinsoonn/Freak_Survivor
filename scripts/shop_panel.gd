@@ -227,10 +227,10 @@ func _card_style(row: int) -> StyleBoxTexture:
 	return style
 
 
-func _icon(id: String, size: float) -> TextureRect:
+func _icon(id: String, side: float) -> TextureRect:
 	var rect := TextureRect.new()
 	rect.texture = _atlas(ICON_SHEET, Rect2(Upgrades.ICONS.find(id) * 16, 0, 16, 16))
-	rect.custom_minimum_size = Vector2(size, size)
+	rect.custom_minimum_size = Vector2(side, side)
 	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	return rect
