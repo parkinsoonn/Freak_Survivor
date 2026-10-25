@@ -1,0 +1,13 @@
+{"frames":[
+  {"filename":"normal_0","frame":{"x":0,"y":0,"w":84,"h":24},"duration":150},
+  {"filename":"normal_1","frame":{"x":84,"y":0,"w":84,"h":24},"duration":150},
+  {"filename":"normal_2","frame":{"x":168,"y":0,"w":84,"h":24},"duration":150},
+  {"filename":"normal_3","frame":{"x":252,"y":0,"w":84,"h":24},"duration":150},
+  {"filename":"hover_0","frame":{"x":0,"y":24,"w":84,"h":24},"duration":100},
+  {"filename":"pressed_0","frame":{"x":0,"y":48,"w":84,"h":24},"duration":100}
+],
+"meta":{"app":"Aseprite","image":"next_wave_button_sheet.png","format":"RGBA8888","size":{"w":336,"h":72},"frameSize":{"w":84,"h":24},"layout":"one row per tag","frameTags":[
+  {"name":"normal","from":0,"to":3,"direction":"forward","row":0,"durations":[150,150,150,150]},
+  {"name":"hover","from":4,"to":4,"direction":"forward","row":1,"durations":[100]},
+  {"name":"pressed","from":5,"to":5,"direction":"forward","row":2,"durations":[100]}
+]}}

@@ -1,0 +1,11 @@
+{"frames":[
+  {"filename":"flash_0","frame":{"x":0,"y":0,"w":32,"h":32},"duration":50},
+  {"filename":"flash_1","frame":{"x":32,"y":0,"w":32,"h":32},"duration":50},
+  {"filename":"flash_2","frame":{"x":64,"y":0,"w":32,"h":32},"duration":50},
+  {"filename":"flash_3","frame":{"x":96,"y":0,"w":32,"h":32},"duration":50},
+  {"filename":"flash_4","frame":{"x":128,"y":0,"w":32,"h":32},"duration":50},
+  {"filename":"flash_5","frame":{"x":160,"y":0,"w":32,"h":32},"duration":50}
+],
+"meta":{"app":"Aseprite","image":"buy_flash_sheet.png","format":"RGBA8888","size":{"w":192,"h":32},"frameSize":{"w":32,"h":32},"layout":"one row per tag","frameTags":[
+  {"name":"flash","from":0,"to":5,"direction":"forward","row":0,"durations":[50,50,50,50,50,50]}
+]}}
