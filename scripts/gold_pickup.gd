@@ -19,7 +19,7 @@ func attract(target: Node2D) -> void:
 	_attract_target = target
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not is_instance_valid(_attract_target):
 		return
 

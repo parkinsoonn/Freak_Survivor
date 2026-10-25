@@ -34,7 +34,7 @@ window/stretch/aspect="expand"
 theme/custom_font="res://assets/fonts/Jersey10-Regular.ttf"
 
 [physics]
-
+common/physics_interpolation=true
 2d/default_gravity=0.0
 
 [rendering]

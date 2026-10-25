@@ -22,7 +22,7 @@ func trigger_shake(duration: float, magnitude: float) -> void:
 	_shake_magnitude = magnitude
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not is_instance_valid(target):
 		return
 

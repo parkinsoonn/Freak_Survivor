@@ -45,6 +45,6 @@ func _layout() -> void:
 		_sabers[i].scale = Vector2.ONE * saber_size
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Unity'de saat yönünde dönüyordu; Godot'ta pozitif açı saat yönü
 	rotation += deg_to_rad(rotate_speed) * delta
