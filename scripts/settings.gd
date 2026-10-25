@@ -20,45 +20,58 @@ var volume: float = 1.0:
 		AudioServer.set_bus_volume_db(0, linear_to_db(value))
 		_save()
 
+const LANGUAGES := ["tr", "en"]
+
+# Çeviriler assets/translations/strings.csv'de; anahtar Türkçe metnin kendisi
+var language := "tr":
+	set(value):
+		language = value
+		TranslationServer.set_locale(value)
+		_save()
+
 
 func _ready() -> void:
 	_add_inputs()
 
+	# İlk açılışta sistem dili Türkçe değilse İngilizce
+	var default_language := "tr" if OS.get_locale_language() == "tr" else "en"
 	var config := ConfigFile.new()
 	if config.load(SAVE_PATH) == OK:
 		difficulty = clampi(config.get_value("game", "difficulty", Difficulty.NORMAL), 0, 2) as Difficulty
 		volume = config.get_value("game", "volume", 1.0)
+		var saved: String = config.get_value("game", "language", default_language)
+		language = saved if saved in LANGUAGES else default_language
 	else:
 		volume = 1.0
+		language = default_language
 
 
 func _save() -> void:
 	var config := ConfigFile.new()
 	config.set_value("game", "difficulty", difficulty)
 	config.set_value("game", "volume", volume)
+	config.set_value("game", "language", language)
 	config.save(SAVE_PATH)
 
 
 func display_name(value: Difficulty) -> String:
 	match value:
-		Difficulty.EASY: return "KOLAY"
-		Difficulty.HARD: return "ZOR"
-		_: return "NORMAL"
+		Difficulty.EASY: return tr("KOLAY")
+		Difficulty.HARD: return tr("ZOR")
+		_: return tr("NORMAL")
 
 
-# Oyun başındaki düşman hızı; zamanla speed_growth_per_minute kadar artar (max_speed_bonus'a kadar)
+# 1. wave'deki düşman hızı; her wave'de speed_growth_per_wave kadar artar (max_speed_bonus'a kadar)
 func enemy_speed_multiplier() -> float: return _pick(0.85, 1.05, 1.15)
-func speed_growth_per_minute() -> float: return _pick(0.05, 0.1, 0.15)
+func speed_growth_per_wave() -> float: return _pick(0.03, 0.05, 0.075)
 func max_speed_bonus() -> float: return _pick(0.25, 0.5, 0.6)
 
-# Spawn aralığı başlangıçtan minimuma ramp_duration saniyede iner (küçük = daha sık düşman)
+# Spawn aralığı 1. wave'den ramp_waves. wave'e kadar minimuma iner (küçük = daha sık düşman)
 func start_interval_multiplier() -> float: return _pick(1.4, 1.15, 1.0)
 func min_interval_multiplier() -> float: return _pick(1.3, 1.0, 0.7)
-func ramp_duration() -> float: return _pick(300.0, 180.0, 120.0)
+func ramp_waves() -> float: return _pick(15.0, 10.0, 8.0)
 
-func multi_shot_drop_chance() -> float: return _pick(0.03, 0.02, 0.01)
 func magnet_drop_chance() -> float: return _pick(0.0225, 0.015, 0.0075)
-func saber_drop_chance() -> float: return _pick(0.015, 0.01, 0.005)
 
 
 func _pick(easy: float, normal: float, hard: float) -> float:

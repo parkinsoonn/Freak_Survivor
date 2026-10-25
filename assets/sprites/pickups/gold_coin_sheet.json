@@ -1,0 +1,18 @@
+{"frames":[
+  {"filename":"spin_0","frame":{"x":0,"y":0,"w":32,"h":32},"duration":80},
+  {"filename":"spin_1","frame":{"x":32,"y":0,"w":32,"h":32},"duration":80},
+  {"filename":"spin_2","frame":{"x":64,"y":0,"w":32,"h":32},"duration":80},
+  {"filename":"spin_3","frame":{"x":96,"y":0,"w":32,"h":32},"duration":80},
+  {"filename":"spin_4","frame":{"x":128,"y":0,"w":32,"h":32},"duration":80},
+  {"filename":"spin_5","frame":{"x":160,"y":0,"w":32,"h":32},"duration":80},
+  {"filename":"spin_6","frame":{"x":192,"y":0,"w":32,"h":32},"duration":80},
+  {"filename":"spin_7","frame":{"x":224,"y":0,"w":32,"h":32},"duration":80},
+  {"filename":"sparkle_0","frame":{"x":0,"y":32,"w":32,"h":32},"duration":60},
+  {"filename":"sparkle_1","frame":{"x":32,"y":32,"w":32,"h":32},"duration":60},
+  {"filename":"sparkle_2","frame":{"x":64,"y":32,"w":32,"h":32},"duration":60},
+  {"filename":"sparkle_3","frame":{"x":96,"y":32,"w":32,"h":32},"duration":60}
+],
+"meta":{"app":"Aseprite","image":"gold_coin_sheet.png","format":"RGBA8888","size":{"w":256,"h":64},"frameSize":{"w":32,"h":32},"layout":"one row per tag","frameTags":[
+  {"name":"spin","from":0,"to":7,"direction":"forward","row":0,"durations":[80,80,80,80,80,80,80,80]},
+  {"name":"sparkle","from":8,"to":11,"direction":"forward","row":1,"durations":[60,60,60,60]}
+]}}

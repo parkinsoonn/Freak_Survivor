@@ -1,0 +1,6 @@
+{"frames":[
+  {"filename":"panel_0","frame":{"x":0,"y":0,"w":32,"h":32},"duration":100}
+],
+"meta":{"app":"Aseprite","image":"market_panel_sheet.png","format":"RGBA8888","size":{"w":32,"h":32},"frameSize":{"w":32,"h":32},"layout":"one row per tag","frameTags":[
+  {"name":"panel","from":0,"to":0,"direction":"forward","row":0,"durations":[100]}
+]}}

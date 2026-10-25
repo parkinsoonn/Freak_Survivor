@@ -1,5 +1,7 @@
 extends Node
 
+# WaveManager FIGHT başında start_wave ile açar, wave bitince stop ile kapatır
+
 @export var enemy_scenes: Array[PackedScene] = []
 
 @export_group("Zorluk Ayarları")
@@ -9,38 +11,50 @@ extends Node
 
 @export_group("Mini Boss")
 @export var mini_boss_scene: PackedScene
-@export var mini_boss_interval := 60.0
+## Her kaçıncı wave'in ortasında bir kez golem çıkar
+@export var mini_boss_every := 5
 
 var _timer := 0.0
-var _boss_timer := 0.0
+var _wave_time := 0.0
+var _boss_time := -1.0 # Bu wave'de golemin çıkacağı an; -1 = yok
 var _player: Node2D
-var _game_manager: Node
 var _start_interval := 0.0
 
 
 func _ready() -> void:
+	set_process(false)
 	_player = get_tree().get_first_node_in_group("player")
-	_game_manager = get_tree().get_first_node_in_group("game_manager")
 
 	# Seçilen zorluğa göre spawn sıklığını ölçekle
 	_start_interval = spawn_interval * Settings.start_interval_multiplier()
 	min_spawn_interval *= Settings.min_interval_multiplier()
 
 
-func _process(delta: float) -> void:
-	# Oyun zamanı ilerledikçe (pause hariç) spawn aralığı minimuma doğru daralır
-	var t: float = clampf(_game_manager.game_time / Settings.ramp_duration(), 0.0, 1.0)
+func start_wave(wave: int, duration: float) -> void:
+	# Wave numarası arttıkça spawn aralığı ramp_waves. wave'de minimuma iner
+	var t := clampf((wave - 1) / (Settings.ramp_waves() - 1.0), 0.0, 1.0)
 	spawn_interval = lerpf(_start_interval, min_spawn_interval, t)
 
+	_timer = 0.0
+	_wave_time = 0.0
+	_boss_time = duration / 2.0 if wave % mini_boss_every == 0 else -1.0
+	set_process(true)
+
+
+func stop() -> void:
+	set_process(false)
+
+
+func _process(delta: float) -> void:
 	_timer += delta
 	if _timer >= spawn_interval:
 		_spawn_enemy()
 		_timer = 0.0
 
-	_boss_timer += delta
-	if _boss_timer >= mini_boss_interval:
+	_wave_time += delta
+	if _boss_time >= 0.0 and _wave_time >= _boss_time:
 		_spawn(mini_boss_scene)
-		_boss_timer = 0.0
+		_boss_time = -1.0
 
 
 func _spawn_enemy() -> void:

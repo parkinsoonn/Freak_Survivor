@@ -6,8 +6,8 @@ extends RigidBody2D
 @export var despawn_distance := 30.0
 ## Ölmesi için gereken mermi sayısı
 @export var health := 1
-## Ölünce düşen XP kristalinin değeri
-@export var xp_reward := 1
+## Ölünce düşen altının değeri
+@export var gold_reward := 1
 
 # Aynı karede birden fazla mermi çarparsa ödülün tek kez verilmesi için
 var is_dead := false
@@ -27,11 +27,11 @@ func _ready() -> void:
 	gravity_scale = 0.0
 	lock_rotation = true
 
-	# Zorluk çarpanı + oyun ilerledikçe artan hız bonusu
-	var game_manager := get_tree().get_first_node_in_group("game_manager")
-	var minutes: float = (game_manager.game_time if game_manager else 0.0) / 60.0
-	var time_bonus := minf(Settings.max_speed_bonus(), Settings.speed_growth_per_minute() * minutes)
-	speed *= Settings.enemy_speed_multiplier() * (1.0 + time_bonus)
+	# Zorluk çarpanı + wave ilerledikçe artan hız bonusu
+	var wave_manager := get_tree().get_first_node_in_group("wave_manager")
+	var wave: int = wave_manager.wave if wave_manager else 1
+	var wave_bonus := minf(Settings.max_speed_bonus(), Settings.speed_growth_per_wave() * (wave - 1))
+	speed *= Settings.enemy_speed_multiplier() * (1.0 + wave_bonus)
 
 	_player = get_tree().get_first_node_in_group("player")
 

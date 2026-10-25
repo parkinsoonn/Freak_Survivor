@@ -1,0 +1,12 @@
+{"frames":[
+  {"filename":"intro_0","frame":{"x":0,"y":0,"w":180,"h":45},"duration":60},
+  {"filename":"intro_1","frame":{"x":180,"y":0,"w":180,"h":45},"duration":60},
+  {"filename":"intro_2","frame":{"x":360,"y":0,"w":180,"h":45},"duration":60},
+  {"filename":"intro_3","frame":{"x":540,"y":0,"w":180,"h":45},"duration":60},
+  {"filename":"intro_4","frame":{"x":720,"y":0,"w":180,"h":45},"duration":60},
+  {"filename":"intro_5","frame":{"x":900,"y":0,"w":180,"h":45},"duration":60},
+  {"filename":"intro_6","frame":{"x":1080,"y":0,"w":180,"h":45},"duration":60}
+],
+"meta":{"app":"Aseprite","image":"wave_banner_sheet.png","format":"RGBA8888","size":{"w":1260,"h":45},"frameSize":{"w":180,"h":45},"layout":"one row per tag","frameTags":[
+  {"name":"intro","from":0,"to":6,"direction":"forward","row":0,"durations":[60,60,60,60,60,60,60]}
+]}}

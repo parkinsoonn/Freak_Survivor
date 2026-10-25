@@ -9,7 +9,6 @@ radius = 14.56
 [node name="miknatis" type="Area2D"]
 monitorable = false
 script = ExtResource("1")
-type = 1
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.091, 0.091)

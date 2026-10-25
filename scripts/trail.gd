@@ -9,12 +9,22 @@ extends Line2D
 
 var _times: Array[float] = []
 var _clock := 0.0
+# Ebeveynin son iki fizik adımındaki konumu; baş, sprite gibi fizik interpolasyonuyla çizilir
+var _previous_head := Vector2.ZERO
+var _current_head := Vector2.ZERO
 
 
 func _ready() -> void:
 	top_level = true
 	global_position = Vector2.ZERO
 	global_rotation = 0.0
+	_current_head = get_parent().global_position
+	_previous_head = _current_head
+
+
+func _physics_process(_delta: float) -> void:
+	_previous_head = _current_head
+	_current_head = get_parent().global_position
 
 
 func _process(delta: float) -> void:
@@ -27,7 +37,7 @@ func _process(delta: float) -> void:
 	if not emitting:
 		return
 
-	var head: Vector2 = get_parent().global_position
+	var head := _previous_head.lerp(_current_head, Engine.get_physics_interpolation_fraction())
 	if get_point_count() == 0 or get_point_position(get_point_count() - 1).distance_to(head) >= min_vertex_distance:
 		add_point(head)
 		_times.append(_clock)

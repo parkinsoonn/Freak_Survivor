@@ -24,6 +24,6 @@ func _on_button_up() -> void:
 func _fade_to(value: float) -> void:
 	if _tween:
 		_tween.kill()
-	# Pause/level-up/game over panelleri durmuş ağaçta çalışıyor
+	# Pause/market/game over panelleri durmuş ağaçta çalışıyor
 	_tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	_tween.tween_property(self, "self_modulate", Color(value, value, value), FADE)

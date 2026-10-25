@@ -13,6 +13,9 @@ extends Node2D
 ## 10x export edilmiş dekorlar zemin yoğunluğunda (16 çizim pikseli = 1.25 birim)
 @export var decor_scale := 0.5
 
+## En büyük dekor (320 px x 0.5) chunk dışına taşabileceği için ekran kenarına eklenen pay, piksel
+const VIEW_MARGIN := 160.0
+
 var _active := {} # Vector2i -> Array[AnimatedSprite2D]
 var _pool: Array[AnimatedSprite2D] = []
 
@@ -22,12 +25,15 @@ func _process(_delta: float) -> void:
 	if camera == null or decor_frames == null:
 		return
 
+	# Görünen alan + en büyük dekor payı kadar chunk dolu olsun; yeni dekor hep ekran dışında belirir
 	var size := chunk_size * Settings.UNIT
-	var center := Vector2i((camera.global_position / size).floor())
+	var half := get_viewport().get_visible_rect().size / camera.zoom / 2.0 + Vector2.ONE * VIEW_MARGIN
+	var from := Vector2i(((camera.global_position - half) / size).floor())
+	var to := Vector2i(((camera.global_position + half) / size).floor())
 	var wanted := {}
-	for dy in range(-1, 2):
-		for dx in range(-1, 2):
-			wanted[center + Vector2i(dx, dy)] = true
+	for y in range(from.y, to.y + 1):
+		for x in range(from.x, to.x + 1):
+			wanted[Vector2i(x, y)] = true
 
 	for chunk in _active.keys():
 		if not wanted.has(chunk):

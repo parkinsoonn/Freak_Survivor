@@ -3,6 +3,9 @@ extends RigidBody2D
 @export_group("Hareket Ayarları")
 @export var move_speed := 5.0
 
+## Bu yarıçapa (birim) giren altın oyuncuya uçar
+@export var pickup_radius := 2.0
+
 @export_group("Ateş Etme Ayarları")
 @export var fire_rate := 0.5
 
@@ -10,6 +13,9 @@ extends RigidBody2D
 @export var bullet_count := 1
 @export var spread_angle := 10.0 # Mermiler arası açı
 @export var max_spread_angle := 60.0 # Yelpazenin toplam genişliği bunu geçmez
+
+@export var bullet_speed := 20.0 # birim/sn
+@export var bullet_size := 1.0 # Sprite + collider ölçeği
 
 @export var bullet_scene: PackedScene
 @export var shoot_sound: AudioStream
@@ -54,6 +60,7 @@ var _camera: Node
 @onready var _health: Node = $Health
 @onready var _dash_trail: Line2D = $DashTrail
 @onready var _audio: AudioStreamPlayer = $ShootSound
+@onready var _pickup_shape: CollisionShape2D = $PickupArea/Shape
 
 
 func _enter_tree() -> void:
@@ -70,12 +77,15 @@ func _ready() -> void:
 	_audio.stream = shoot_sound
 	_audio.volume_db = linear_to_db(shoot_volume)
 
+	_pickup_shape.shape.radius = pickup_radius * Settings.UNIT
+	$PickupArea.area_entered.connect(_on_pickup_area_entered)
+
 	_game_manager = get_tree().get_first_node_in_group("game_manager")
 	_camera = get_tree().get_first_node_in_group("camera")
 
 
 func _notification(what: int) -> void:
-	# Pause, seviye atlama ve Game Over ekranlarından dönünce basılı tık ateş etmesin
+	# Pause, market ve Game Over ekranlarından dönünce basılı tık ateş etmesin
 	if what == NOTIFICATION_UNPAUSED:
 		_fire_locked = true
 
@@ -95,14 +105,14 @@ func _process(delta: float) -> void:
 
 	if _dash_cooldown_timer > 0.0:
 		_dash_cooldown_timer -= delta
-		_update_cooldown_ui(_dash_cooldown_timer, dash_icon, dash_cooldown_text)
+		_update_cooldown_ui(_dash_cooldown_timer, dash_cooldown, dash_icon, dash_cooldown_text)
 
 	if Input.is_action_just_pressed("dash") and not _is_dashing and _dash_cooldown_timer <= 0.0:
 		_start_dash()
 
 	if _nuke_cooldown_timer > 0.0:
 		_nuke_cooldown_timer -= delta
-		_update_cooldown_ui(_nuke_cooldown_timer, nuke_icon, nuke_cooldown_text)
+		_update_cooldown_ui(_nuke_cooldown_timer, nuke_cooldown, nuke_icon, nuke_cooldown_text)
 
 	if Input.is_action_just_pressed("nuke") and _nuke_cooldown_timer <= 0.0:
 		_perform_nuke()
@@ -176,29 +186,58 @@ func _perform_nuke() -> void:
 	_nuke_flash_time = 0.0
 
 
+func _on_pickup_area_entered(area: Area2D) -> void:
+	if area.is_in_group("gold"):
+		area.attract(self)
+
+
 func increase_speed(amount: float) -> void:
 	move_speed += amount
 
 
-func add_bullet() -> void:
-	bullet_count += 1
+func increase_pickup_radius(amount: float) -> void:
+	pickup_radius += amount
+	_pickup_shape.shape.radius = pickup_radius * Settings.UNIT
+
+
+func add_bullet(amount: int) -> void:
+	bullet_count += amount
 
 
 func increase_fire_rate(amount: float) -> void:
 	fire_rate = maxf(fire_rate - amount, 0.1)
 
 
-func set_dash_ui_visibility(is_visible: bool) -> void:
+func increase_bullet_speed(amount: float) -> void:
+	bullet_speed += amount
+
+
+func increase_bullet_size(amount: float) -> void:
+	bullet_size += amount
+
+
+func decrease_dash_cooldown(amount: float) -> void:
+	dash_cooldown = maxf(dash_cooldown - amount, 0.3)
+
+
+func set_dash_ui_visibility(shown: bool) -> void:
 	for control in [dash_icon, dash_cooldown_text, nuke_icon, nuke_cooldown_text]:
-		if control: control.visible = is_visible
+		if control: control.visible = shown
 
 
-func _update_cooldown_ui(timer: float, icon: TextureRect, text: Label) -> void:
+# İkonun üstünde saat yönünde açılan karartma + ortada kalan süre; hazır olunca kısa bir "pop"
+func _update_cooldown_ui(timer: float, duration: float, icon: TextureRect, text: Label) -> void:
 	var on_cooldown := timer > 0.0
 	if text:
-		text.text = ("%.1fs" % timer) if on_cooldown else "READY"
-	if icon:
-		icon.modulate = Color(0.3, 0.3, 0.3, 0.6) if on_cooldown else Color.WHITE
+		text.text = ("%.1f" % timer) if on_cooldown else ""
+	if icon == null:
+		return
+
+	icon.get_node("Cooldown").value = timer / duration * 100.0 if on_cooldown else 0.0
+	if not on_cooldown:
+		icon.pivot_offset = icon.size / 2.0
+		icon.scale = Vector2(1.3, 1.3)
+		icon.create_tween().tween_property(icon, "scale", Vector2.ONE, 0.2)
 
 
 # Görselin alt kenarının (yüzünün) baktığı yön
@@ -217,6 +256,8 @@ func _shoot() -> void:
 		var bullet: Node2D = bullet_scene.instantiate()
 		bullet.global_position = _fire_point.global_position
 		bullet.direction = _aim_direction().rotated(deg_to_rad(offset))
+		bullet.speed = bullet_speed
+		bullet.scale = Vector2.ONE * bullet_size
 		bullet.rotation = bullet.direction.angle() + PI / 2.0
 		get_parent().add_child(bullet)
 

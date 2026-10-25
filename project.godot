@@ -18,6 +18,7 @@ config/icon="res://assets/sprites/logo.png"
 [autoload]
 
 Settings="*res://scripts/settings.gd"
+Transition="*res://scripts/transition.gd"
 
 [display]
 
@@ -32,8 +33,12 @@ window/stretch/aspect="expand"
 
 theme/custom_font="res://assets/fonts/Jersey10-Regular.ttf"
 
-[physics]
+[internationalization]
 
+locale/translations=PackedStringArray("res://assets/translations/strings.en.translation", "res://assets/translations/strings.tr.translation")
+
+[physics]
+common/physics_interpolation=true
 2d/default_gravity=0.0
 
 [rendering]
