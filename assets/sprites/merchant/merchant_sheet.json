@@ -1,0 +1,13 @@
+{"frames":[
+  {"filename":"idle_0","frame":{"x":0,"y":0,"w":64,"h":64},"duration":130},
+  {"filename":"idle_1","frame":{"x":64,"y":0,"w":64,"h":64},"duration":130},
+  {"filename":"idle_2","frame":{"x":128,"y":0,"w":64,"h":64},"duration":130},
+  {"filename":"idle_3","frame":{"x":192,"y":0,"w":64,"h":64},"duration":130},
+  {"filename":"idle_4","frame":{"x":256,"y":0,"w":64,"h":64},"duration":130},
+  {"filename":"idle_5","frame":{"x":320,"y":0,"w":64,"h":64},"duration":130},
+  {"filename":"idle_6","frame":{"x":384,"y":0,"w":64,"h":64},"duration":130},
+  {"filename":"idle_7","frame":{"x":448,"y":0,"w":64,"h":64},"duration":130}
+],
+"meta":{"app":"Aseprite","image":"merchant_sheet.png","format":"RGBA8888","size":{"w":512,"h":64},"frameSize":{"w":64,"h":64},"layout":"one row per tag","frameTags":[
+  {"name":"idle","from":0,"to":7,"direction":"forward","row":0,"durations":[130,130,130,130,130,130,130,130]}
+]}}

@@ -50,7 +50,7 @@ const LIST := [
 		target = "Player", method = "increase_bullet_size", amount = 0.25 },
 
 	{ id = "saber", category = "isin_kilici", name = "Işın Kılıcı", icon = "kilic_adedi",
-		desc = "İlk alım kılıcı açar, sonra +1 kılıç", base_cost = 35, cost_growth = 1.5, max_level = 5,
+		desc = "Kılıcı açar, sonra +1 kılıç", base_cost = 35, cost_growth = 1.5, max_level = 5,
 		target = "Player/SaberOrbit", method = "add_saber", amount = 1 },
 	{ id = "saber_speed", category = "isin_kilici", name = "Dönüş Hızı", icon = "donus_hizi",
 		desc = "Dönüş hızı +40°/sn", base_cost = 15, cost_growth = 1.35, max_level = 5, requires = "saber",

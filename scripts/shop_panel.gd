@@ -158,6 +158,8 @@ func _make_card(upgrade: Dictionary) -> Button:
 	var bottom := HBoxContainer.new()
 	var desc := _label("", 28)
 	desc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	# Uzun açıklama kartı sütundan taşırmasın
+	desc.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	desc.add_theme_color_override("font_color", Color(0.12, 0.12, 0.1))
 	bottom.add_child(desc)
 	var coin := TextureRect.new()
