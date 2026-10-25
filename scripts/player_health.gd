@@ -10,9 +10,11 @@ var current_health := 0
 var _invincible_timer := 0.0
 
 @export_group("UI Ayarları")
-@export var health_bar: TextureRect
-# healthBar.png içindeki kareler; indeks = kalan can (0 boş ... 4 dolu)
-@export var health_regions: Array[Rect2] = []
+## healthBar.png: alt katman boş bar, üst katman dolu bar; value = doluluk pikseli
+@export var health_bar: TextureProgressBar
+## Bar dokusunda yeşil şeridin başladığı x ve genişliği (kalbin sağı)
+@export var bar_fill_start := 120.0
+@export var bar_fill_width := 310.0
 
 var is_invincible := false
 
@@ -54,15 +56,22 @@ func take_damage(damage_amount: int) -> void:
 		_die()
 
 
-func heal_player() -> void:
-	current_health = max_health
+func heal_player(amount: int) -> void:
+	current_health = mini(current_health + amount, max_health)
 	_update_health_ui()
 
 
+# Yeni kapasite dolu gelir
+func increase_max_health(amount: int) -> void:
+	max_health += amount
+	current_health += amount
+	_update_health_ui()
+
+
+# Can oranı kalbin sağındaki şeride yayılır; can 0 ise kalp de boşalır
 func _update_health_ui() -> void:
-	if health_bar and current_health < health_regions.size():
-		var atlas := health_bar.texture as AtlasTexture
-		atlas.region = health_regions[current_health]
+	if health_bar:
+		health_bar.value = 0.0 if current_health <= 0 else bar_fill_start + bar_fill_width * current_health / max_health
 
 
 func _die() -> void:

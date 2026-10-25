@@ -27,9 +27,7 @@ extends Node
 @export var death_effect: PackedScene
 @export var enemy_death_sound: AudioStream
 @export var gold_scene: PackedScene
-@export var multi_shot_pickup_scene: PackedScene
 @export var magnet_pickup_scene: PackedScene
-@export var saber_pickup_scene: PackedScene
 
 @export_group("İmleç")
 @export var crosshair_cursor: Texture2D
@@ -40,7 +38,6 @@ var _is_game_over := false
 
 var _player: Node
 var _camera: Node
-var _saber_orbit: Node
 var _wave_manager: Node
 
 
@@ -59,7 +56,6 @@ func _ready() -> void:
 		Input.set_custom_mouse_cursor(ImageTexture.create_from_image(img), Input.CURSOR_ARROW, img.get_size() / 2.0)
 
 	_player = get_tree().get_first_node_in_group("player")
-	_saber_orbit = _player.get_node("SaberOrbit")
 	_camera = get_tree().get_first_node_in_group("camera")
 	_wave_manager = get_tree().get_first_node_in_group("wave_manager")
 
@@ -137,6 +133,11 @@ func add_gold(amount: int) -> void:
 		tween.tween_property(gold_text, "scale", Vector2.ONE, 0.15)
 
 
+func spend_gold(amount: int) -> void:
+	gold -= amount
+	_update_gold_text()
+
+
 func _update_gold_text() -> void:
 	if gold_text:
 		gold_text.text = str(gold)
@@ -196,11 +197,7 @@ func kill_enemy(enemy: Node, feedback := true, reward := true) -> bool:
 			coin.value = enemy.gold_reward
 			_spawn(coin, position)
 
-		_try_drop(multi_shot_pickup_scene, Settings.multi_shot_drop_chance(), position)
 		_try_drop(magnet_pickup_scene, Settings.magnet_drop_chance(), position)
-		# Kılıçlar doluysa (3) kılıç item'ı artık düşmesin
-		if _saber_orbit == null or not _saber_orbit.is_full():
-			_try_drop(saber_pickup_scene, Settings.saber_drop_chance(), position)
 
 	if death_effect:
 		_spawn(death_effect.instantiate(), position)

@@ -13,7 +13,7 @@ const CLEANUP_TIME := 1.0
 @export var shop_panel: Control
 
 @export_group("Wave Banner'ı")
-@export var banner: Control
+@export var banner: TextureRect
 @export var banner_text: Label
 
 var wave := 0
@@ -67,8 +67,11 @@ func _play_banner() -> void:
 	banner.position.x = -banner.size.x
 	banner.visible = true
 
+	# Girişte wave_banner_sheet "intro" kareleri (7 x 60 ms) oynar
+	var atlas := banner.texture as AtlasTexture
 	var tween := create_tween().set_trans(Tween.TRANS_BACK)
 	tween.tween_property(banner, "position:x", (width - banner.size.x) / 2.0, 0.45).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_method(func(f: float) -> void: atlas.region.position.x = floorf(f) * atlas.region.size.x, 0.0, 6.99, 0.42)
 	tween.tween_interval(1.0)
 	tween.tween_property(banner, "position:x", width, 0.35).set_ease(Tween.EASE_IN)
 	await tween.finished

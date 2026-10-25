@@ -14,6 +14,9 @@ extends RigidBody2D
 @export var spread_angle := 10.0 # Mermiler arası açı
 @export var max_spread_angle := 60.0 # Yelpazenin toplam genişliği bunu geçmez
 
+@export var bullet_speed := 20.0 # birim/sn
+@export var bullet_size := 1.0 # Sprite + collider ölçeği
+
 @export var bullet_scene: PackedScene
 @export var shoot_sound: AudioStream
 @export_range(0.0, 1.0) var shoot_volume := 0.5
@@ -197,12 +200,24 @@ func increase_pickup_radius(amount: float) -> void:
 	_pickup_shape.shape.radius = pickup_radius * Settings.UNIT
 
 
-func add_bullet() -> void:
-	bullet_count += 1
+func add_bullet(amount: int) -> void:
+	bullet_count += amount
 
 
 func increase_fire_rate(amount: float) -> void:
 	fire_rate = maxf(fire_rate - amount, 0.1)
+
+
+func increase_bullet_speed(amount: float) -> void:
+	bullet_speed += amount
+
+
+func increase_bullet_size(amount: float) -> void:
+	bullet_size += amount
+
+
+func decrease_dash_cooldown(amount: float) -> void:
+	dash_cooldown = maxf(dash_cooldown - amount, 0.3)
 
 
 func set_dash_ui_visibility(is_visible: bool) -> void:
@@ -234,6 +249,8 @@ func _shoot() -> void:
 		var bullet: Node2D = bullet_scene.instantiate()
 		bullet.global_position = _fire_point.global_position
 		bullet.direction = _aim_direction().rotated(deg_to_rad(offset))
+		bullet.speed = bullet_speed
+		bullet.scale = Vector2.ONE * bullet_size
 		bullet.rotation = bullet.direction.angle() + PI / 2.0
 		get_parent().add_child(bullet)
 
