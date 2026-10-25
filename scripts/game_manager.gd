@@ -149,7 +149,7 @@ func show_game_over() -> void:
 
 	_is_game_over = true
 	if game_over_panel: game_over_panel.visible = true
-	if game_over_wave_text: game_over_wave_text.text = "WAVE %d" % _wave_manager.wave
+	if game_over_wave_text: game_over_wave_text.text = tr("DALGA %d") % _wave_manager.wave
 
 	# Oyun bittiğinde HUD'u gizle
 	set_hud_visibility(false)

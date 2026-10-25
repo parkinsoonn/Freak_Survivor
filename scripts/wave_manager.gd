@@ -60,7 +60,7 @@ func _start_next_wave() -> void:
 
 # "WAVE N" soldan kayarak girer, ~1 sn bekler, sağa çıkar
 func _play_banner() -> void:
-	banner_text.text = "WAVE %d" % wave
+	banner_text.text = tr("DALGA %d") % wave
 	var width := banner.get_viewport_rect().size.x
 	banner.position.x = -banner.size.x
 	banner.visible = true
@@ -120,4 +120,4 @@ func can_pause() -> bool:
 func _update_wave_text() -> void:
 	if wave_text:
 		var seconds := ceili(time_left)
-		wave_text.text = "WAVE %d  %d:%02d" % [wave, floori(seconds / 60.0), seconds % 60]
+		wave_text.text = (tr("DALGA %d") % wave) + "  %d:%02d" % [floori(seconds / 60.0), seconds % 60]

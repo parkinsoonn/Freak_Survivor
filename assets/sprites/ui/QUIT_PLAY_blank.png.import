@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8c02j4mm756x"
-path="res://.godot/imported/GAME_PAUSED_YAZI.png-98e15a89e9e0f4b6bff9ab37f108691d.ctex"
+uid="uid://byqdycabrw433"
+path="res://.godot/imported/QUIT_PLAY_blank.png-a2c62eb2f85b5ae1ab88bf1e4488ff7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/GAME_PAUSED_YAZI.png"
-dest_files=["res://.godot/imported/GAME_PAUSED_YAZI.png-98e15a89e9e0f4b6bff9ab37f108691d.ctex"]
+source_file="res://assets/sprites/ui/QUIT_PLAY_blank.png"
+dest_files=["res://.godot/imported/QUIT_PLAY_blank.png-a2c62eb2f85b5ae1ab88bf1e4488ff7b.ctex"]
 
 [params]
 

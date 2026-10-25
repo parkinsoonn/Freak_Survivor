@@ -36,14 +36,12 @@
 [ext_resource type="Texture2D" uid="uid://ds2fpnj0ooh7k" path="res://assets/sprites/map/zemin_ucube.png" id="t_ground"]
 [ext_resource type="Texture2D" uid="uid://dwqd8gug0ai4n" path="res://assets/sprites/healthBar.png" id="t_health"]
 [ext_resource type="Texture2D" uid="uid://cq668c0va2x6i" path="res://assets/sprites/ui/market_panel_sheet_x4.png" id="t_market_panel"]
-[ext_resource type="Texture2D" uid="uid://gen3wle3ih5p" path="res://assets/sprites/MENU_RESUME.png" id="t_menu_resume"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/MENU_RESUME_blank.png" id="t_menu_resume"]
 [ext_resource type="Texture2D" uid="uid://dw51gu41xv65m" path="res://assets/sprites/ui/next_wave_button_sheet.png" id="t_next_wave"]
 [ext_resource type="Texture2D" uid="uid://c3nyjpkpj755l" path="res://assets/sprites/atom_bomba.png" id="t_nuke"]
-[ext_resource type="Texture2D" uid="uid://b8c02j4mm756x" path="res://assets/sprites/GAME_PAUSED_YAZI.png" id="t_paused"]
 [ext_resource type="Texture2D" uid="uid://dwts7mtultequ" path="res://assets/sprites/asker.png" id="t_player"]
 [ext_resource type="Texture2D" uid="uid://cubkqyp3o7bui" path="res://assets/sprites/hoparlor.png" id="t_speaker"]
-[ext_resource type="Texture2D" uid="uid://du7d65pxt5u6v" path="res://assets/sprites/TRY_AGAIN.png" id="t_try_again"]
-[ext_resource type="Texture2D" uid="uid://cta7cayvcko8e" path="res://assets/sprites/YOU_DIED_YAZI.png" id="t_you_died"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/TRY_AGAIN_blank.png" id="t_try_again"]
 
 [sub_resource type="RectangleShape2D" id="player_shape"]
 size = Vector2(54.17, 68.04)
@@ -454,18 +452,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 0.98039216)
 
-[node name="GamePaused" type="TextureRect" parent="UI/PausePanel" unique_id=903690414]
+[node name="GamePaused" type="Label" parent="UI/PausePanel" unique_id=903690414]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -261.96
+offset_left = -600.0
 offset_top = -395.32
-offset_right = 259.82
+offset_right = 600.0
 offset_bottom = -139.12
-texture = ExtResource("t_paused")
-expand_mode = 1
+theme_override_colors/font_shadow_color = Color(0.17, 0.17, 0.17, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_font_sizes/font_size = 170
+text = "OYUN DURDU"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ResumeButton" type="TextureButton" parent="UI/PausePanel" unique_id=1324286600]
 layout_mode = 0
@@ -482,6 +485,17 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
+[node name="Label" type="Label" parent="UI/PausePanel/ResumeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -12
+theme_override_font_sizes/font_size = 84
+text = "DEVAM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MainMenuButton" type="TextureButton" parent="UI/PausePanel" unique_id=167085496]
 layout_mode = 0
 anchor_left = 0.5
@@ -496,6 +510,17 @@ texture_normal = SubResource("menu")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
+
+[node name="Label" type="Label" parent="UI/PausePanel/MainMenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -12
+theme_override_font_sizes/font_size = 84
+text = "MENÜ"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PauseVolumeIcon" type="TextureRect" parent="UI/PausePanel" unique_id=1599897390]
 layout_mode = 0
@@ -535,17 +560,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 1)
 
-[node name="YouDied" type="TextureRect" parent="UI/GameOverPanel" unique_id=1349933848]
+[node name="YouDied" type="Label" parent="UI/GameOverPanel" unique_id=1349933848]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -322.4
+offset_left = -600.0
 offset_top = -371.52
-offset_right = 327.29
-texture = ExtResource("t_you_died")
-expand_mode = 1
+offset_right = 600.0
+theme_override_colors/font_shadow_color = Color(0.17, 0.17, 0.17, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_font_sizes/font_size = 220
+text = "ÖLDÜN"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="WaveReached" type="Label" parent="UI/GameOverPanel" unique_id=105751344]
 layout_mode = 0
@@ -577,6 +607,17 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
+[node name="Label" type="Label" parent="UI/GameOverPanel/TryAgainButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -10
+theme_override_font_sizes/font_size = 64
+text = "TEKRAR DENE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MainMenuButton" type="TextureButton" parent="UI/GameOverPanel" unique_id=482858773]
 layout_mode = 0
 anchor_left = 0.5
@@ -591,6 +632,17 @@ texture_normal = SubResource("menu")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
+
+[node name="Label" type="Label" parent="UI/GameOverPanel/MainMenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -12
+theme_override_font_sizes/font_size = 80
+text = "MENÜ"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ShopPanel" type="ColorRect" parent="UI" unique_id=1209195372 node_paths=PackedStringArray("columns", "gold_text", "next_wave_button")]
 visible = false

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dxrvpijyyr1e3" path="res://scripts/main_menu_controller.gd" id="s_menu"]
 [ext_resource type="Script" uid="uid://bht0umigatto2" path="res://scripts/tint_button.gd" id="s_tint"]
 [ext_resource type="Texture2D" uid="uid://bw4o6ladgf7q6" path="res://assets/sprites/logo.png" id="t_logo"]
-[ext_resource type="Texture2D" uid="uid://dpmerlfms6fbt" path="res://assets/sprites/QUIT_PLAY.png" id="t_quit_play"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/QUIT_PLAY_blank.png" id="t_quit_play"]
 [ext_resource type="Texture2D" uid="uid://cubkqyp3o7bui" path="res://assets/sprites/hoparlor.png" id="t_speaker"]
 
 [sub_resource type="StyleBoxFlat" id="menu_panel"]
@@ -183,6 +183,17 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
+[node name="Label" type="Label" parent="UI/Canvas/PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -5
+theme_override_font_sizes/font_size = 36
+text = "OYNA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="QuitButton" type="TextureButton" parent="UI/Canvas" unique_id=583334500]
 layout_mode = 0
 offset_left = -68.71
@@ -193,6 +204,17 @@ texture_normal = SubResource("quit")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
+
+[node name="Label" type="Label" parent="UI/Canvas/QuitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -5
+theme_override_font_sizes/font_size = 36
+text = "ÇIKIŞ"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SpeakerButton" type="TextureButton" parent="UI/Canvas" unique_id=574917705]
 layout_mode = 0
