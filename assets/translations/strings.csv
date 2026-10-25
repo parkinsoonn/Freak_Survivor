@@ -1,0 +1,38 @@
+keys,tr,en
+SKOR: %d,SKOR: %d,SCORE: %d
+MARKET,MARKET,SHOP
+SONRAKİ WAVE,SONRAKİ WAVE,NEXT WAVE
+KOLAY,KOLAY,EASY
+NORMAL,NORMAL,NORMAL
+ZOR,ZOR,HARD
+Sv %d/%d,Sv %d/%d,Lv %d/%d
+Sv %d,Sv %d,Lv %d
+Önce %s al,Önce %s al,Unlock %s first
+Karakter,Karakter,Character
+Tabanca,Tabanca,Pistol
+Işın Kılıcı,Işın Kılıcı,Lightsaber
+Hareket Hızı,Hareket Hızı,Move Speed
+Hareket hızı +0.5,Hareket hızı +0.5,Move speed +0.5
+Max Can,Max Can,Max Health
++1 can kapasitesi,+1 can kapasitesi,+1 max health
+Toplama Alanı,Toplama Alanı,Pickup Range
+Altın çekme yarıçapı +0.75,Altın çekme yarıçapı +0.75,Gold pickup radius +0.75
+Can Doldur,Can Doldur,Heal
+2 can doldurur,2 can doldurur,Restores 2 health
+Dash,Dash,Dash
+Dash bekleme süresi -0.15 sn,Dash bekleme süresi -0.15 sn,Dash cooldown -0.15 s
+Atış Hızı,Atış Hızı,Fire Rate
+Atışlar arası süre -0.02 sn,Atışlar arası süre -0.02 sn,Shot delay -0.02 s
+Mermi Adedi,Mermi Adedi,Bullet Count
+Her atışta +1 mermi,Her atışta +1 mermi,+1 bullet per shot
+Mermi Hızı,Mermi Hızı,Bullet Speed
+Mermi hızı +4,Mermi hızı +4,Bullet speed +4
+Mermi Boyutu,Mermi Boyutu,Bullet Size
+Mermi boyutu +%25,Mermi boyutu +%25,Bullet size +25%
+"Kılıcı açar, sonra +1 kılıç","Kılıcı açar, sonra +1 kılıç","Unlocks it, then +1 saber"
+Dönüş Hızı,Dönüş Hızı,Spin Speed
+Dönüş hızı +40°/sn,Dönüş hızı +40°/sn,Spin speed +40°/s
+Kılıç Boyutu,Kılıç Boyutu,Saber Size
+Kılıç boyutu +%20,Kılıç boyutu +%20,Saber size +20%
+Yörünge,Yörünge,Orbit
+Dönüş yarıçapı +0.3,Dönüş yarıçapı +0.3,Orbit radius +0.3

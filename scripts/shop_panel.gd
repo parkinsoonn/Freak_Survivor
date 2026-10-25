@@ -51,7 +51,7 @@ func _ready() -> void:
 		var header := HBoxContainer.new()
 		header.alignment = BoxContainer.ALIGNMENT_CENTER
 		header.add_child(_icon(category.icon, 56))
-		header.add_child(_label(category.name, 48))
+		header.add_child(_label(tr(category.name), 48))
 		column.add_child(header)
 
 		for upgrade in Upgrades.LIST:
@@ -115,10 +115,10 @@ func _refresh() -> void:
 		var maxed := _upgrades.is_max(upgrade)
 		var buyable := _upgrades.can_buy(upgrade, _game_manager.gold)
 
-		card.level.text = ("Sv %d/%d" % [level, upgrade.max_level]) if upgrade.max_level > 0 else ("Sv %d" % level)
+		card.level.text = (tr("Sv %d/%d") % [level, upgrade.max_level]) if upgrade.max_level > 0 else (tr("Sv %d") % level)
 		card.price.text = "MAX" if maxed else str(_upgrades.cost(upgrade))
 		card.coin.visible = not maxed
-		card.desc.text = ("Önce %s al" % _name_of(upgrade.requires)) if _upgrades.is_locked(upgrade) else upgrade.desc
+		card.desc.text = (tr("Önce %s al") % tr(_name_of(upgrade.requires))) if _upgrades.is_locked(upgrade) else tr(upgrade.desc)
 		card.button.disabled = not buyable
 		card.button.add_theme_stylebox_override("disabled", _style_max if maxed else _style_disabled)
 		card.content.modulate.a = 1.0 if buyable or maxed else 0.45
@@ -148,7 +148,7 @@ func _make_card(upgrade: Dictionary) -> Button:
 	content.add_child(info)
 
 	var top := HBoxContainer.new()
-	var title := _label(upgrade.name, 40)
+	var title := _label(tr(upgrade.name), 40)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(title)
 	var level := _label("", 32)

@@ -33,6 +33,10 @@ window/stretch/aspect="expand"
 
 theme/custom_font="res://assets/fonts/Jersey10-Regular.ttf"
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/translations/strings.en.translation", "res://assets/translations/strings.tr.translation")
+
 [physics]
 common/physics_interpolation=true
 2d/default_gravity=0.0

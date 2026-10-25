@@ -118,7 +118,7 @@ func add_score(points: int) -> void:
 
 func _update_score_text() -> void:
 	if score_text:
-		score_text.text = "SCORE: " + str(score)
+		score_text.text = tr("SKOR: %d") % score
 
 
 func add_gold(amount: int) -> void:

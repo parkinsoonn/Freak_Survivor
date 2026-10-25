@@ -8,6 +8,9 @@ extends Node
 @export_group("Zorluk")
 @export var difficulty_text: Label
 
+@export_group("Dil")
+@export var language_text: Button
+
 var _is_muted := false
 var _last_volume := 1.0
 
@@ -26,6 +29,20 @@ func _ready() -> void:
 	else: _last_volume = saved_volume
 
 	_update_difficulty_text()
+	_update_language_text()
+
+
+# TR ↔ EN; seçim kaydedilir, oyundaki yazılar bu dille kurulur
+func toggle_language() -> void:
+	var languages := Settings.LANGUAGES
+	Settings.language = languages[(languages.find(Settings.language) + 1) % languages.size()]
+	_update_language_text()
+	_update_difficulty_text()
+
+
+func _update_language_text() -> void:
+	if language_text:
+		language_text.text = Settings.language.to_upper()
 
 
 func next_difficulty() -> void:

@@ -49,6 +49,14 @@ func _initialize() -> void:
 		assert(game.get_node(upgrade.target).has_method(upgrade.method), upgrade.id)
 	game.free()
 
+	# Marketteki her yazının İngilizce çevirisi var
+	var english := TranslationServer.get_translation_object("en")
+	var texts: Array = Upgrades.CATEGORIES.map(func(c): return c.name)
+	for upgrade in Upgrades.LIST:
+		texts.append_array([upgrade.name, upgrade.desc])
+	for text in texts:
+		assert(english.get_message(text) != &"", text)
+
 	print("test_upgrades: OK")
 	quit()
 
