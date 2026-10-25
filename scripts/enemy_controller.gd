@@ -6,8 +6,8 @@ extends RigidBody2D
 @export var despawn_distance := 30.0
 ## Ölmesi için gereken mermi sayısı
 @export var health := 1
-## Ölünce düşen XP kristalinin değeri
-@export var xp_reward := 1
+## Ölünce düşen altının değeri
+@export var gold_reward := 1
 
 # Aynı karede birden fazla mermi çarparsa ödülün tek kez verilmesi için
 var is_dead := false

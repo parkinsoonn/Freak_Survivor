@@ -18,8 +18,8 @@ func _on_body_entered(body: Node) -> void:
 		PowerUpType.MULTI_SHOT:
 			body.add_bullet()
 		PowerUpType.MAGNET:
-			for crystal in get_tree().get_nodes_in_group("xp_crystal"):
-				crystal.attract(body)
+			for gold in get_tree().get_nodes_in_group("gold"):
+				gold.attract(body)
 		PowerUpType.SABER:
 			body.get_node("SaberOrbit").add_saber()
 	queue_free()

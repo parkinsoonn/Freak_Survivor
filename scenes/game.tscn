@@ -2,12 +2,12 @@
 
 [ext_resource type="AudioStream" uid="uid://dqb3td6rvkrvv" path="res://assets/audio/enemy_death.mp3" id="a_enemy_death"]
 [ext_resource type="AudioStream" uid="uid://ckyqkptskdven" path="res://assets/audio/death.mp3" id="a_game_over"]
-[ext_resource type="AudioStream" uid="uid://cby8dujclqs0" path="res://assets/audio/level_up.mp3" id="a_level_up"]
 [ext_resource type="AudioStream" uid="uid://vdtxa3vrfkkh" path="res://assets/audio/bg_music.mp3" id="a_music"]
 [ext_resource type="AudioStream" uid="uid://buh1nuysfoowx" path="res://assets/audio/gun_shot.mp3" id="a_shot"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/map/decor_frames.tres" id="f_decor"]
 [ext_resource type="PackedScene" path="res://scenes/bullet.tscn" id="p_bullet"]
 [ext_resource type="PackedScene" path="res://scenes/death_effect.tscn" id="p_death_effect"]
+[ext_resource type="PackedScene" path="res://scenes/gold.tscn" id="p_gold"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/fare.tscn" id="p_fare"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/goblin.tscn" id="p_goblin"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/golem.tscn" id="p_golem"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/mumyavari.tscn" id="p_mumyavari"]
 [ext_resource type="PackedScene" path="res://scenes/isin_kilici.tscn" id="p_saber"]
 [ext_resource type="PackedScene" path="res://scenes/isin_kilici_powerup.tscn" id="p_saber_pickup"]
-[ext_resource type="PackedScene" path="res://scenes/xp.tscn" id="p_xp"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/zombi.tscn" id="p_zombi"]
 [ext_resource type="Script" uid="uid://dqucgx4cag7j7" path="res://scripts/infinite_background.gd" id="s_background"]
 [ext_resource type="Script" uid="uid://c3byfsqsl0y3p" path="res://scripts/camera_controller.gd" id="s_camera"]
@@ -32,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://gqcwagvpyrn5" path="res://assets/sprites/nisangah.png" id="t_cursor"]
 [ext_resource type="Texture2D" uid="uid://b7ob32c6hvrn5" path="res://assets/sprites/dasharkaplan.png" id="t_dash"]
 [ext_resource type="Texture2D" uid="uid://ds2fpnj0ooh7k" path="res://assets/sprites/map/zemin_ucube.png" id="t_ground"]
+[ext_resource type="Texture2D" path="res://assets/sprites/pickups/gold_coin_sheet.png" id="t_coin"]
 [ext_resource type="Texture2D" uid="uid://dwqd8gug0ai4n" path="res://assets/sprites/healthBar.png" id="t_health"]
 [ext_resource type="Texture2D" uid="uid://gen3wle3ih5p" path="res://assets/sprites/MENU_RESUME.png" id="t_menu_resume"]
 [ext_resource type="Texture2D" uid="uid://c3nyjpkpj755l" path="res://assets/sprites/atom_bomba.png" id="t_nuke"]
@@ -39,7 +39,6 @@
 [ext_resource type="Texture2D" uid="uid://dwts7mtultequ" path="res://assets/sprites/asker.png" id="t_player"]
 [ext_resource type="Texture2D" uid="uid://cubkqyp3o7bui" path="res://assets/sprites/hoparlor.png" id="t_speaker"]
 [ext_resource type="Texture2D" uid="uid://du7d65pxt5u6v" path="res://assets/sprites/TRY_AGAIN.png" id="t_try_again"]
-[ext_resource type="Texture2D" uid="uid://dlytsk363dtfu" path="res://assets/sprites/heal_speed_attack-export.png" id="t_upgrades"]
 [ext_resource type="Texture2D" uid="uid://cta7cayvcko8e" path="res://assets/sprites/YOU_DIED_YAZI.png" id="t_you_died"]
 
 [sub_resource type="RectangleShape2D" id="player_shape"]
@@ -112,17 +111,12 @@ corner_radius_bottom_left = 4
 atlas = ExtResource("t_try_again")
 region = Rect2(29, 89, 472, 152)
 
-[sub_resource type="AtlasTexture" id="speed_upgrade"]
-atlas = ExtResource("t_upgrades")
-region = Rect2(29, 39, 452, 162)
+[sub_resource type="AtlasTexture" id="coin_icon"]
+atlas = ExtResource("t_coin")
+region = Rect2(8, 8, 16, 16)
 
-[sub_resource type="AtlasTexture" id="fire_rate_upgrade"]
-atlas = ExtResource("t_upgrades")
-region = Rect2(29, 259, 452, 202)
-
-[sub_resource type="AtlasTexture" id="heal_upgrade"]
-atlas = ExtResource("t_upgrades")
-region = Rect2(29, 529, 452, 162)
+[sub_resource type="CircleShape2D" id="pickup_shape"]
+radius = 128.0
 
 [node name="Game" type="Node2D" unique_id=1667207943]
 
@@ -141,21 +135,20 @@ z_index = -9
 script = ExtResource("s_decor")
 decor_frames = ExtResource("f_decor")
 
-[node name="GameManager" type="Node" parent="." unique_id=1860428368 node_paths=PackedStringArray("game_over_panel", "pause_panel", "level_up_panel", "score_text", "volume_slider", "music", "level_text")]
+[node name="GameManager" type="Node" parent="." unique_id=1860428368 node_paths=PackedStringArray("game_over_panel", "pause_panel", "score_text", "gold_counter", "gold_text", "volume_slider", "music")]
 process_mode = 3
 script = ExtResource("s_game_manager")
 game_over_panel = NodePath("../UI/GameOverPanel")
 pause_panel = NodePath("../UI/PausePanel")
-level_up_panel = NodePath("../UI/LevelUpPanel")
 score_text = NodePath("../UI/ScoreText")
+gold_counter = NodePath("../UI/GoldCounter")
+gold_text = NodePath("../UI/GoldCounter/GoldText")
 volume_slider = NodePath("../UI/PausePanel/PauseVolumeSlider")
 game_over_sound = ExtResource("a_game_over")
 music = NodePath("Music")
-level_text = NodePath("../UI/LevelText")
-level_up_sound = ExtResource("a_level_up")
 death_effect = ExtResource("p_death_effect")
 enemy_death_sound = ExtResource("a_enemy_death")
-xp_crystal_scene = ExtResource("p_xp")
+gold_scene = ExtResource("p_gold")
 multi_shot_pickup_scene = ExtResource("p_multi_shot")
 magnet_pickup_scene = ExtResource("p_magnet")
 saber_pickup_scene = ExtResource("p_saber_pickup")
@@ -227,6 +220,12 @@ script = ExtResource("s_trail")
 [node name="ShootSound" type="AudioStreamPlayer" parent="Player" unique_id=165727783]
 max_polyphony = 8
 
+[node name="PickupArea" type="Area2D" parent="Player"]
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Player/PickupArea"]
+shape = SubResource("pickup_shape")
+
 [node name="Camera" type="Camera2D" parent="." unique_id=1562472083 node_paths=PackedStringArray("target")]
 zoom = Vector2(1.2054, 1.2054)
 script = ExtResource("s_camera")
@@ -256,16 +255,29 @@ offset_bottom = 158.74
 theme_override_font_sizes/font_size = 36
 text = "SCORE: 0"
 
-[node name="LevelText" type="Label" parent="UI" unique_id=383908411]
+[node name="GoldCounter" type="HBoxContainer" parent="UI"]
 anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -75.0
-offset_top = 18.0
-offset_right = 338.23
-offset_bottom = 158.74
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 64.0
+offset_right = -20.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="UI/GoldCounter"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("coin_icon")
+expand_mode = 1
+
+[node name="GoldText" type="Label" parent="UI/GoldCounter"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "LEVEL: 1"
+text = "0"
 
 [node name="DashIcon" type="TextureRect" parent="UI" unique_id=353393938]
 anchors_preset = -1
@@ -461,74 +473,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
-[node name="LevelUpPanel" type="ColorRect" parent="UI" unique_id=844929754]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0, 0, 0, 0.92156863)
-
-[node name="Title" type="Label" parent="UI/LevelUpPanel" unique_id=1368510112]
-layout_mode = 0
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -290.5
-offset_top = 110.66
-offset_right = 288.5
-offset_bottom = 363.34
-theme_override_font_sizes/font_size = 180
-text = "LEVEL UP!"
-horizontal_alignment = 1
-
-[node name="SpeedButton" type="TextureButton" parent="UI/LevelUpPanel" unique_id=2000397315]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -66.4
-offset_right = 150.0
-offset_bottom = 43.6
-texture_normal = SubResource("speed_upgrade")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("s_tint")
-
-[node name="FireRateButton" type="TextureButton" parent="UI/LevelUpPanel" unique_id=1168197482]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = 111.0
-offset_right = 150.0
-offset_bottom = 221.0
-texture_normal = SubResource("fire_rate_upgrade")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("s_tint")
-
-[node name="HealButton" type="TextureButton" parent="UI/LevelUpPanel" unique_id=1810011935]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = 292.0
-offset_right = 150.0
-offset_bottom = 402.0
-texture_normal = SubResource("heal_upgrade")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("s_tint")
-
 [connection signal="pressed" from="UI/PausePanel/ResumeButton" to="GameManager" method="resume_game"]
 [connection signal="pressed" from="UI/PausePanel/MainMenuButton" to="GameManager" method="load_main_menu"]
 [connection signal="pressed" from="UI/GameOverPanel/TryAgainButton" to="GameManager" method="restart_game"]
 [connection signal="pressed" from="UI/GameOverPanel/MainMenuButton" to="GameManager" method="load_main_menu"]
-[connection signal="pressed" from="UI/LevelUpPanel/SpeedButton" to="GameManager" method="choose_speed_upgrade"]
-[connection signal="pressed" from="UI/LevelUpPanel/FireRateButton" to="GameManager" method="choose_fire_rate_upgrade"]
-[connection signal="pressed" from="UI/LevelUpPanel/HealButton" to="GameManager" method="choose_heal_upgrade"]

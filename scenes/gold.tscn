@@ -1,0 +1,83 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://cv4nvv2eo2yvx" path="res://scripts/gold_pickup.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/pickups/gold_coin_sheet.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="spin0"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="spin1"]
+atlas = ExtResource("2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="spin2"]
+atlas = ExtResource("2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="spin3"]
+atlas = ExtResource("2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="spin4"]
+atlas = ExtResource("2")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="spin5"]
+atlas = ExtResource("2")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="spin6"]
+atlas = ExtResource("2")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="spin7"]
+atlas = ExtResource("2")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("spin0")
+}, {
+"duration": 1.0,
+"texture": SubResource("spin1")
+}, {
+"duration": 1.0,
+"texture": SubResource("spin2")
+}, {
+"duration": 1.0,
+"texture": SubResource("spin3")
+}, {
+"duration": 1.0,
+"texture": SubResource("spin4")
+}, {
+"duration": 1.0,
+"texture": SubResource("spin5")
+}, {
+"duration": 1.0,
+"texture": SubResource("spin6")
+}, {
+"duration": 1.0,
+"texture": SubResource("spin7")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 12.5
+}]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 14.0
+
+[node name="gold" type="Area2D"]
+script = ExtResource("1")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("frames")
+animation = &"spin"
+autoplay = "spin"
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")

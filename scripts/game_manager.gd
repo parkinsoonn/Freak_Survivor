@@ -5,11 +5,15 @@ extends Node
 @export_group("UI Panelleri")
 @export var game_over_panel: Control
 @export var pause_panel: Control
-@export var level_up_panel: Control
 
 @export_group("Skor Sistemi")
 @export var score := 0
 @export var score_text: Label
+
+@export_group("Altın")
+@export var gold := 0
+@export var gold_counter: Control # Sağ üstteki coin ikonu + sayı
+@export var gold_text: Label
 
 @export_group("ESC Menüsü")
 @export var volume_slider: Range
@@ -18,19 +22,10 @@ extends Node
 @export var game_over_sound: AudioStream
 @export var music: AudioStreamPlayer
 
-@export_group("XP ve Seviye Sistemi")
-@export var current_xp := 0
-@export var current_level := 1
-@export var xp_to_next_level := 5 # İlk seviye için 5 XP yetsin
-@export var level_text: Label # Ekranda LEVEL: 1 yazması için
-
-@export_group("Seviye Atlama Sesleri")
-@export var level_up_sound: AudioStream
-
 @export_group("Düşman Ölümü ve Drop'lar")
 @export var death_effect: PackedScene
 @export var enemy_death_sound: AudioStream
-@export var xp_crystal_scene: PackedScene
+@export var gold_scene: PackedScene
 @export var multi_shot_pickup_scene: PackedScene
 @export var magnet_pickup_scene: PackedScene
 @export var saber_pickup_scene: PackedScene
@@ -38,16 +33,14 @@ extends Node
 @export_group("İmleç")
 @export var crosshair_cursor: Texture2D
 
-# Unity'deki Time.timeSinceLevelLoad: pause/level-up sırasında durur
+# Unity'deki Time.timeSinceLevelLoad: pause sırasında durur
 var game_time := 0.0
 
 # Oyun durumunu kontrol eden kilitler
 var _is_paused := false
 var _is_game_over := false
-var _is_leveling_up := false
 
 var _player: Node
-var _player_health: Node
 var _camera: Node
 var _saber_orbit: Node
 
@@ -59,6 +52,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	get_tree().paused = false
 	_update_score_text()
+	_update_gold_text()
 	# Nişangah 2x piksel-keskin büyütülür, hotspot ortası
 	if crosshair_cursor:
 		var img := crosshair_cursor.get_image()
@@ -66,7 +60,6 @@ func _ready() -> void:
 		Input.set_custom_mouse_cursor(ImageTexture.create_from_image(img), Input.CURSOR_ARROW, img.get_size() / 2.0)
 
 	_player = get_tree().get_first_node_in_group("player")
-	_player_health = _player.get_node("Health")
 	_saber_orbit = _player.get_node("SaberOrbit")
 	_camera = get_tree().get_first_node_in_group("camera")
 
@@ -78,8 +71,6 @@ func _ready() -> void:
 		volume_slider.set_value_no_signal(Settings.volume)
 		volume_slider.value_changed.connect(set_volume)
 
-	_update_level_text()
-
 
 # ESC menüsündeki ses slider'ı; ana menüyle aynı ayarı kullanır
 func set_volume(volume: float) -> void:
@@ -90,8 +81,8 @@ func _process(delta: float) -> void:
 	if not get_tree().paused:
 		game_time += delta
 
-	# Oyun bitmişse ya da seviye atlama ekranı açıksa ESC hiçbir işe yaramasın
-	if _is_game_over or _is_leveling_up:
+	# Oyun bitmişse ESC hiçbir işe yaramasın
+	if _is_game_over:
 		return
 
 	if Input.is_action_just_pressed("pause"):
@@ -138,6 +129,23 @@ func _update_score_text() -> void:
 		score_text.text = "SCORE: " + str(score)
 
 
+func add_gold(amount: int) -> void:
+	gold += amount
+	_update_gold_text()
+
+	# Sayı kısa bir ölçek "pop"u yapar
+	if gold_text:
+		gold_text.pivot_offset = gold_text.size / 2.0
+		var tween := gold_text.create_tween()
+		gold_text.scale = Vector2(1.4, 1.4)
+		tween.tween_property(gold_text, "scale", Vector2.ONE, 0.15)
+
+
+func _update_gold_text() -> void:
+	if gold_text:
+		gold_text.text = str(gold)
+
+
 func show_game_over() -> void:
 	if _is_game_over:
 		return
@@ -145,7 +153,7 @@ func show_game_over() -> void:
 	_is_game_over = true
 	if game_over_panel: game_over_panel.visible = true
 
-	# Oyun bittiğinde Skor, Level ve Dash UI'ı gizle
+	# Oyun bittiğinde HUD'u gizle
 	_set_hud_visibility(false)
 
 	if music:
@@ -170,30 +178,33 @@ func hit_enemy(enemy: Node) -> bool:
 	return true
 
 
-# Mermi, kılıç ve bombanın ortak öldürme yolu. Düşman zaten öldüyse false döner.
-func kill_enemy(enemy: Node, feedback := true) -> bool:
+# Mermi, kılıç, bomba ve wave sonu temizliğinin ortak öldürme yolu. Düşman zaten öldüyse false döner.
+# reward = false: skor ve drop yok, sadece ölüm efekti (wave bitince kalan moblar)
+func kill_enemy(enemy: Node, feedback := true, reward := true) -> bool:
 	if enemy == null or enemy.is_dead:
 		return false
 	enemy.is_dead = true
 
 	var position: Vector2 = enemy.global_position
-	add_score(10)
 
 	if feedback:
 		if _camera: _camera.trigger_shake(0.08, 0.08)
 		# Unity'de PlayClipAtPoint kameradan ~10 birim uzakta çaldığı için kısık duyuluyordu
 		if enemy_death_sound: play_sound(enemy_death_sound, 0.1)
 
-	if xp_crystal_scene:
-		var crystal: Node2D = xp_crystal_scene.instantiate()
-		crystal.xp_value = enemy.xp_reward
-		_spawn(crystal, position)
+	if reward:
+		add_score(10)
 
-	_try_drop(multi_shot_pickup_scene, Settings.multi_shot_drop_chance(), position)
-	_try_drop(magnet_pickup_scene, Settings.magnet_drop_chance(), position)
-	# Kılıçlar doluysa (3) kılıç item'ı artık düşmesin
-	if _saber_orbit == null or not _saber_orbit.is_full():
-		_try_drop(saber_pickup_scene, Settings.saber_drop_chance(), position)
+		if gold_scene:
+			var coin: Node2D = gold_scene.instantiate()
+			coin.value = enemy.gold_reward
+			_spawn(coin, position)
+
+		_try_drop(multi_shot_pickup_scene, Settings.multi_shot_drop_chance(), position)
+		_try_drop(magnet_pickup_scene, Settings.magnet_drop_chance(), position)
+		# Kılıçlar doluysa (3) kılıç item'ı artık düşmesin
+		if _saber_orbit == null or not _saber_orbit.is_full():
+			_try_drop(saber_pickup_scene, Settings.saber_drop_chance(), position)
 
 	if death_effect:
 		_spawn(death_effect.instantiate(), position)
@@ -205,7 +216,7 @@ func kill_enemy(enemy: Node, feedback := true) -> bool:
 func _try_drop(scene: PackedScene, chance: float, position: Vector2) -> void:
 	if scene == null or randf() >= chance:
 		return
-	# XP kristaliyle üst üste binmesin diye biraz kaydır
+	# Altınla üst üste binmesin diye biraz kaydır
 	_spawn(scene.instantiate(), position + Vector2.from_angle(randf() * TAU) * 0.5 * Settings.UNIT)
 
 
@@ -215,71 +226,10 @@ func _spawn(node: Node2D, position: Vector2) -> void:
 	get_parent().add_child.call_deferred(node)
 
 
-func add_xp(amount: int) -> void:
-	current_xp += amount
-
-	_update_level_text()
-
-	# Seviye ekranı açıkken gelen XP birikir; seçim yapılınca _resume_after_upgrade tekrar kontrol eder
-	if not _is_leveling_up and current_xp >= xp_to_next_level:
-		_level_up()
-
-
-func _level_up() -> void:
-	current_xp -= xp_to_next_level
-	current_level += 1
-	xp_to_next_level = current_level * 5
-
-	_update_level_text()
-
-	if level_up_panel:
-		_is_leveling_up = true
-		level_up_panel.visible = true
-
-		_set_hud_visibility(false)
-
-		if level_up_sound:
-			play_sound(level_up_sound, 1.0)
-
-		get_tree().paused = true
-
-
-func _update_level_text() -> void:
-	if level_text:
-		level_text.text = "LEVEL: %d (XP: %d/%d)" % [current_level, current_xp, xp_to_next_level]
-
-
-func choose_speed_upgrade() -> void:
-	_player.increase_speed(1.0)
-	_resume_after_upgrade()
-
-
-func choose_fire_rate_upgrade() -> void:
-	_player.increase_fire_rate(0.015)
-	_resume_after_upgrade()
-
-
-func choose_heal_upgrade() -> void:
-	_player_health.heal_player()
-	_resume_after_upgrade()
-
-
-func _resume_after_upgrade() -> void:
-	_is_leveling_up = false
-	if level_up_panel: level_up_panel.visible = false
-
-	_set_hud_visibility(true)
-
-	get_tree().paused = false
-
-	if current_xp >= xp_to_next_level:
-		_level_up()
-
-
-# Skor, Level ve Dash UI'ını birlikte gösterip gizler
+# Skor, altın ve Dash UI'ını birlikte gösterip gizler
 func _set_hud_visibility(is_visible: bool) -> void:
 	if score_text: score_text.visible = is_visible
-	if level_text: level_text.visible = is_visible
+	if gold_counter: gold_counter.visible = is_visible
 	_player.set_dash_ui_visibility(is_visible)
 
 

@@ -3,6 +3,9 @@ extends RigidBody2D
 @export_group("Hareket Ayarları")
 @export var move_speed := 5.0
 
+## Bu yarıçapa (birim) giren altın oyuncuya uçar
+@export var pickup_radius := 2.0
+
 @export_group("Ateş Etme Ayarları")
 @export var fire_rate := 0.5
 
@@ -54,6 +57,7 @@ var _camera: Node
 @onready var _health: Node = $Health
 @onready var _dash_trail: Line2D = $DashTrail
 @onready var _audio: AudioStreamPlayer = $ShootSound
+@onready var _pickup_shape: CollisionShape2D = $PickupArea/Shape
 
 
 func _enter_tree() -> void:
@@ -69,6 +73,9 @@ func _ready() -> void:
 	_dash_trail.emitting = false
 	_audio.stream = shoot_sound
 	_audio.volume_db = linear_to_db(shoot_volume)
+
+	_pickup_shape.shape.radius = pickup_radius * Settings.UNIT
+	$PickupArea.area_entered.connect(_on_pickup_area_entered)
 
 	_game_manager = get_tree().get_first_node_in_group("game_manager")
 	_camera = get_tree().get_first_node_in_group("camera")
@@ -176,8 +183,18 @@ func _perform_nuke() -> void:
 	_nuke_flash_time = 0.0
 
 
+func _on_pickup_area_entered(area: Area2D) -> void:
+	if area.is_in_group("gold"):
+		area.attract(self)
+
+
 func increase_speed(amount: float) -> void:
 	move_speed += amount
+
+
+func increase_pickup_radius(amount: float) -> void:
+	pickup_radius += amount
+	_pickup_shape.shape.radius = pickup_radius * Settings.UNIT
 
 
 func add_bullet() -> void:

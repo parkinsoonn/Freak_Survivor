@@ -49,7 +49,7 @@ script = ExtResource("1")
 speed = 1.5
 despawn_distance = 200.0
 health = 40
-xp_reward = 5
+gold_reward = 10
 
 [node name="Visual" type="Node2D" parent="."]
 
