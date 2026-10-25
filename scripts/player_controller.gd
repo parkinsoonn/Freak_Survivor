@@ -105,14 +105,14 @@ func _process(delta: float) -> void:
 
 	if _dash_cooldown_timer > 0.0:
 		_dash_cooldown_timer -= delta
-		_update_cooldown_ui(_dash_cooldown_timer, dash_icon, dash_cooldown_text)
+		_update_cooldown_ui(_dash_cooldown_timer, dash_cooldown, dash_icon, dash_cooldown_text)
 
 	if Input.is_action_just_pressed("dash") and not _is_dashing and _dash_cooldown_timer <= 0.0:
 		_start_dash()
 
 	if _nuke_cooldown_timer > 0.0:
 		_nuke_cooldown_timer -= delta
-		_update_cooldown_ui(_nuke_cooldown_timer, nuke_icon, nuke_cooldown_text)
+		_update_cooldown_ui(_nuke_cooldown_timer, nuke_cooldown, nuke_icon, nuke_cooldown_text)
 
 	if Input.is_action_just_pressed("nuke") and _nuke_cooldown_timer <= 0.0:
 		_perform_nuke()
@@ -225,12 +225,19 @@ func set_dash_ui_visibility(shown: bool) -> void:
 		if control: control.visible = shown
 
 
-func _update_cooldown_ui(timer: float, icon: TextureRect, text: Label) -> void:
+# İkonun üstünde saat yönünde açılan karartma + ortada kalan süre; hazır olunca kısa bir "pop"
+func _update_cooldown_ui(timer: float, duration: float, icon: TextureRect, text: Label) -> void:
 	var on_cooldown := timer > 0.0
 	if text:
-		text.text = ("%.1fs" % timer) if on_cooldown else "READY"
-	if icon:
-		icon.modulate = Color(0.3, 0.3, 0.3, 0.6) if on_cooldown else Color.WHITE
+		text.text = ("%.1f" % timer) if on_cooldown else ""
+	if icon == null:
+		return
+
+	icon.get_node("Cooldown").value = timer / duration * 100.0 if on_cooldown else 0.0
+	if not on_cooldown:
+		icon.pivot_offset = icon.size / 2.0
+		icon.scale = Vector2(1.3, 1.3)
+		icon.create_tween().tween_property(icon, "scale", Vector2.ONE, 0.2)
 
 
 # Görselin alt kenarının (yüzünün) baktığı yön
