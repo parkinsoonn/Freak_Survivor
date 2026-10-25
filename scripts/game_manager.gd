@@ -59,9 +59,11 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	get_tree().paused = false
 	_update_score_text()
-	# Hotspot nişangahın ortası
+	# Nişangah 2x piksel-keskin büyütülür, hotspot ortası
 	if crosshair_cursor:
-		Input.set_custom_mouse_cursor(crosshair_cursor, Input.CURSOR_ARROW, crosshair_cursor.get_size() / 2.0)
+		var img := crosshair_cursor.get_image()
+		img.resize(img.get_width() * 2, img.get_height() * 2, Image.INTERPOLATE_NEAREST)
+		Input.set_custom_mouse_cursor(ImageTexture.create_from_image(img), Input.CURSOR_ARROW, img.get_size() / 2.0)
 
 	_player = get_tree().get_first_node_in_group("player")
 	_player_health = _player.get_node("Health")
