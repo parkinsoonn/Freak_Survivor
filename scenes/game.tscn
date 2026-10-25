@@ -171,6 +171,7 @@ script = ExtResource("s_background")
 tile_size = Vector2(320, 320)
 
 [node name="Decor" type="Node2D" parent="." unique_id=1553077203]
+physics_interpolation_mode = 2
 z_index = -9
 script = ExtResource("s_decor")
 decor_frames = ExtResource("f_decor")
