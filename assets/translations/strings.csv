@@ -24,13 +24,13 @@ Hareket hızı +0.5,Hareket hızı +0.5,Move speed +0.5
 Max Can,Max Can,Max Health
 +1 can kapasitesi,+1 can kapasitesi,+1 max health
 Toplama Alanı,Toplama Alanı,Pickup Range
-Altın çekme yarıçapı +0.75,Altın çekme yarıçapı +0.75,Gold pickup radius +0.75
+Altın çekme yarıçapı +0.75,Çekme alanı +0.75,Gold pickup radius +0.75
 Can Doldur,Can Doldur,Heal
 2 can doldurur,2 can doldurur,Restores 2 health
 Dash,Dash,Dash
-Dash bekleme süresi -0.15 sn,Dash bekleme süresi -0.15 sn,Dash cooldown -0.15 s
+Dash bekleme süresi -0.15 sn,Dash süresi -0.15 sn,Dash cooldown -0.15 s
 Atış Hızı,Atış Hızı,Fire Rate
-Atışlar arası süre -0.02 sn,Atışlar arası süre -0.02 sn,Shot delay -0.02 s
+Atışlar arası süre -0.02 sn,Atış aralığı -0.02 sn,Shot delay -0.02 s
 Mermi Adedi,Mermi Adedi,Bullet Count
 Her atışta +1 mermi,Her atışta +1 mermi,+1 bullet per shot
 Mermi Hızı,Mermi Hızı,Bullet Speed
