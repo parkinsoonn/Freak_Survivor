@@ -1,11 +1,11 @@
 extends Node
 
 # Wave döngüsü: INTRO (banner) → FIGHT (süre sayar, spawner açık) → CLEANUP (kalan moblar silinir,
-# altınlar oyuncuya uçar) → SHOP (ağaç durur, market açık) → "SONRAKİ WAVE" ile tekrar INTRO
+# toplanmayan altınlar kaybolur) → SHOP (ağaç durur, market açık) → "SONRAKİ WAVE" ile tekrar INTRO
 
 enum State { INTRO, FIGHT, CLEANUP, SHOP }
 
-## Moblar silindikten sonra altınların oyuncuya uçması için beklenen süre
+## Moblar silindikten sonra ölüm efektleri görünsün diye market açılmadan beklenen süre
 const CLEANUP_TIME := 1.0
 
 @export var spawner: Node
@@ -21,7 +21,6 @@ var state := State.INTRO
 var time_left := 0.0
 
 var _game_manager: Node
-var _player: Node2D
 
 
 func _enter_tree() -> void:
@@ -30,7 +29,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	_game_manager = get_tree().get_first_node_in_group("game_manager")
-	_player = get_tree().get_first_node_in_group("player")
 	_start_next_wave()
 
 
@@ -86,17 +84,16 @@ func _end_wave() -> void:
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		_game_manager.kill_enemy(enemy, false, false)
 
-	# Son karede öldürülenlerin altını ertelenmiş eklenir, bir kare bekleyip hepsini çek
+	# Toplanmayan altınlar sönerek kaybolur; son karede öldürülenlerinki ertelenmiş eklendiği için bir kare bekle
 	await get_tree().process_frame
 	for coin in get_tree().get_nodes_in_group("gold"):
-		coin.attract(_player)
+		coin.remove_from_group("gold") # Sönerken toplanmasın
+		coin.set_deferred("monitoring", false)
+		var tween := coin.create_tween()
+		tween.tween_property(coin, "modulate:a", 0.0, 0.3)
+		tween.tween_callback(coin.queue_free)
 
 	await get_tree().create_timer(CLEANUP_TIME, false).timeout
-
-	# Yetişemeyen uzaktaki altınlar da sayılsın
-	for coin in get_tree().get_nodes_in_group("gold"):
-		_game_manager.add_gold(coin.value)
-		coin.queue_free()
 
 	state = State.SHOP
 	_game_manager.set_hud_visibility(false)
