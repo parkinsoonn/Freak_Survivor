@@ -28,6 +28,7 @@ A **golem** (mini boss) appears halfway through every 5th wave.
 | Left click (hold) | Shoot |
 | Shift | Dash (briefly invulnerable) |
 | Q | Nuke (kills every enemy on screen, 60 s cooldown) |
+| E | Barrier (shield, 2 s invulnerable, 15 s cooldown) |
 | Esc | Pause (during a wave) |
 
 ### Shop

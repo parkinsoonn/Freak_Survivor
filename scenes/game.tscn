@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://buh1nuysfoowx" path="res://assets/audio/gun_shot.mp3" id="a_shot"]
 [ext_resource type="SpriteFrames" uid="uid://b2eu3ynbcowb" path="res://assets/sprites/map/decor_frames.tres" id="f_decor"]
 [ext_resource type="SpriteFrames" uid="uid://tcwcr1csembq" path="res://assets/sprites/merchant/merchant_frames.tres" id="f_merchant"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/skills/barrier_frames.tres" id="f_barrier"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/barrier_icon_sheet.png" id="t_barrier"]
 [ext_resource type="PackedScene" path="res://scenes/bullet.tscn" id="p_bullet"]
 [ext_resource type="PackedScene" path="res://scenes/death_effect.tscn" id="p_death_effect"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/fare.tscn" id="p_fare"]
@@ -36,12 +38,12 @@
 [ext_resource type="Texture2D" uid="uid://ds2fpnj0ooh7k" path="res://assets/sprites/map/zemin_ucube.png" id="t_ground"]
 [ext_resource type="Texture2D" uid="uid://dwqd8gug0ai4n" path="res://assets/sprites/healthBar.png" id="t_health"]
 [ext_resource type="Texture2D" uid="uid://cq668c0va2x6i" path="res://assets/sprites/ui/market_panel_sheet_x4.png" id="t_market_panel"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/MENU_RESUME_blank.png" id="t_menu_resume"]
+[ext_resource type="Texture2D" uid="uid://dr4tnhauy440a" path="res://assets/sprites/ui/MENU_RESUME_blank.png" id="t_menu_resume"]
 [ext_resource type="Texture2D" uid="uid://dw51gu41xv65m" path="res://assets/sprites/ui/next_wave_button_sheet.png" id="t_next_wave"]
 [ext_resource type="Texture2D" uid="uid://c3nyjpkpj755l" path="res://assets/sprites/atom_bomba.png" id="t_nuke"]
 [ext_resource type="Texture2D" uid="uid://dwts7mtultequ" path="res://assets/sprites/asker.png" id="t_player"]
 [ext_resource type="Texture2D" uid="uid://cubkqyp3o7bui" path="res://assets/sprites/hoparlor.png" id="t_speaker"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/TRY_AGAIN_blank.png" id="t_try_again"]
+[ext_resource type="Texture2D" uid="uid://c5pq5gojmmf6o" path="res://assets/sprites/ui/TRY_AGAIN_blank.png" id="t_try_again"]
 
 [sub_resource type="RectangleShape2D" id="player_shape"]
 size = Vector2(54.17, 68.04)
@@ -177,12 +179,6 @@ decor_frames = ExtResource("f_decor")
 [node name="GameManager" type="Node" parent="." unique_id=1860428368 node_paths=PackedStringArray("game_over_panel", "game_over_wave_text", "pause_panel", "score_text", "gold_counter", "gold_text", "volume_slider", "music")]
 process_mode = 3
 script = ExtResource("s_game_manager")
-game_over_sound = ExtResource("a_game_over")
-death_effect = ExtResource("p_death_effect")
-enemy_death_sound = ExtResource("a_enemy_death")
-gold_scene = ExtResource("p_gold")
-magnet_pickup_scene = ExtResource("p_magnet")
-crosshair_cursor = ExtResource("t_cursor")
 game_over_panel = NodePath("../UI/GameOverPanel")
 game_over_wave_text = NodePath("../UI/GameOverPanel/WaveReached")
 pause_panel = NodePath("../UI/PausePanel")
@@ -190,7 +186,13 @@ score_text = NodePath("../UI/ScoreText")
 gold_counter = NodePath("../UI/GoldCounter")
 gold_text = NodePath("../UI/GoldCounter/GoldText")
 volume_slider = NodePath("../UI/PausePanel/PauseVolumeSlider")
+game_over_sound = ExtResource("a_game_over")
 music = NodePath("Music")
+death_effect = ExtResource("p_death_effect")
+enemy_death_sound = ExtResource("a_enemy_death")
+gold_scene = ExtResource("p_gold")
+magnet_pickup_scene = ExtResource("p_magnet")
+crosshair_cursor = ExtResource("t_cursor")
 
 [node name="Music" type="AudioStreamPlayer" parent="GameManager" unique_id=1186071052]
 process_mode = 1
@@ -204,6 +206,7 @@ enemy_scenes = Array[PackedScene]([ExtResource("p_fare"), ExtResource("p_goz"), 
 spawn_interval = 0.8
 min_spawn_interval = 0.3
 mini_boss_scene = ExtResource("p_golem")
+mini_boss_every = 3
 
 [node name="WaveManager" type="Node" parent="." unique_id=1423100723 node_paths=PackedStringArray("spawner", "wave_text", "shop_panel", "banner", "banner_text")]
 script = ExtResource("s_wave")
@@ -213,7 +216,7 @@ shop_panel = NodePath("../UI/ShopPanel")
 banner = NodePath("../UI/WaveBanner")
 banner_text = NodePath("../UI/WaveBanner/Label")
 
-[node name="Player" type="RigidBody2D" parent="." unique_id=1998920266 node_paths=PackedStringArray("dash_icon", "dash_cooldown_text", "nuke_icon", "nuke_cooldown_text", "nuke_flash")]
+[node name="Player" type="RigidBody2D" parent="." unique_id=1998920266 node_paths=PackedStringArray("dash_icon", "dash_cooldown_text", "nuke_icon", "nuke_cooldown_text", "nuke_flash", "barrier_icon", "barrier_cooldown_text")]
 position = Vector2(-64.64, 105.6)
 gravity_scale = 0.0
 lock_rotation = true
@@ -231,6 +234,8 @@ nuke_cooldown_text = NodePath("../UI/NukeIcon/NukeCooldownText")
 nuke_flash = NodePath("../UI/NukeFlash")
 nuke_effect = ExtResource("p_death_effect")
 nuke_sound = ExtResource("a_enemy_death")
+barrier_icon = NodePath("../UI/BarrierIcon")
+barrier_cooldown_text = NodePath("../UI/BarrierIcon/BarrierCooldownText")
 
 [node name="Visual" type="Node2D" parent="Player" unique_id=2130435828]
 
@@ -260,6 +265,13 @@ width = 38.4
 width_curve = SubResource("dash_width")
 gradient = SubResource("dash_color")
 script = ExtResource("s_trail")
+
+[node name="Shield" type="AnimatedSprite2D" parent="Player"]
+visible = false
+z_index = 1
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("f_barrier")
+animation = &"shield"
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="Player" unique_id=165727783]
 max_polyphony = 8
@@ -437,6 +449,44 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BarrierIcon" type="TextureRect" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 178.0
+offset_top = -136.0
+offset_right = 274.0
+offset_bottom = -40.0
+mouse_filter = 2
+texture = ExtResource("t_barrier")
+expand_mode = 1
+
+[node name="Cooldown" type="TextureProgressBar" parent="UI/BarrierIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+fill_mode = 4
+texture_progress = SubResource("cooldown_shade")
+
+[node name="BarrierCooldownText" type="Label" parent="UI/BarrierIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="NukeFlash" type="ColorRect" parent="UI" unique_id=1991056432]
 visible = false
 anchors_preset = 15
@@ -485,12 +535,14 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
-[node name="Label" type="Label" parent="UI/PausePanel/ResumeButton"]
+[node name="Label" type="Label" parent="UI/PausePanel/ResumeButton" unique_id=1175914175]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -12
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 84
 text = "DEVAM"
 horizontal_alignment = 1
@@ -511,12 +563,14 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
-[node name="Label" type="Label" parent="UI/PausePanel/MainMenuButton"]
+[node name="Label" type="Label" parent="UI/PausePanel/MainMenuButton" unique_id=1018385152]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -12
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 84
 text = "MENÜ"
 horizontal_alignment = 1
@@ -607,12 +661,14 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
-[node name="Label" type="Label" parent="UI/GameOverPanel/TryAgainButton"]
+[node name="Label" type="Label" parent="UI/GameOverPanel/TryAgainButton" unique_id=1725328241]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -10
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "TEKRAR DENE"
 horizontal_alignment = 1
@@ -633,12 +689,14 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
-[node name="Label" type="Label" parent="UI/GameOverPanel/MainMenuButton"]
+[node name="Label" type="Label" parent="UI/GameOverPanel/MainMenuButton" unique_id=626164996]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -12
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 80
 text = "MENÜ"
 horizontal_alignment = 1

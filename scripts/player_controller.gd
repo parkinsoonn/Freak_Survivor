@@ -38,6 +38,12 @@ extends RigidBody2D
 @export var nuke_effect: PackedScene
 @export var nuke_sound: AudioStream
 
+@export_group("Bariyer")
+@export var barrier_duration := 2.0
+@export var barrier_cooldown := 15.0
+@export var barrier_icon: TextureRect
+@export var barrier_cooldown_text: Label
+
 var _movement := Vector2.ZERO
 var _next_fire_time := 0.0
 var _clock := 0.0
@@ -50,6 +56,8 @@ var _dash_direction := Vector2.ZERO
 var _dash_cooldown_timer := 0.0
 var _nuke_cooldown_timer := 0.0
 var _nuke_flash_time := -1.0
+var _barrier_cooldown_timer := 0.0
+var _barrier_time := -1.0 # Kalkan açıkken geçen süre; -1 = kapalı
 
 var _game_manager: Node
 var _camera: Node
@@ -59,6 +67,8 @@ var _camera: Node
 @onready var _fire_point: Node2D = $Visual/FirePoint
 @onready var _health: Node = $Health
 @onready var _dash_trail: Line2D = $DashTrail
+@onready var _shield: AnimatedSprite2D = $Shield
+@onready var _shield_scale: Vector2 = _shield.scale
 @onready var _audio: AudioStreamPlayer = $ShootSound
 @onready var _pickup_shape: CollisionShape2D = $PickupArea/Shape
 
@@ -73,6 +83,7 @@ func _ready() -> void:
 
 	if dash_cooldown_text: dash_cooldown_text.text = ""
 	if nuke_cooldown_text: nuke_cooldown_text.text = ""
+	if barrier_cooldown_text: barrier_cooldown_text.text = ""
 	_dash_trail.emitting = false
 	_audio.stream = shoot_sound
 	_audio.volume_db = linear_to_db(shoot_volume)
@@ -124,6 +135,19 @@ func _process(delta: float) -> void:
 			nuke_flash.visible = false
 			_nuke_flash_time = -1.0
 
+	if _barrier_cooldown_timer > 0.0:
+		_barrier_cooldown_timer -= delta
+		_update_cooldown_ui(_barrier_cooldown_timer, barrier_cooldown, barrier_icon, barrier_cooldown_text)
+
+	if Input.is_action_just_pressed("barrier") and _barrier_cooldown_timer <= 0.0 and _barrier_time < 0.0:
+		_start_barrier()
+
+	if _barrier_time >= 0.0:
+		_barrier_time += delta
+		_update_shield()
+		if _barrier_time >= barrier_duration:
+			_end_barrier()
+
 
 func _physics_process(delta: float) -> void:
 	if _is_dashing:
@@ -158,7 +182,7 @@ func _start_dash() -> void:
 
 
 func _end_dash() -> void:
-	_health.is_invincible = false
+	_health.is_invincible = _barrier_time >= 0.0 # Bariyer açıksa koruma sürsün
 	_dash_trail.emitting = false
 	_is_dashing = false
 
@@ -184,6 +208,43 @@ func _perform_nuke() -> void:
 	nuke_flash.visible = true
 	nuke_flash.color.a = 1.0
 	_nuke_flash_time = 0.0
+
+
+# Açılışta kalkan sıfırdan büyüyüp hafif taşar ve beyaz parlar
+func _start_barrier() -> void:
+	_barrier_time = 0.0
+	_barrier_cooldown_timer = barrier_cooldown
+	_health.is_invincible = true
+	if _camera: _camera.trigger_shake(0.15, 0.2)
+
+	_shield.visible = true
+	_shield.play()
+	_shield.scale = Vector2.ZERO
+	_shield.modulate = Color(2.0, 2.0, 2.0, 1.0)
+	var tween := _shield.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_shield, "scale", _shield_scale, 0.25)
+	tween.parallel().tween_property(_shield, "modulate", Color(1.0, 1.0, 1.0, 0.85), 0.3)
+
+
+# Aktifken nabız gibi atar; son 0.5 sn yanıp sönerek bittiğini haber verir
+func _update_shield() -> void:
+	if _barrier_time < 0.3:
+		return # Açılış tween'i sürüyor
+	_shield.scale = _shield_scale * (1.0 + 0.04 * sin(_barrier_time * 12.0))
+	var left := barrier_duration - _barrier_time
+	_shield.modulate.a = (0.25 if int(left * 12.0) % 2 == 0 else 0.85) if left < 0.5 else 0.85
+
+
+# Kapanışta kalkan genişleyip saydamlaşarak kaybolur
+func _end_barrier() -> void:
+	_barrier_time = -1.0
+	_health.is_invincible = _is_dashing
+	var tween := _shield.create_tween()
+	tween.tween_property(_shield, "scale", _shield_scale * 1.4, 0.2)
+	tween.parallel().tween_property(_shield, "modulate:a", 0.0, 0.2)
+	tween.tween_callback(func() -> void:
+		_shield.stop()
+		_shield.visible = false)
 
 
 func _on_pickup_area_entered(area: Area2D) -> void:
@@ -221,7 +282,7 @@ func decrease_dash_cooldown(amount: float) -> void:
 
 
 func set_dash_ui_visibility(shown: bool) -> void:
-	for control in [dash_icon, dash_cooldown_text, nuke_icon, nuke_cooldown_text]:
+	for control in [dash_icon, dash_cooldown_text, nuke_icon, nuke_cooldown_text, barrier_icon, barrier_cooldown_text]:
 		if control: control.visible = shown
 
 
