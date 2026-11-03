@@ -81,7 +81,7 @@ func _pick(easy: float, normal: float, hard: float) -> float:
 		_: return normal
 
 
-# Unity'nin Horizontal/Vertical eksenleri (WASD + oklar), Fire1, Shift, Q, Esc
+# Unity'nin Horizontal/Vertical eksenleri (WASD + oklar), Fire1, Shift, Q, E, Esc
 func _add_inputs() -> void:
 	_add_keys("move_left", [KEY_A, KEY_LEFT])
 	_add_keys("move_right", [KEY_D, KEY_RIGHT])
@@ -89,6 +89,7 @@ func _add_inputs() -> void:
 	_add_keys("move_down", [KEY_S, KEY_DOWN])
 	_add_keys("dash", [KEY_SHIFT])
 	_add_keys("nuke", [KEY_Q])
+	_add_keys("barrier", [KEY_E])
 	_add_keys("pause", [KEY_ESCAPE])
 
 	InputMap.add_action("fire")
