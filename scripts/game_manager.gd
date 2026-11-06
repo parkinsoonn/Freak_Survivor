@@ -5,6 +5,7 @@ extends Node
 @export_group("UI Panelleri")
 @export var game_over_panel: Control
 @export var game_over_wave_text: Label # Game Over'da ulaşılan wave
+@export var game_over_summary: Label # Öldürme / altın / süre + rekor satırı
 @export var pause_panel: Control
 
 @export_group("Skor Sistemi")
@@ -38,6 +39,11 @@ extends Node
 # Oyun durumunu kontrol eden kilitler
 var _is_paused := false
 var _is_game_over := false
+
+# Oyun sonu özeti için run istatistikleri
+var _kills := 0
+var _gold_collected := 0
+var _run_time := 0.0
 
 var _player: Node
 var _camera: Node
@@ -76,7 +82,11 @@ func set_volume(volume: float) -> void:
 	Settings.volume = volume
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# Bu node pause'da da çalışır; süre sadece oyun akarken sayılsın
+	if not get_tree().paused:
+		_run_time += delta
+
 	# Oyun bitmişse, market ya da wave geçişi sırasında ESC hiçbir işe yaramasın
 	if _is_game_over or not _wave_manager.can_pause():
 		return
@@ -126,6 +136,7 @@ func _update_score_text() -> void:
 
 func add_gold(amount: int) -> void:
 	gold += amount
+	_gold_collected += amount
 	_update_gold_text()
 
 	# Sayı kısa bir ölçek "pop"u yapar
@@ -153,6 +164,14 @@ func show_game_over() -> void:
 	_is_game_over = true
 	if game_over_panel: game_over_panel.visible = true
 	if game_over_wave_text: game_over_wave_text.text = tr("DALGA %d") % _wave_manager.wave
+
+	var new_record: bool = _wave_manager.wave > Settings.best_wave
+	if new_record:
+		Settings.best_wave = _wave_manager.wave
+	if game_over_summary:
+		var seconds := floori(_run_time)
+		game_over_summary.text = tr("Öldürme: %d   Altın: %d   Süre: %s") % [_kills, _gold_collected, "%d:%02d" % [floori(seconds / 60.0), seconds % 60]] \
+			+ "\n" + (tr("YENİ REKOR!") if new_record else tr("EN İYİ: DALGA %d") % Settings.best_wave)
 
 	# Oyun bittiğinde HUD'u gizle
 	set_hud_visibility(false)
@@ -193,6 +212,7 @@ func kill_enemy(enemy: Node, feedback := true, reward := true) -> bool:
 		if enemy_death_sound: play_sound(enemy_death_sound, 0.1)
 
 	if reward:
+		_kills += 1
 		add_score(10)
 
 		if gold_scene:

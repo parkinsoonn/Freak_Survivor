@@ -15,7 +15,7 @@ Hold out against hordes of monsters until each wave's timer runs out, collect th
 3. Every enemy you kill drops **gold** (10 for the golem, 1 for the rest). Gold inside your pickup range flies to you; the **magnet** pulls in all gold on the ground.
 4. **When the timer runs out:** the remaining enemies are cleared and any gold you didn't pick up disappears.
 5. **Shop:** buy upgrades with your gold, then press **NEXT WAVE**.
-6. When you die, the Game Over screen shows the wave you reached. Gold and upgrades only last for the current run and are not saved.
+6. When you die, the Game Over screen shows the wave you reached plus kills, gold collected and play time. Your best wave is saved and shown on the main menu; gold and upgrades only last for the current run.
 
 A **golem** (mini boss) appears halfway through every 3rd wave.
 

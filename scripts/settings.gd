@@ -20,6 +20,12 @@ var volume: float = 1.0:
 		AudioServer.set_bus_volume_db(0, linear_to_db(value))
 		_save()
 
+## Ulaşılan en yüksek dalga (Game Over'da güncellenir, ana menüde gösterilir)
+var best_wave := 0:
+	set(value):
+		best_wave = value
+		_save()
+
 const LANGUAGES := ["tr", "en"]
 
 # Çeviriler assets/translations/strings.csv'de; anahtar Türkçe metnin kendisi
@@ -39,6 +45,7 @@ func _ready() -> void:
 	if config.load(SAVE_PATH) == OK:
 		difficulty = clampi(config.get_value("game", "difficulty", Difficulty.NORMAL), 0, 2) as Difficulty
 		volume = config.get_value("game", "volume", 1.0)
+		best_wave = config.get_value("game", "best_wave", 0)
 		var saved: String = config.get_value("game", "language", default_language)
 		language = saved if saved in LANGUAGES else default_language
 	else:
@@ -51,6 +58,7 @@ func _save() -> void:
 	config.set_value("game", "difficulty", difficulty)
 	config.set_value("game", "volume", volume)
 	config.set_value("game", "language", language)
+	config.set_value("game", "best_wave", best_wave)
 	config.save(SAVE_PATH)
 
 

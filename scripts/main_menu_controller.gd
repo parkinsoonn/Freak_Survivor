@@ -11,6 +11,9 @@ extends Node
 @export_group("Dil")
 @export var language_text: Button
 
+@export_group("Rekor")
+@export var best_wave_text: Label
+
 var _is_muted := false
 var _last_volume := 1.0
 
@@ -43,6 +46,10 @@ func toggle_language() -> void:
 func _update_language_text() -> void:
 	if language_text:
 		language_text.text = Settings.language.to_upper()
+	# Henüz hiç oynanmadıysa rekor yazısı yok
+	if best_wave_text:
+		best_wave_text.visible = Settings.best_wave > 0
+		best_wave_text.text = tr("EN İYİ: DALGA %d") % Settings.best_wave
 
 
 func next_difficulty() -> void:

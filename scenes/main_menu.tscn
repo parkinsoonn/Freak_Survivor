@@ -74,12 +74,13 @@ corner_radius_bottom_left = 4
 
 [node name="MainMenu" type="Node" unique_id=605167557]
 
-[node name="MenuManager" type="Node" parent="." unique_id=1885633020 node_paths=PackedStringArray("volume_slider", "music", "difficulty_text", "language_text")]
+[node name="MenuManager" type="Node" parent="." unique_id=1885633020 node_paths=PackedStringArray("volume_slider", "music", "difficulty_text", "language_text", "best_wave_text")]
 script = ExtResource("s_menu")
 volume_slider = NodePath("../UI/Canvas/VolumeSlider")
 music = NodePath("../MenuBGM")
 difficulty_text = NodePath("../UI/Canvas/DifficultySelector/Label")
 language_text = NodePath("../UI/Canvas/LanguageButton")
+best_wave_text = NodePath("../UI/Canvas/BestWave")
 
 [node name="MenuBGM" type="AudioStreamPlayer" parent="." unique_id=2008875310]
 stream = ExtResource("a_music")
@@ -269,6 +270,17 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "by  parkinson
  and  oridantes"
+
+[node name="BestWave" type="Label" parent="UI/Canvas"]
+visible = false
+layout_mode = 0
+offset_left = -388.0
+offset_top = 182.0
+offset_right = -120.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "EN İYİ: DALGA 1"
 
 [connection signal="pressed" from="UI/Canvas/DifficultySelector/PrevButton" to="MenuManager" method="previous_difficulty"]
 [connection signal="pressed" from="UI/Canvas/DifficultySelector/NextButton" to="MenuManager" method="next_difficulty"]
