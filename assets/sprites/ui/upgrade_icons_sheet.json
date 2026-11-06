@@ -14,8 +14,12 @@
   {"filename":"icons_12","frame":{"x":192,"y":0,"w":16,"h":16},"duration":400},
   {"filename":"icons_13","frame":{"x":208,"y":0,"w":16,"h":16},"duration":400},
   {"filename":"icons_14","frame":{"x":224,"y":0,"w":16,"h":16},"duration":400},
-  {"filename":"icons_15","frame":{"x":240,"y":0,"w":16,"h":16},"duration":400}
+  {"filename":"icons_15","frame":{"x":240,"y":0,"w":16,"h":16},"duration":400},
+  {"filename":"icons_16","frame":{"x":256,"y":0,"w":16,"h":16},"duration":400},
+  {"filename":"icons_17","frame":{"x":272,"y":0,"w":16,"h":16},"duration":400},
+  {"filename":"icons_18","frame":{"x":288,"y":0,"w":16,"h":16},"duration":400},
+  {"filename":"icons_19","frame":{"x":304,"y":0,"w":16,"h":16},"duration":400}
 ],
-"meta":{"app":"Aseprite","image":"upgrade_icons_sheet.png","format":"RGBA8888","size":{"w":256,"h":16},"frameSize":{"w":16,"h":16},"layout":"one row per tag","frameTags":[
-  {"name":"icons","from":0,"to":15,"direction":"forward","row":0,"durations":[400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400]}
+"meta":{"app":"Aseprite","image":"upgrade_icons_sheet.png","format":"RGBA8888","size":{"w":320,"h":16},"frameSize":{"w":16,"h":16},"layout":"one row per tag","frameTags":[
+  {"name":"icons","from":0,"to":19,"direction":"forward","row":0,"durations":[400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400]}
 ]}}

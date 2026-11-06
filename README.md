@@ -35,7 +35,8 @@ A **golem** (mini boss) appears halfway through every 3rd wave.
 
 | Category | Upgrades |
 |---|---|
-| **Character** | Move Speed, Max Health, Pickup Range, Heal (unlimited), Dash cooldown |
+| **Character** | Move Speed, Max Health, Pickup Range, Heal (unlimited) |
+| **Skills** | Dash cooldown, Barrier Time, Barrier cooldown, Nuke cooldown |
 | **Pistol** | Fire Rate, Bullet Count, Bullet Speed, Bullet Size |
 | **Lightsaber** | Lightsaber (first purchase unlocks it, then +1 saber), Spin Speed, Saber Size, Orbit |
 

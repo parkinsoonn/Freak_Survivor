@@ -29,6 +29,13 @@ Can Doldur,Can Doldur,Heal
 2 can doldurur,2 can doldurur,Restores 2 health
 Dash,Dash,Dash
 Dash bekleme süresi -0.15 sn,Dash süresi -0.15 sn,Dash cooldown -0.15 s
+Yetenekler,Yetenekler,Skills
+Bariyer Süresi,Bariyer Süresi,Barrier Time
+Kalkan süresi +0.5 sn,Kalkan süresi +0.5 sn,Shield time +0.5 s
+Bariyer,Bariyer,Barrier
+Bariyer bekleme süresi -2 sn,Bekleme -2 sn,Barrier cooldown -2 s
+Atom Bombası,Atom Bombası,Nuke
+Bomba bekleme süresi -8 sn,Bekleme -8 sn,Nuke cooldown -8 s
 Atış Hızı,Atış Hızı,Fire Rate
 Atışlar arası süre -0.02 sn,Atış aralığı -0.02 sn,Shot delay -0.02 s
 Mermi Adedi,Mermi Adedi,Bullet Count

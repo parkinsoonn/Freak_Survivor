@@ -11,10 +11,12 @@ const ICONS := [
 	"hiz", "can", "yaricap", "kalp", "dash",
 	"atis_hizi", "mermi_adedi", "mermi_hizi", "mermi_boyutu",
 	"kilic_adedi", "donus_hizi", "kilic_boyutu", "yorunge",
+	"yetenek", "bariyer_sure", "bariyer_bekleme", "bomba_bekleme",
 ]
 
 const CATEGORIES := [
 	{ id = "karakter", name = "Karakter", icon = "karakter" },
+	{ id = "yetenek", name = "Yetenekler", icon = "yetenek" },
 	{ id = "silah", name = "Tabanca", icon = "tabanca" },
 	{ id = "isin_kilici", name = "Işın Kılıcı", icon = "isin_kilici" },
 ]
@@ -32,9 +34,19 @@ const LIST := [
 	{ id = "heal", category = "karakter", name = "Can Doldur", icon = "kalp",
 		desc = "2 can doldurur", base_cost = 8, cost_growth = 1.2, max_level = 0,
 		target = "Player/Health", method = "heal_player", amount = 2 },
-	{ id = "dash_cooldown", category = "karakter", name = "Dash", icon = "dash",
+
+	{ id = "dash_cooldown", category = "yetenek", name = "Dash", icon = "dash",
 		desc = "Dash bekleme süresi -0.15 sn", base_cost = 15, cost_growth = 1.4, max_level = 4,
 		target = "Player", method = "decrease_dash_cooldown", amount = 0.15 },
+	{ id = "barrier_duration", category = "yetenek", name = "Bariyer Süresi", icon = "bariyer_sure",
+		desc = "Kalkan süresi +0.5 sn", base_cost = 20, cost_growth = 1.5, max_level = 4,
+		target = "Player", method = "increase_barrier_duration", amount = 0.5 },
+	{ id = "barrier_cooldown", category = "yetenek", name = "Bariyer", icon = "bariyer_bekleme",
+		desc = "Bariyer bekleme süresi -2 sn", base_cost = 18, cost_growth = 1.45, max_level = 4,
+		target = "Player", method = "decrease_barrier_cooldown", amount = 2.0 },
+	{ id = "nuke_cooldown", category = "yetenek", name = "Atom Bombası", icon = "bomba_bekleme",
+		desc = "Bomba bekleme süresi -8 sn", base_cost = 25, cost_growth = 1.5, max_level = 4,
+		target = "Player", method = "decrease_nuke_cooldown", amount = 8.0 },
 
 	{ id = "fire_rate", category = "silah", name = "Atış Hızı", icon = "atis_hizi",
 		desc = "Atışlar arası süre -0.02 sn", base_cost = 15, cost_growth = 1.35, max_level = 5,

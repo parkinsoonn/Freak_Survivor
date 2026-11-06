@@ -127,18 +127,18 @@ func _refresh() -> void:
 func _make_card(upgrade: Dictionary) -> Button:
 	var button := Button.new()
 	button.set_script(TintButton)
-	button.custom_minimum_size.y = 112
+	button.custom_minimum_size.y = 136
 	button.focus_mode = Control.FOCUS_NONE
 	button.add_theme_stylebox_override("normal", _style_normal)
 	button.add_theme_stylebox_override("pressed", _style_normal)
 	button.add_theme_stylebox_override("hover", _style_hover)
 	button.add_theme_stylebox_override("hover_pressed", _style_hover)
 
-	# İkon | ad + seviye / açıklama + fiyat
+	# İkon | ad / açıklama / seviye + fiyat (4 sütunda kart ~310 px, ad tek satıra sığsın diye 3 satır)
 	var content := HBoxContainer.new()
 	content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 20)
-	content.add_theme_constant_override("separation", 16)
-	var icon := _icon(upgrade.icon, 64)
+	content.add_theme_constant_override("separation", 12)
+	var icon := _icon(upgrade.icon, 56)
 	content.add_child(icon)
 
 	var info := VBoxContainer.new()
@@ -147,28 +147,27 @@ func _make_card(upgrade: Dictionary) -> Button:
 	info.add_theme_constant_override("separation", 0)
 	content.add_child(info)
 
-	var top := HBoxContainer.new()
-	var title := _label(tr(upgrade.name), 40)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	top.add_child(title)
-	var level := _label("", 32)
-	top.add_child(level)
-	info.add_child(top)
+	var title := _label(tr(upgrade.name), 34)
+	title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	info.add_child(title)
 
-	var bottom := HBoxContainer.new()
-	var desc := _label("", 28)
-	desc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var desc := _label("", 24)
 	# Uzun açıklama kartı sütundan taşırmasın
 	desc.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	desc.add_theme_color_override("font_color", Color(0.12, 0.12, 0.1))
-	bottom.add_child(desc)
+	info.add_child(desc)
+
+	var bottom := HBoxContainer.new()
+	var level := _label("", 26)
+	level.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	bottom.add_child(level)
 	var coin := TextureRect.new()
 	coin.texture = _atlas(COIN_SHEET, Rect2(8, 8, 16, 16))
-	coin.custom_minimum_size = Vector2(32, 32)
+	coin.custom_minimum_size = Vector2(28, 28)
 	coin.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	coin.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	bottom.add_child(coin)
-	var price := _label("", 36)
+	var price := _label("", 30)
 	bottom.add_child(price)
 	info.add_child(bottom)
 

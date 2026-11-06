@@ -281,6 +281,18 @@ func decrease_dash_cooldown(amount: float) -> void:
 	dash_cooldown = maxf(dash_cooldown - amount, 0.3)
 
 
+func increase_barrier_duration(amount: float) -> void:
+	barrier_duration += amount
+
+
+func decrease_barrier_cooldown(amount: float) -> void:
+	barrier_cooldown = maxf(barrier_cooldown - amount, 5.0)
+
+
+func decrease_nuke_cooldown(amount: float) -> void:
+	nuke_cooldown = maxf(nuke_cooldown - amount, 20.0)
+
+
 func set_dash_ui_visibility(shown: bool) -> void:
 	for control in [dash_icon, dash_cooldown_text, nuke_icon, nuke_cooldown_text, barrier_icon, barrier_cooldown_text]:
 		if control: control.visible = shown
