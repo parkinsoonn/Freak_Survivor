@@ -96,7 +96,7 @@ physics_interpolation_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.19215687, 0.3019608, 0.4745098, 1)
+color = Color(0.4479867, 0.46226418, 0.26820046, 1)
 
 [node name="Canvas" type="Control" parent="UI" unique_id=1164692537]
 layout_mode = 3
