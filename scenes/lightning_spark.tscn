@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/lightning_spark_sheet.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="f0"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="f1"]
+atlas = ExtResource("1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="f2"]
+atlas = ExtResource("1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="f3"]
+atlas = ExtResource("1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("f3")
+}],
+"loop": false,
+"name": &"spark",
+"speed": 20.0
+}]
+
+[node name="LightningSpark" type="AnimatedSprite2D"]
+z_index = 21
+scale = Vector2(4, 4)
+sprite_frames = SubResource("frames")
+animation = &"spark"
+autoplay = "spark"
+
+[connection signal="animation_finished" from="." to="." method="queue_free"]

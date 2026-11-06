@@ -28,6 +28,9 @@ const BUTTON_FRAME_TIME := 0.15
 
 var _upgrades := Upgrades.new()
 var _cards: Array[Dictionary] = []
+# Silahlar sütununun sekmeleri: { category, button, cards }
+var _tabs: Array[Dictionary] = []
+var _tab_title: Label
 var _game_manager: Node
 var _anim_time := 0.0
 var _gold_tween: Tween
@@ -41,22 +44,38 @@ var _style_max := _card_style(3)
 func _ready() -> void:
 	_game_manager = get_tree().get_first_node_in_group("game_manager")
 
+	var tab_bar: HBoxContainer
 	for category in Upgrades.CATEGORIES:
-		var column := VBoxContainer.new()
-		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		column.add_theme_constant_override("separation", 12)
-		column.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		columns.add_child(column)
-
-		var header := HBoxContainer.new()
-		header.alignment = BoxContainer.ALIGNMENT_CENTER
-		header.add_child(_icon(category.icon, 56))
-		header.add_child(_label(tr(category.name), 48))
-		column.add_child(header)
-
+		var cards := _vbox()
 		for upgrade in Upgrades.LIST:
 			if upgrade.category == category.id:
-				column.add_child(_make_card(upgrade))
+				cards.add_child(_make_card(upgrade))
+
+		if not category.get("tab", false):
+			var column := _column()
+			var header := _header()
+			header.add_child(_icon(category.icon, 56))
+			header.add_child(_label(tr(category.name), 48))
+			column.add_child(header)
+			column.add_child(cards)
+			continue
+
+		# Sekmeli kategoriler tek "Silahlar" sütununu paylaşır: üstte ikon sekmeleri + seçili silahın adı
+		if tab_bar == null:
+			var weapons := _column()
+			tab_bar = _header()
+			tab_bar.add_theme_constant_override("separation", 8)
+			_tab_title = _label("", 40)
+			tab_bar.add_child(_tab_title)
+			weapons.add_child(tab_bar)
+		var tab := _make_tab(category, _tabs.size())
+		tab_bar.add_child(tab)
+		tab_bar.move_child(tab, _tabs.size())
+		tab_bar.get_parent().add_child(cards)
+		_tabs.append({ category = category, button = tab, cards = cards })
+
+	if not _tabs.is_empty():
+		_select_tab(0)
 
 
 func _process(delta: float) -> void:
@@ -124,6 +143,51 @@ func _refresh() -> void:
 		card.content.modulate.a = 1.0 if buyable or maxed else 0.45
 
 
+func _column() -> VBoxContainer:
+	var column := _vbox()
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	columns.add_child(column)
+	return column
+
+
+# Başlık satırları aynı yükseklikte olsun ki kartlar hizalı başlasın
+func _header() -> HBoxContainer:
+	var header := HBoxContainer.new()
+	header.alignment = BoxContainer.ALIGNMENT_CENTER
+	header.custom_minimum_size.y = 64
+	return header
+
+
+func _vbox() -> VBoxContainer:
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 12)
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return box
+
+
+func _make_tab(category: Dictionary, index: int) -> Button:
+	var button := Button.new()
+	button.custom_minimum_size = Vector2(64, 64)
+	button.focus_mode = Control.FOCUS_NONE
+	for state in ["normal", "hover", "pressed", "hover_pressed"]:
+		button.add_theme_stylebox_override(state, _style_normal)
+	var icon := _icon(category.icon, 40)
+	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 12)
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	button.add_child(icon)
+	button.pressed.connect(_select_tab.bind(index))
+	return button
+
+
+# Seçili silahın kartları görünür, diğer sekmeler soluk
+func _select_tab(index: int) -> void:
+	for i in _tabs.size():
+		var tab: Dictionary = _tabs[i]
+		tab.cards.visible = i == index
+		tab.button.modulate.a = 1.0 if i == index else 0.45
+	_tab_title.text = tr(_tabs[index].category.name)
+
+
 func _make_card(upgrade: Dictionary) -> Button:
 	var button := Button.new()
 	button.set_script(TintButton)
@@ -134,7 +198,7 @@ func _make_card(upgrade: Dictionary) -> Button:
 	button.add_theme_stylebox_override("hover", _style_hover)
 	button.add_theme_stylebox_override("hover_pressed", _style_hover)
 
-	# İkon | ad / açıklama / seviye + fiyat (4 sütunda kart ~310 px, ad tek satıra sığsın diye 3 satır)
+	# İkon | ad / açıklama / seviye + fiyat (ad tek satıra sığsın diye 3 satır)
 	var content := HBoxContainer.new()
 	content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 20)
 	content.add_theme_constant_override("separation", 12)

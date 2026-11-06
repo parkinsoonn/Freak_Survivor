@@ -54,3 +54,9 @@ Kılıç Boyutu,Kılıç Boyutu,Saber Size
 Kılıç boyutu +%20,Kılıç boyutu +%20,Saber size +20%
 Yörünge,Yörünge,Orbit
 Dönüş yarıçapı +0.3,Dönüş yarıçapı +0.3,Orbit radius +0.3
+Yıldırım,Yıldırım,Lightning
+"Yıldırımı açar, sonra +1 sekme","Yıldırımı açar, sonra +1 sekme","Unlocks it, then +1 chain"
+Çakma Hızı,Çakma Hızı,Strike Rate
+Çakma aralığı -0.25 sn,Çakma aralığı -0.25 sn,Strike delay -0.25 s
+Menzil,Menzil,Range
+Yıldırım menzili +1,Yıldırım menzili +1,Lightning range +1

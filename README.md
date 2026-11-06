@@ -37,8 +37,9 @@ A **golem** (mini boss) appears halfway through every 3rd wave.
 |---|---|
 | **Character** | Move Speed, Max Health, Pickup Range, Heal (unlimited) |
 | **Skills** | Dash cooldown, Barrier Time, Barrier cooldown, Nuke cooldown |
-| **Pistol** | Fire Rate, Bullet Count, Bullet Speed, Bullet Size |
-| **Lightsaber** | Lightsaber (first purchase unlocks it, then +1 saber), Spin Speed, Saber Size, Orbit |
+| **Weapons** (tabs) | **Pistol:** Fire Rate, Bullet Count, Bullet Speed, Bullet Size |
+| | **Lightsaber:** Lightsaber (first purchase unlocks it, then +1 saber), Spin Speed, Saber Size, Orbit |
+| | **Lightning:** Lightning (unlocks a bolt that chains between 3 nearby enemies, then +1 chain), Strike Rate, Range |
 
 Prices go up with every level: `round(base_cost × cost_growth ^ level)`.
 

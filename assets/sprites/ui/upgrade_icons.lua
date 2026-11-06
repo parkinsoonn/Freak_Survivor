@@ -355,12 +355,59 @@ ICONS.bariyer_sure = stamp(shield(), PLUS)
 ICONS.bariyer_bekleme = stamp(shield(), HOURGLASS)
 ICONS.bomba_bekleme = stamp(bomb(), HOURGLASS)
 
+-- Yıldırım: sağ üstten sol alta zikzak şimşek (sol kenar açık sarı, sağ kenar koyu)
+local BOLT = {
+  "........kkkkk...",
+  ".......kcyyk....",
+  "......kcyyk.....",
+  ".....kcyyk......",
+  "....kcyyk.......",
+  "...kcyyykkkkk...",
+  "..kcyyyyyyyyk...",
+  "..kkkkkcyyyk....",
+  "......kcyyk.....",
+  ".....kcyok......",
+  "....kcyok.......",
+  "...kcyok........",
+  "..kcok..........",
+  "..kok...........",
+  "..kk............",
+  "................",
+}
+local function bolt() return UI.art(BOLT) end
+ICONS.yildirim = bolt()
+
+-- Zincir: üstte sekilen üç hedef (mavi noktalar, aralarında kıvılcım), altta küçük şimşek
+local chain = UI.grid(S, S)
+for _, p in ipairs({ { 1, 3 }, { 6, 1 }, { 11, 3 } }) do
+  UI.rect(chain, p[1], p[2], 3, 3, "b")
+  UI.set(chain, p[1] + 1, p[2] + 1, "w")
+end
+for _, p in ipairs({ { 4, 3 }, { 5, 2 }, { 9, 2 }, { 10, 3 } }) do UI.set(chain, p[1], p[2], "c") end
+UI.outline(chain, "k")
+local SMALL_BOLT = { "...kkkk..", "..kcyyk..", ".kcyyykkk", ".kkkcyyyk", "...kcyyk.", "..kcyok..", "..kcok...", "..kkk...." }
+for y, row in ipairs(SMALL_BOLT) do
+  for x = 1, #row do
+    local c = row:sub(x, x)
+    if c ~= "." then UI.set(chain, 3 + x - 1, 8 + y - 1, c) end
+  end
+end
+ICONS.zincir = chain
+
+ICONS.yildirim_hiz = stamp(bolt(), HOURGLASS)
+
+-- Menzil: şimşeğin etrafında yarıçap halkası (yaricap ikonundaki gibi kesikli)
+local reach = bolt()
+ring(reach, 7.2, 8.2, "b", function(a) return math.floor(a / 30) % 2 == 0 end)
+ICONS.yildirim_menzil = reach
+
 local ORDER = {
   "karakter", "tabanca", "isin_kilici",
   "hiz", "can", "yaricap", "kalp", "dash",
   "atis_hizi", "mermi_adedi", "mermi_hizi", "mermi_boyutu",
   "kilic_adedi", "donus_hizi", "kilic_boyutu", "yorunge",
   "yetenek", "bariyer_sure", "bariyer_bekleme", "bomba_bekleme",
+  "yildirim", "zincir", "yildirim_hiz", "yildirim_menzil",
 }
 
 -- Tek satır: her ikon kendi tag'i değil, "icons" tag'inin bir karesi (JSON'da icons_<i>)

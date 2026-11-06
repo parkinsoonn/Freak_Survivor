@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/golem.tscn" id="p_golem"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/goz.tscn" id="p_goz"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/nisanci.tscn" id="p_nisanci"]
+[ext_resource type="PackedScene" path="res://scenes/lightning_spark.tscn" id="p_spark"]
+[ext_resource type="Script" path="res://scripts/lightning_caster.gd" id="s_lightning"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/patlayan.tscn" id="p_patlayan"]
 [ext_resource type="PackedScene" path="res://scenes/miknatis.tscn" id="p_magnet"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/mumyavari.tscn" id="p_mumyavari"]
@@ -278,6 +280,10 @@ health_bar = NodePath("../../UI/Healthbar")
 [node name="SaberOrbit" type="Node2D" parent="Player" unique_id=164857793]
 script = ExtResource("s_saber_orbit")
 saber_scene = ExtResource("p_saber")
+
+[node name="LightningCaster" type="Node2D" parent="Player"]
+script = ExtResource("s_lightning")
+spark_scene = ExtResource("p_spark")
 
 [node name="DashTrail" type="Line2D" parent="Player" unique_id=1565581710]
 z_index = -1

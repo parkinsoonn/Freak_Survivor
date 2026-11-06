@@ -12,13 +12,16 @@ const ICONS := [
 	"atis_hizi", "mermi_adedi", "mermi_hizi", "mermi_boyutu",
 	"kilic_adedi", "donus_hizi", "kilic_boyutu", "yorunge",
 	"yetenek", "bariyer_sure", "bariyer_bekleme", "bomba_bekleme",
+	"yildirim", "zincir", "yildirim_hiz", "yildirim_menzil",
 ]
 
+# tab = true: silahlar marketteki tek "Silahlar" sütununda sekme olarak gösterilir
 const CATEGORIES := [
 	{ id = "karakter", name = "Karakter", icon = "karakter" },
 	{ id = "yetenek", name = "Yetenekler", icon = "yetenek" },
-	{ id = "silah", name = "Tabanca", icon = "tabanca" },
-	{ id = "isin_kilici", name = "Işın Kılıcı", icon = "isin_kilici" },
+	{ id = "silah", name = "Tabanca", icon = "tabanca", tab = true },
+	{ id = "isin_kilici", name = "Işın Kılıcı", icon = "isin_kilici", tab = true },
+	{ id = "yildirim", name = "Yıldırım", icon = "yildirim", tab = true },
 ]
 
 const LIST := [
@@ -73,6 +76,16 @@ const LIST := [
 	{ id = "saber_radius", category = "isin_kilici", name = "Yörünge", icon = "yorunge",
 		desc = "Dönüş yarıçapı +0.3", base_cost = 12, cost_growth = 1.3, max_level = 4, requires = "saber",
 		target = "Player/SaberOrbit", method = "increase_radius", amount = 0.3 },
+
+	{ id = "lightning", category = "yildirim", name = "Yıldırım", icon = "zincir",
+		desc = "Yıldırımı açar, sonra +1 sekme", base_cost = 40, cost_growth = 1.5, max_level = 5,
+		target = "Player/LightningCaster", method = "add_lightning", amount = 1 },
+	{ id = "lightning_rate", category = "yildirim", name = "Çakma Hızı", icon = "yildirim_hiz",
+		desc = "Çakma aralığı -0.25 sn", base_cost = 18, cost_growth = 1.4, max_level = 4, requires = "lightning",
+		target = "Player/LightningCaster", method = "decrease_interval", amount = 0.25 },
+	{ id = "lightning_range", category = "yildirim", name = "Menzil", icon = "yildirim_menzil",
+		desc = "Yıldırım menzili +1", base_cost = 15, cost_growth = 1.35, max_level = 4, requires = "lightning",
+		target = "Player/LightningCaster", method = "increase_range", amount = 1.0 },
 ]
 
 # Run boyunca alınan seviyeler (id → seviye); kaydedilmez
