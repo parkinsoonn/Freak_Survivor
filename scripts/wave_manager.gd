@@ -10,6 +10,7 @@ const CLEANUP_TIME := 1.0
 
 @export var spawner: Node
 @export var wave_text: Label # Üst ortada "WAVE 3  0:24"
+@export var wave_progress: Range # Yazının altında kalan süre çubuğu
 @export var shop_panel: Control
 
 @export_group("Wave Banner'ı")
@@ -121,3 +122,5 @@ func _update_wave_text() -> void:
 	if wave_text:
 		var seconds := ceili(time_left)
 		wave_text.text = (tr("DALGA %d") % wave) + "  %d:%02d" % [floori(seconds / 60.0), seconds % 60]
+	if wave_progress:
+		wave_progress.value = time_left / wave_duration(wave) * 100.0

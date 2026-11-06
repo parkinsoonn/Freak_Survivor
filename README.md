@@ -17,7 +17,7 @@ Hold out against hordes of monsters until each wave's timer runs out, collect th
 5. **Shop:** buy upgrades with your gold, then press **NEXT WAVE**.
 6. When you die, the Game Over screen shows the wave you reached. Gold and upgrades only last for the current run and are not saved.
 
-A **golem** (mini boss) appears halfway through every 5th wave.
+A **golem** (mini boss) appears halfway through every 3rd wave.
 
 ### Controls
 

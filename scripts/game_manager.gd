@@ -13,8 +13,11 @@ extends Node
 
 @export_group("Altın")
 @export var gold := 0
-@export var gold_counter: Control # Sağ üstteki coin ikonu + sayı
 @export var gold_text: Label
+
+@export_group("HUD Panelleri")
+@export var stats_panel: Control # Sol üstte skor + altın
+@export var wave_panel: Control # Üst ortada dalga yazısı + süre çubuğu
 
 @export_group("ESC Menüsü")
 @export var volume_slider: Range
@@ -221,9 +224,8 @@ func _spawn(node: Node2D, position: Vector2) -> void:
 
 # Skor, altın, wave ve Dash UI'ını birlikte gösterip gizler
 func set_hud_visibility(is_visible: bool) -> void:
-	if score_text: score_text.visible = is_visible
-	if gold_counter: gold_counter.visible = is_visible
-	if _wave_manager.wave_text: _wave_manager.wave_text.visible = is_visible
+	if stats_panel: stats_panel.visible = is_visible
+	if wave_panel: wave_panel.visible = is_visible
 	_player.set_dash_ui_visibility(is_visible)
 
 
