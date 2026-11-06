@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" path="res://scenes/gold.tscn" id="p_gold"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/golem.tscn" id="p_golem"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/goz.tscn" id="p_goz"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/nisanci.tscn" id="p_nisanci"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/patlayan.tscn" id="p_patlayan"]
 [ext_resource type="PackedScene" path="res://scenes/miknatis.tscn" id="p_magnet"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/mumyavari.tscn" id="p_mumyavari"]
 [ext_resource type="PackedScene" path="res://scenes/isin_kilici.tscn" id="p_saber"]
@@ -216,6 +218,10 @@ autoplay = true
 [node name="SpawnManager" type="Node" parent="." unique_id=425893368]
 script = ExtResource("s_spawner")
 enemy_scenes = Array[PackedScene]([ExtResource("p_fare"), ExtResource("p_goz"), ExtResource("p_mumyavari"), ExtResource("p_zombi"), ExtResource("p_goblin")])
+later_enemies = Dictionary[PackedScene, int]({
+ExtResource("p_patlayan"): 2,
+ExtResource("p_nisanci"): 3
+})
 spawn_interval = 0.8
 min_spawn_interval = 0.3
 mini_boss_scene = ExtResource("p_golem")

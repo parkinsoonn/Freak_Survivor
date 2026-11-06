@@ -8,6 +8,8 @@ extends RigidBody2D
 @export var health := 1
 ## Ölünce düşen altının değeri
 @export var gold_reward := 1
+## Oyuncuya bu mesafeden (birim) fazla yaklaşmaz; 0 = üstüne yürür
+@export var stop_distance := 0.0
 
 # Aynı karede birden fazla mermi çarparsa ödülün tek kez verilmesi için
 var is_dead := false
@@ -63,7 +65,8 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	var direction := to_player.normalized()
-	linear_velocity = direction * speed * Settings.UNIT
+	var stop := stop_distance * Settings.UNIT
+	linear_velocity = Vector2.ZERO if to_player.length_squared() < stop * stop else direction * speed * Settings.UNIT
 
 	# Görselin alt kenarı (yüzü) oyuncuya baksın
 	var angle := direction.angle() - PI / 2.0

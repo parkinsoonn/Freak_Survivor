@@ -1,0 +1,9 @@
+{"frames":[
+  {"filename":"walk_0","frame":{"x":0,"y":0,"w":24,"h":24},"duration":150},
+  {"filename":"walk_1","frame":{"x":24,"y":0,"w":24,"h":24},"duration":150},
+  {"filename":"walk_2","frame":{"x":48,"y":0,"w":24,"h":24},"duration":150},
+  {"filename":"walk_3","frame":{"x":72,"y":0,"w":24,"h":24},"duration":150}
+],
+"meta":{"app":"Aseprite","image":"nisanci_sheet.png","format":"RGBA8888","size":{"w":96,"h":24},"frameSize":{"w":24,"h":24},"layout":"one row per tag","frameTags":[
+  {"name":"walk","from":0,"to":3,"direction":"forward","row":0,"durations":[150,150,150,150]}
+]}}

@@ -84,6 +84,7 @@ func _end_wave() -> void:
 	# Kalan moblar ölüm efektiyle silinir; skor ve altın vermez
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		_game_manager.kill_enemy(enemy, false, false)
+	get_tree().call_group("enemy_bullet", "queue_free")
 
 	# Toplanmayan altınlar sönerek kaybolur; son karede öldürülenlerinki ertelenmiş eklendiği için bir kare bekle
 	await get_tree().process_frame

@@ -46,6 +46,8 @@ Prices go up with every level: `round(base_cost × cost_growth ^ level)`.
 
 Rat, Eye, Mummy, Zombie, Goblin and the **Golem** mini boss. Their speed and spawn rate scale with the chosen difficulty and the wave number.
 
+From wave 2 the **Exploder** joins: it rushes you, flashes red for a moment and blows up (dodge out of range or kill it first). From wave 3 the **Shooter** keeps its distance and fires slow purple orbs at you.
+
 ## Running the game
 
 1. Install [Godot 4.7](https://godotengine.org/).

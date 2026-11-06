@@ -3,6 +3,8 @@ extends Node
 # WaveManager FIGHT başında start_wave ile açar, wave bitince stop ile kapatır
 
 @export var enemy_scenes: Array[PackedScene] = []
+## Sonradan katılan düşmanlar: sahne → çıkmaya başladığı dalga
+@export var later_enemies: Dictionary[PackedScene, int] = {}
 
 @export_group("Zorluk Ayarları")
 @export var spawn_interval := 2.0
@@ -19,6 +21,7 @@ var _wave_time := 0.0
 var _boss_time := -1.0 # Bu wave'de golemin çıkacağı an; -1 = yok
 var _player: Node2D
 var _start_interval := 0.0
+var _pool: Array[PackedScene] = [] # Bu dalgada çıkabilecek düşmanlar
 
 
 func _ready() -> void:
@@ -34,6 +37,11 @@ func start_wave(wave: int, duration: float) -> void:
 	# Wave numarası arttıkça spawn aralığı ramp_waves. wave'de minimuma iner
 	var t := clampf((wave - 1) / (Settings.ramp_waves() - 1.0), 0.0, 1.0)
 	spawn_interval = lerpf(_start_interval, min_spawn_interval, t)
+
+	_pool = enemy_scenes.duplicate()
+	for scene in later_enemies:
+		if wave >= later_enemies[scene]:
+			_pool.append(scene)
 
 	_timer = 0.0
 	_wave_time = 0.0
@@ -58,9 +66,9 @@ func _process(delta: float) -> void:
 
 
 func _spawn_enemy() -> void:
-	if enemy_scenes.is_empty():
+	if _pool.is_empty():
 		return
-	_spawn(enemy_scenes.pick_random())
+	_spawn(_pool.pick_random())
 
 
 func _spawn(scene: PackedScene) -> void:
