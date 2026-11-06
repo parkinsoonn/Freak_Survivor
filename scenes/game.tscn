@@ -232,6 +232,7 @@ ExtResource("p_nisanci"): 3
 })
 spawn_interval = 0.8
 min_spawn_interval = 0.3
+spawn_radius = 18.0
 mini_boss_scene = ExtResource("p_golem")
 mini_boss_every = 3
 boss_scene = ExtResource("p_boss")
@@ -316,7 +317,7 @@ monitorable = false
 shape = SubResource("pickup_shape")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1562472083 node_paths=PackedStringArray("target")]
-zoom = Vector2(1.2054, 1.2054)
+zoom = Vector2(1, 1)
 process_callback = 0
 script = ExtResource("s_camera")
 target = NodePath("../Player")

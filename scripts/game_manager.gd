@@ -165,7 +165,8 @@ func show_game_over() -> void:
 	if game_over_panel: game_over_panel.visible = true
 	if game_over_wave_text: game_over_wave_text.text = tr("DALGA %d") % _wave_manager.wave
 
-	var new_record: bool = _wave_manager.wave > Settings.best_wave
+	# Test dalgasından başlanan run rekor sayılmaz
+	var new_record: bool = Settings.debug_start_wave <= 1 and _wave_manager.wave > Settings.best_wave
 	if new_record:
 		Settings.best_wave = _wave_manager.wave
 	if game_over_summary:

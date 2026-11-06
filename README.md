@@ -54,6 +54,8 @@ From wave 2 the **Exploder** joins: it rushes you, flashes red for a moment and 
 1. Install [Godot 4.7](https://godotengine.org/).
 2. Open `project.godot` in Godot and press **F5** (main scene: `scenes/main_menu.tscn`).
 
+**Test wave (editor only):** when the game is run from the Godot editor, the main menu shows a `< TEST DALGA N >` selector. Picking a wave above 1 starts the run in the shop with 9999 gold, then NEXT WAVE starts that wave; such runs never update the best-wave record. The selector does not exist in exported builds.
+
 **Windows build:** *Project → Export → Windows Desktop* produces `build/FreakSurvivor.exe` (`build/` is not tracked by git).
 
 ### Tests

@@ -26,6 +26,9 @@ var best_wave := 0:
 		best_wave = value
 		_save()
 
+## Sadece editörden çalıştırınca ana menüden seçilen test dalgası (kaydedilmez); 1 = normal oyun
+var debug_start_wave := 1
+
 const LANGUAGES := ["tr", "en"]
 
 # Çeviriler assets/translations/strings.csv'de; anahtar Türkçe metnin kendisi

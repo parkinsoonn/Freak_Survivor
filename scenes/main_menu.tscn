@@ -74,13 +74,15 @@ corner_radius_bottom_left = 4
 
 [node name="MainMenu" type="Node" unique_id=605167557]
 
-[node name="MenuManager" type="Node" parent="." unique_id=1885633020 node_paths=PackedStringArray("volume_slider", "music", "difficulty_text", "language_text", "best_wave_text")]
+[node name="MenuManager" type="Node" parent="." unique_id=1885633020 node_paths=PackedStringArray("volume_slider", "music", "difficulty_text", "language_text", "best_wave_text", "dev_wave_selector", "dev_wave_text")]
 script = ExtResource("s_menu")
 volume_slider = NodePath("../UI/Canvas/VolumeSlider")
 music = NodePath("../MenuBGM")
 difficulty_text = NodePath("../UI/Canvas/DifficultySelector/Label")
 language_text = NodePath("../UI/Canvas/LanguageButton")
 best_wave_text = NodePath("../UI/Canvas/BestWave")
+dev_wave_selector = NodePath("../UI/Canvas/DevWaveSelector")
+dev_wave_text = NodePath("../UI/Canvas/DevWaveSelector/Label")
 
 [node name="MenuBGM" type="AudioStreamPlayer" parent="." unique_id=2008875310]
 stream = ExtResource("a_music")
@@ -246,6 +248,58 @@ auto_translate_mode = 2
 text = "TR"
 script = ExtResource("s_tint")
 
+[node name="DevWaveSelector" type="Control" parent="UI/Canvas"]
+visible = false
+anchors_preset = 0
+offset_left = -388.0
+offset_top = -176.0
+offset_right = -132.0
+offset_bottom = -140.0
+mouse_filter = 2
+
+[node name="PrevButton" type="Button" parent="UI/Canvas/DevWaveSelector"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("no_focus")
+theme_override_styles/pressed = SubResource("no_focus")
+theme_override_styles/hover = SubResource("no_focus")
+theme_override_styles/focus = SubResource("no_focus")
+text = "<"
+script = ExtResource("s_tint")
+
+[node name="Label" type="Label" parent="UI/Canvas/DevWaveSelector"]
+layout_mode = 0
+offset_left = 30.0
+offset_right = 226.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+auto_translate_mode = 2
+text = "TEST DALGA 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="UI/Canvas/DevWaveSelector"]
+layout_mode = 0
+offset_left = 226.0
+offset_right = 256.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("no_focus")
+theme_override_styles/pressed = SubResource("no_focus")
+theme_override_styles/hover = SubResource("no_focus")
+theme_override_styles/focus = SubResource("no_focus")
+text = ">"
+script = ExtResource("s_tint")
+
 [node name="VolumeSlider" type="HSlider" parent="UI/Canvas" unique_id=459086305]
 layout_mode = 0
 offset_left = 283.82
@@ -288,3 +342,5 @@ text = "EN İYİ: DALGA 1"
 [connection signal="pressed" from="UI/Canvas/QuitButton" to="MenuManager" method="quit_game"]
 [connection signal="pressed" from="UI/Canvas/SpeakerButton" to="MenuManager" method="toggle_mute"]
 [connection signal="pressed" from="UI/Canvas/LanguageButton" to="MenuManager" method="toggle_language"]
+[connection signal="pressed" from="UI/Canvas/DevWaveSelector/PrevButton" to="MenuManager" method="change_dev_wave" binds= [-1]]
+[connection signal="pressed" from="UI/Canvas/DevWaveSelector/NextButton" to="MenuManager" method="change_dev_wave" binds= [1]]
