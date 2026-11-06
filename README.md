@@ -15,9 +15,9 @@ Hold out against hordes of monsters until each wave's timer runs out, collect th
 3. Every enemy you kill drops **gold** (10 for the golem, 1 for the rest). Gold inside your pickup range flies to you; the **magnet** pulls in all gold on the ground.
 4. **When the timer runs out:** the remaining enemies are cleared and any gold you didn't pick up disappears.
 5. **Shop:** buy upgrades with your gold, then press **NEXT WAVE**.
-6. When you die, the Game Over screen shows the wave you reached. Gold and upgrades only last for the current run and are not saved.
+6. When you die, the Game Over screen shows the wave you reached plus kills, gold collected and play time. Your best wave is saved and shown on the main menu; gold and upgrades only last for the current run.
 
-A **golem** (mini boss) appears halfway through every 5th wave.
+A **golem** (mini boss) appears halfway through every 3rd wave. Every 10th wave the **Freak Pile** boss rises out of the ground a quarter of the way in: it alternates a ring of orbs and an aimed volley, enrages at half health (faster, more orbs) and survives the nuke (it only takes a quarter of its health). Its health bar is shown at the top of the screen.
 
 ### Controls
 
@@ -35,9 +35,11 @@ A **golem** (mini boss) appears halfway through every 5th wave.
 
 | Category | Upgrades |
 |---|---|
-| **Character** | Move Speed, Max Health, Pickup Range, Heal (unlimited), Dash cooldown |
-| **Pistol** | Fire Rate, Bullet Count, Bullet Speed, Bullet Size |
-| **Lightsaber** | Lightsaber (first purchase unlocks it, then +1 saber), Spin Speed, Saber Size, Orbit |
+| **Character** | Move Speed, Max Health, Pickup Range, Heal (unlimited) |
+| **Skills** | Dash cooldown, Barrier Time, Barrier cooldown, Nuke cooldown |
+| **Weapons** (tabs) | **Pistol:** Fire Rate, Bullet Count, Bullet Speed, Bullet Size |
+| | **Lightsaber:** Lightsaber (first purchase unlocks it, then +1 saber), Spin Speed, Saber Size, Orbit |
+| | **Lightning:** Lightning (unlocks a bolt that chains between 3 nearby enemies, then +1 chain), Strike Rate, Range |
 
 Prices go up with every level: `round(base_cost × cost_growth ^ level)`.
 
@@ -45,10 +47,14 @@ Prices go up with every level: `round(base_cost × cost_growth ^ level)`.
 
 Rat, Eye, Mummy, Zombie, Goblin and the **Golem** mini boss. Their speed and spawn rate scale with the chosen difficulty and the wave number.
 
+From wave 2 the **Exploder** joins: it rushes you, flashes red for a moment and blows up (dodge out of range or kill it first). From wave 3 the **Shooter** keeps its distance and fires slow purple orbs at you.
+
 ## Running the game
 
 1. Install [Godot 4.7](https://godotengine.org/).
 2. Open `project.godot` in Godot and press **F5** (main scene: `scenes/main_menu.tscn`).
+
+**Test wave (editor only):** when the game is run from the Godot editor, the main menu shows a `< TEST DALGA N >` selector. Picking a wave above 1 starts the run in the shop with 9999 gold, then NEXT WAVE starts that wave; such runs never update the best-wave record. The selector does not exist in exported builds.
 
 **Windows build:** *Project → Export → Windows Desktop* produces `build/FreakSurvivor.exe` (`build/` is not tracked by git).
 

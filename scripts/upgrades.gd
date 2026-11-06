@@ -11,12 +11,17 @@ const ICONS := [
 	"hiz", "can", "yaricap", "kalp", "dash",
 	"atis_hizi", "mermi_adedi", "mermi_hizi", "mermi_boyutu",
 	"kilic_adedi", "donus_hizi", "kilic_boyutu", "yorunge",
+	"yetenek", "bariyer_sure", "bariyer_bekleme", "bomba_bekleme",
+	"yildirim", "zincir", "yildirim_hiz", "yildirim_menzil",
 ]
 
+# tab = true: silahlar marketteki tek "Silahlar" sütununda sekme olarak gösterilir
 const CATEGORIES := [
 	{ id = "karakter", name = "Karakter", icon = "karakter" },
-	{ id = "silah", name = "Tabanca", icon = "tabanca" },
-	{ id = "isin_kilici", name = "Işın Kılıcı", icon = "isin_kilici" },
+	{ id = "yetenek", name = "Yetenekler", icon = "yetenek" },
+	{ id = "silah", name = "Tabanca", icon = "tabanca", tab = true },
+	{ id = "isin_kilici", name = "Işın Kılıcı", icon = "isin_kilici", tab = true },
+	{ id = "yildirim", name = "Yıldırım", icon = "yildirim", tab = true },
 ]
 
 const LIST := [
@@ -32,9 +37,19 @@ const LIST := [
 	{ id = "heal", category = "karakter", name = "Can Doldur", icon = "kalp",
 		desc = "2 can doldurur", base_cost = 8, cost_growth = 1.2, max_level = 0,
 		target = "Player/Health", method = "heal_player", amount = 2 },
-	{ id = "dash_cooldown", category = "karakter", name = "Dash", icon = "dash",
+
+	{ id = "dash_cooldown", category = "yetenek", name = "Dash", icon = "dash",
 		desc = "Dash bekleme süresi -0.15 sn", base_cost = 15, cost_growth = 1.4, max_level = 4,
 		target = "Player", method = "decrease_dash_cooldown", amount = 0.15 },
+	{ id = "barrier_duration", category = "yetenek", name = "Bariyer Süresi", icon = "bariyer_sure",
+		desc = "Kalkan süresi +0.5 sn", base_cost = 20, cost_growth = 1.5, max_level = 4,
+		target = "Player", method = "increase_barrier_duration", amount = 0.5 },
+	{ id = "barrier_cooldown", category = "yetenek", name = "Bariyer", icon = "bariyer_bekleme",
+		desc = "Bariyer bekleme süresi -2 sn", base_cost = 18, cost_growth = 1.45, max_level = 4,
+		target = "Player", method = "decrease_barrier_cooldown", amount = 2.0 },
+	{ id = "nuke_cooldown", category = "yetenek", name = "Atom Bombası", icon = "bomba_bekleme",
+		desc = "Bomba bekleme süresi -8 sn", base_cost = 25, cost_growth = 1.5, max_level = 4,
+		target = "Player", method = "decrease_nuke_cooldown", amount = 8.0 },
 
 	{ id = "fire_rate", category = "silah", name = "Atış Hızı", icon = "atis_hizi",
 		desc = "Atışlar arası süre -0.02 sn", base_cost = 15, cost_growth = 1.35, max_level = 5,
@@ -61,6 +76,16 @@ const LIST := [
 	{ id = "saber_radius", category = "isin_kilici", name = "Yörünge", icon = "yorunge",
 		desc = "Dönüş yarıçapı +0.3", base_cost = 12, cost_growth = 1.3, max_level = 4, requires = "saber",
 		target = "Player/SaberOrbit", method = "increase_radius", amount = 0.3 },
+
+	{ id = "lightning", category = "yildirim", name = "Yıldırım", icon = "zincir",
+		desc = "Yıldırımı açar, sonra +1 sekme", base_cost = 40, cost_growth = 1.5, max_level = 5,
+		target = "Player/LightningCaster", method = "add_lightning", amount = 1 },
+	{ id = "lightning_rate", category = "yildirim", name = "Çakma Hızı", icon = "yildirim_hiz",
+		desc = "Çakma aralığı -0.25 sn", base_cost = 18, cost_growth = 1.4, max_level = 4, requires = "lightning",
+		target = "Player/LightningCaster", method = "decrease_interval", amount = 0.25 },
+	{ id = "lightning_range", category = "yildirim", name = "Menzil", icon = "yildirim_menzil",
+		desc = "Yıldırım menzili +1", base_cost = 15, cost_growth = 1.35, max_level = 4, requires = "lightning",
+		target = "Player/LightningCaster", method = "increase_range", amount = 1.0 },
 ]
 
 # Run boyunca alınan seviyeler (id → seviye); kaydedilmez

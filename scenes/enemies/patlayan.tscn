@@ -1,0 +1,61 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/exploder_enemy.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/patlayan_sheet.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="f0"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="f1"]
+atlas = ExtResource("2")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="f2"]
+atlas = ExtResource("2")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="f3"]
+atlas = ExtResource("2")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("f3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.3333
+}]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 25.0
+
+[node name="patlayan" type="RigidBody2D"]
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1")
+speed = 4.5
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("frames")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("shape")

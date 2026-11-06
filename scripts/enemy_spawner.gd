@@ -3,6 +3,8 @@ extends Node
 # WaveManager FIGHT başında start_wave ile açar, wave bitince stop ile kapatır
 
 @export var enemy_scenes: Array[PackedScene] = []
+## Sonradan katılan düşmanlar: sahne → çıkmaya başladığı dalga
+@export var later_enemies: Dictionary[PackedScene, int] = {}
 
 @export_group("Zorluk Ayarları")
 @export var spawn_interval := 2.0
@@ -14,11 +16,20 @@ extends Node
 ## Her kaçıncı wave'in ortasında bir kez golem çıkar
 @export var mini_boss_every := 5
 
+@export_group("Büyük Boss")
+@export var boss_scene: PackedScene
+## Her kaçıncı wave'in ilk çeyreğinde boss çıkar
+@export var boss_every := 10
+## Belirme animasyonu görünsün diye oyuncuya daha yakın çıkar (birim)
+@export var boss_spawn_radius := 7.0
+
 var _timer := 0.0
 var _wave_time := 0.0
 var _boss_time := -1.0 # Bu wave'de golemin çıkacağı an; -1 = yok
+var _big_boss_time := -1.0
 var _player: Node2D
 var _start_interval := 0.0
+var _pool: Array[PackedScene] = [] # Bu dalgada çıkabilecek düşmanlar
 
 
 func _ready() -> void:
@@ -35,9 +46,15 @@ func start_wave(wave: int, duration: float) -> void:
 	var t := clampf((wave - 1) / (Settings.ramp_waves() - 1.0), 0.0, 1.0)
 	spawn_interval = lerpf(_start_interval, min_spawn_interval, t)
 
+	_pool = enemy_scenes.duplicate()
+	for scene in later_enemies:
+		if wave >= later_enemies[scene]:
+			_pool.append(scene)
+
 	_timer = 0.0
 	_wave_time = 0.0
 	_boss_time = duration / 2.0 if wave % mini_boss_every == 0 else -1.0
+	_big_boss_time = duration / 4.0 if wave % boss_every == 0 else -1.0
 	set_process(true)
 
 
@@ -55,19 +72,22 @@ func _process(delta: float) -> void:
 	if _boss_time >= 0.0 and _wave_time >= _boss_time:
 		_spawn(mini_boss_scene)
 		_boss_time = -1.0
+	if _big_boss_time >= 0.0 and _wave_time >= _big_boss_time:
+		_spawn(boss_scene, boss_spawn_radius)
+		_big_boss_time = -1.0
 
 
 func _spawn_enemy() -> void:
-	if enemy_scenes.is_empty():
+	if _pool.is_empty():
 		return
-	_spawn(enemy_scenes.pick_random())
+	_spawn(_pool.pick_random())
 
 
-func _spawn(scene: PackedScene) -> void:
+func _spawn(scene: PackedScene, radius := spawn_radius) -> void:
 	if not is_instance_valid(_player) or scene == null:
 		return
 
 	var random_direction := Vector2.from_angle(randf() * TAU)
 	var enemy: Node2D = scene.instantiate()
-	enemy.position = _player.global_position + random_direction * spawn_radius * Settings.UNIT
+	enemy.position = _player.global_position + random_direction * radius * Settings.UNIT
 	get_parent().add_child(enemy)

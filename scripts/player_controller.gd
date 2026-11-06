@@ -192,7 +192,10 @@ func _perform_nuke() -> void:
 
 	if _game_manager:
 		for enemy in get_tree().get_nodes_in_group("enemy"):
-			_game_manager.kill_enemy(enemy, false)
+			if enemy.has_method("on_nuke"):
+				enemy.on_nuke() # Boss tek bombayla ölmez
+			else:
+				_game_manager.kill_enemy(enemy, false)
 
 	# Tek tek ses/sarsıntı yerine tek büyük patlama
 	if _camera: _camera.trigger_shake(0.5, 0.6)
@@ -279,6 +282,18 @@ func increase_bullet_size(amount: float) -> void:
 
 func decrease_dash_cooldown(amount: float) -> void:
 	dash_cooldown = maxf(dash_cooldown - amount, 0.3)
+
+
+func increase_barrier_duration(amount: float) -> void:
+	barrier_duration += amount
+
+
+func decrease_barrier_cooldown(amount: float) -> void:
+	barrier_cooldown = maxf(barrier_cooldown - amount, 5.0)
+
+
+func decrease_nuke_cooldown(amount: float) -> void:
+	nuke_cooldown = maxf(nuke_cooldown - amount, 20.0)
 
 
 func set_dash_ui_visibility(shown: bool) -> void:

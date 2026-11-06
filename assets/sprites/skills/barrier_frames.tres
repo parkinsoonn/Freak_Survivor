@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://bejl4di0xm3f7"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/barrier_shield_sheet.png" id="1_sheet"]
+[ext_resource type="Texture2D" uid="uid://dspj3hkpjnumm" path="res://assets/sprites/skills/barrier_shield_sheet.png" id="1_sheet"]
 
 [sub_resource type="AtlasTexture" id="shield_0"]
 atlas = ExtResource("1_sheet")
@@ -61,7 +61,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("shield_7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"shield",
 "speed": 12.5
 }]

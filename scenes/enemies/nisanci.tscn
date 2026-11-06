@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/shooter_enemy.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/nisanci_sheet.png" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_bullet.tscn" id="3"]
+
+[sub_resource type="AtlasTexture" id="f0"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="f1"]
+atlas = ExtResource("2")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="f2"]
+atlas = ExtResource("2")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="f3"]
+atlas = ExtResource("2")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("f3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.6667
+}]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 27.0
+
+[node name="nisanci" type="RigidBody2D"]
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1")
+speed = 2.5
+health = 2
+gold_reward = 2
+stop_distance = 5.0
+bullet_scene = ExtResource("3")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("frames")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")

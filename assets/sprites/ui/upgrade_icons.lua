@@ -289,11 +289,125 @@ UI.rect(orbit, 7, 7, 2, 2, "n")
 UI.rect(orbit, 11, 2, 2, 2, "p")
 ICONS.yorunge = UI.outline(orbit, "k")
 
+-- Yetenekler kategorisi: dört köşeli parlak yıldız (astroid), sağ alt çeyrek gölgeli
+local star = UI.grid(S, S)
+for y = 0, S - 1 do
+  for x = 0, S - 1 do
+    local dx, dy = math.abs(x + 0.5 - 8), math.abs(y + 0.5 - 8)
+    if math.sqrt(dx) + math.sqrt(dy) <= math.sqrt(7) then
+      star[y][x] = (dx + dy < 2) and "w" or ((x >= 8 and y >= 8) and "o" or "y")
+    end
+  end
+end
+ICONS.yetenek = UI.outline(star, "k")
+
+-- Küçük bariyer kalkanı (barrier_icon.lua'nın 16x16 hali)
+local function shield()
+  local g = UI.grid(S, S)
+  for y = 1, 13 do
+    local hw = 6
+    if y > 7 then hw = 6 * (13 - y) / 6 end
+    if y < 3 then hw = hw - (3 - y) end
+    for x = 0, S - 1 do
+      if math.abs(x + 0.5 - 7) <= hw then g[y][x] = x < 7 and "b" or "B" end
+    end
+  end
+  UI.set(g, 4, 3, "w")
+  UI.set(g, 4, 4, "w")
+  UI.set(g, 5, 3, "w")
+  return UI.outline(g, "k")
+end
+
+-- Bomba: koyu gövde, parlama, fitil ve kıvılcım
+local function bomb()
+  local g = UI.grid(S, S)
+  for y = 0, S - 1 do
+    for x = 0, S - 1 do
+      local dx, dy = x + 0.5 - 7, y + 0.5 - 9
+      if dx * dx + dy * dy <= 25 then g[y][x] = (dx > 1.5 and dy > 1.5) and "z" or "X" end
+    end
+  end
+  UI.set(g, 5, 7, "s")
+  UI.set(g, 5, 8, "s")
+  UI.set(g, 6, 6, "s")
+  UI.rect(g, 7, 3, 2, 1, "N")
+  UI.set(g, 9, 2, "N")
+  UI.outline(g, "k")
+  for _, p in ipairs({ { 11, 1 }, { 10, 0 }, { 12, 0 }, { 10, 2 }, { 12, 2 } }) do UI.set(g, p[1], p[2], "y") end
+  UI.set(g, 11, 1, "r")
+  return g
+end
+
+-- Sağ alta damga (kendi konturuyla): artı = süre artışı, kum saati = bekleme azalması
+local function stamp(g, rows)
+  for y, row in ipairs(rows) do
+    for x = 1, #row do
+      local c = row:sub(x, x)
+      if c ~= "." then UI.set(g, 16 - #row + x - 1, 16 - #rows + y - 1, c) end
+    end
+  end
+  return g
+end
+local PLUS = { ".kkk.", "kkykk", "kyyyk", "kkykk", ".kkk." }
+local HOURGLASS = { "kkkkk", "kyyyk", ".kyk.", "..k..", ".kck.", "kccck", "kkkkk" }
+
+ICONS.bariyer_sure = stamp(shield(), PLUS)
+ICONS.bariyer_bekleme = stamp(shield(), HOURGLASS)
+ICONS.bomba_bekleme = stamp(bomb(), HOURGLASS)
+
+-- Yıldırım: sağ üstten sol alta zikzak şimşek (sol kenar açık sarı, sağ kenar koyu)
+local BOLT = {
+  "........kkkkk...",
+  ".......kcyyk....",
+  "......kcyyk.....",
+  ".....kcyyk......",
+  "....kcyyk.......",
+  "...kcyyykkkkk...",
+  "..kcyyyyyyyyk...",
+  "..kkkkkcyyyk....",
+  "......kcyyk.....",
+  ".....kcyok......",
+  "....kcyok.......",
+  "...kcyok........",
+  "..kcok..........",
+  "..kok...........",
+  "..kk............",
+  "................",
+}
+local function bolt() return UI.art(BOLT) end
+ICONS.yildirim = bolt()
+
+-- Zincir: üstte sekilen üç hedef (mavi noktalar, aralarında kıvılcım), altta küçük şimşek
+local chain = UI.grid(S, S)
+for _, p in ipairs({ { 1, 3 }, { 6, 1 }, { 11, 3 } }) do
+  UI.rect(chain, p[1], p[2], 3, 3, "b")
+  UI.set(chain, p[1] + 1, p[2] + 1, "w")
+end
+for _, p in ipairs({ { 4, 3 }, { 5, 2 }, { 9, 2 }, { 10, 3 } }) do UI.set(chain, p[1], p[2], "c") end
+UI.outline(chain, "k")
+local SMALL_BOLT = { "...kkkk..", "..kcyyk..", ".kcyyykkk", ".kkkcyyyk", "...kcyyk.", "..kcyok..", "..kcok...", "..kkk...." }
+for y, row in ipairs(SMALL_BOLT) do
+  for x = 1, #row do
+    local c = row:sub(x, x)
+    if c ~= "." then UI.set(chain, 3 + x - 1, 8 + y - 1, c) end
+  end
+end
+ICONS.zincir = chain
+
+ICONS.yildirim_hiz = stamp(bolt(), HOURGLASS)
+
+-- Menzil: şimşeğin etrafında yarıçap halkası (yaricap ikonundaki gibi kesikli)
+local reach = bolt()
+ring(reach, 7.2, 8.2, "b", function(a) return math.floor(a / 30) % 2 == 0 end)
+ICONS.yildirim_menzil = reach
+
 local ORDER = {
   "karakter", "tabanca", "isin_kilici",
   "hiz", "can", "yaricap", "kalp", "dash",
   "atis_hizi", "mermi_adedi", "mermi_hizi", "mermi_boyutu",
   "kilic_adedi", "donus_hizi", "kilic_boyutu", "yorunge",
+  "yetenek", "bariyer_sure", "bariyer_bekleme", "bomba_bekleme",
+  "yildirim", "zincir", "yildirim_hiz", "yildirim_menzil",
 }
 
 -- Tek satır: her ikon kendi tag'i değil, "icons" tag'inin bir karesi (JSON'da icons_<i>)

@@ -11,6 +11,14 @@ extends Node
 @export_group("Dil")
 @export var language_text: Button
 
+@export_group("Rekor")
+@export var best_wave_text: Label
+
+@export_group("Test")
+## Sadece editörden çalıştırınca görünen başlangıç dalgası seçici
+@export var dev_wave_selector: Control
+@export var dev_wave_text: Label
+
 var _is_muted := false
 var _last_volume := 1.0
 
@@ -31,6 +39,23 @@ func _ready() -> void:
 	_update_difficulty_text()
 	_update_language_text()
 
+	# Dışa aktarılan oyunda "editor" özelliği yok; seçici hiç görünmez ve normal oyun 1. dalgadan başlar
+	if dev_wave_selector:
+		dev_wave_selector.visible = OS.has_feature("editor")
+	if not OS.has_feature("editor"):
+		Settings.debug_start_wave = 1
+	_update_dev_wave_text()
+
+
+func change_dev_wave(direction: int) -> void:
+	Settings.debug_start_wave = clampi(Settings.debug_start_wave + direction, 1, 60)
+	_update_dev_wave_text()
+
+
+func _update_dev_wave_text() -> void:
+	if dev_wave_text:
+		dev_wave_text.text = "TEST DALGA %d" % Settings.debug_start_wave
+
 
 # TR ↔ EN; seçim kaydedilir, oyundaki yazılar bu dille kurulur
 func toggle_language() -> void:
@@ -43,6 +68,10 @@ func toggle_language() -> void:
 func _update_language_text() -> void:
 	if language_text:
 		language_text.text = Settings.language.to_upper()
+	# Henüz hiç oynanmadıysa rekor yazısı yok
+	if best_wave_text:
+		best_wave_text.visible = Settings.best_wave > 0
+		best_wave_text.text = tr("EN İYİ: DALGA %d") % Settings.best_wave
 
 
 func next_difficulty() -> void:

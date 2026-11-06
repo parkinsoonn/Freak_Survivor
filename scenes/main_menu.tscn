@@ -74,12 +74,15 @@ corner_radius_bottom_left = 4
 
 [node name="MainMenu" type="Node" unique_id=605167557]
 
-[node name="MenuManager" type="Node" parent="." unique_id=1885633020 node_paths=PackedStringArray("volume_slider", "music", "difficulty_text", "language_text")]
+[node name="MenuManager" type="Node" parent="." unique_id=1885633020 node_paths=PackedStringArray("volume_slider", "music", "difficulty_text", "language_text", "best_wave_text", "dev_wave_selector", "dev_wave_text")]
 script = ExtResource("s_menu")
 volume_slider = NodePath("../UI/Canvas/VolumeSlider")
 music = NodePath("../MenuBGM")
 difficulty_text = NodePath("../UI/Canvas/DifficultySelector/Label")
 language_text = NodePath("../UI/Canvas/LanguageButton")
+best_wave_text = NodePath("../UI/Canvas/BestWave")
+dev_wave_selector = NodePath("../UI/Canvas/DevWaveSelector")
+dev_wave_text = NodePath("../UI/Canvas/DevWaveSelector/Label")
 
 [node name="MenuBGM" type="AudioStreamPlayer" parent="." unique_id=2008875310]
 stream = ExtResource("a_music")
@@ -93,7 +96,7 @@ physics_interpolation_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.19215687, 0.3019608, 0.4745098, 1)
+color = Color(0.4479867, 0.46226418, 0.26820046, 1)
 
 [node name="Canvas" type="Control" parent="UI" unique_id=1164692537]
 layout_mode = 3
@@ -102,7 +105,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-scale = Vector2(2.4, 2.4)
+scale = Vector2(2.2, 2.2)
 mouse_filter = 2
 
 [node name="Background" type="Panel" parent="UI/Canvas" unique_id=1872976312]
@@ -245,6 +248,58 @@ auto_translate_mode = 2
 text = "TR"
 script = ExtResource("s_tint")
 
+[node name="DevWaveSelector" type="Control" parent="UI/Canvas"]
+visible = false
+anchors_preset = 0
+offset_left = -388.0
+offset_top = -176.0
+offset_right = -132.0
+offset_bottom = -140.0
+mouse_filter = 2
+
+[node name="PrevButton" type="Button" parent="UI/Canvas/DevWaveSelector"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("no_focus")
+theme_override_styles/pressed = SubResource("no_focus")
+theme_override_styles/hover = SubResource("no_focus")
+theme_override_styles/focus = SubResource("no_focus")
+text = "<"
+script = ExtResource("s_tint")
+
+[node name="Label" type="Label" parent="UI/Canvas/DevWaveSelector"]
+layout_mode = 0
+offset_left = 30.0
+offset_right = 226.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+auto_translate_mode = 2
+text = "TEST DALGA 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="UI/Canvas/DevWaveSelector"]
+layout_mode = 0
+offset_left = 226.0
+offset_right = 256.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("no_focus")
+theme_override_styles/pressed = SubResource("no_focus")
+theme_override_styles/hover = SubResource("no_focus")
+theme_override_styles/focus = SubResource("no_focus")
+text = ">"
+script = ExtResource("s_tint")
+
 [node name="VolumeSlider" type="HSlider" parent="UI/Canvas" unique_id=459086305]
 layout_mode = 0
 offset_left = 283.82
@@ -270,9 +325,22 @@ theme_override_font_sizes/font_size = 28
 text = "by  parkinson
  and  oridantes"
 
+[node name="BestWave" type="Label" parent="UI/Canvas"]
+visible = false
+layout_mode = 0
+offset_left = -388.0
+offset_top = 182.0
+offset_right = -120.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "EN İYİ: DALGA 1"
+
 [connection signal="pressed" from="UI/Canvas/DifficultySelector/PrevButton" to="MenuManager" method="previous_difficulty"]
 [connection signal="pressed" from="UI/Canvas/DifficultySelector/NextButton" to="MenuManager" method="next_difficulty"]
 [connection signal="pressed" from="UI/Canvas/PlayButton" to="MenuManager" method="play_game"]
 [connection signal="pressed" from="UI/Canvas/QuitButton" to="MenuManager" method="quit_game"]
 [connection signal="pressed" from="UI/Canvas/SpeakerButton" to="MenuManager" method="toggle_mute"]
 [connection signal="pressed" from="UI/Canvas/LanguageButton" to="MenuManager" method="toggle_language"]
+[connection signal="pressed" from="UI/Canvas/DevWaveSelector/PrevButton" to="MenuManager" method="change_dev_wave" binds= [-1]]
+[connection signal="pressed" from="UI/Canvas/DevWaveSelector/NextButton" to="MenuManager" method="change_dev_wave" binds= [1]]

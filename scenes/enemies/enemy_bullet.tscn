@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_bullet.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemy_bullet_sheet.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="f0"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="f1"]
+atlas = ExtResource("2")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("f1")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10
+}]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 9.0
+
+[node name="enemy_bullet" type="Area2D"]
+z_index = 5
+monitorable = false
+script = ExtResource("1")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("frames")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")

@@ -1,0 +1,7 @@
+{"frames":[
+  {"filename":"fly_0","frame":{"x":0,"y":0,"w":8,"h":8},"duration":100},
+  {"filename":"fly_1","frame":{"x":8,"y":0,"w":8,"h":8},"duration":100}
+],
+"meta":{"app":"Aseprite","image":"enemy_bullet_sheet.png","format":"RGBA8888","size":{"w":16,"h":8},"frameSize":{"w":8,"h":8},"layout":"one row per tag","frameTags":[
+  {"name":"fly","from":0,"to":1,"direction":"forward","row":0,"durations":[100,100]}
+]}}

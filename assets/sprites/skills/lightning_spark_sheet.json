@@ -1,0 +1,9 @@
+{"frames":[
+  {"filename":"spark_0","frame":{"x":0,"y":0,"w":16,"h":16},"duration":50},
+  {"filename":"spark_1","frame":{"x":16,"y":0,"w":16,"h":16},"duration":50},
+  {"filename":"spark_2","frame":{"x":32,"y":0,"w":16,"h":16},"duration":50},
+  {"filename":"spark_3","frame":{"x":48,"y":0,"w":16,"h":16},"duration":50}
+],
+"meta":{"app":"Aseprite","image":"lightning_spark_sheet.png","format":"RGBA8888","size":{"w":64,"h":16},"frameSize":{"w":16,"h":16},"layout":"one row per tag","frameTags":[
+  {"name":"spark","from":0,"to":3,"direction":"forward","row":0,"durations":[50,50,50,50]}
+]}}

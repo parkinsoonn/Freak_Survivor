@@ -10,6 +10,7 @@ const CLEANUP_TIME := 1.0
 
 @export var spawner: Node
 @export var wave_text: Label # Üst ortada "WAVE 3  0:24"
+@export var wave_progress: Range # Yazının altında kalan süre çubuğu
 @export var shop_panel: Control
 
 @export_group("Wave Banner'ı")
@@ -29,6 +30,15 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	_game_manager = get_tree().get_first_node_in_group("game_manager")
+
+	if Settings.debug_start_wave > 1:
+		# Test dalgası: önce bol altınla market, "SONRAKİ DALGA" seçilen dalgayı başlatır
+		wave = Settings.debug_start_wave - 1
+		_game_manager.add_gold(9999)
+		await get_tree().process_frame # Market kartları kendi _ready'sinde kurulur
+		_open_shop()
+		return
+
 	_start_next_wave()
 
 
@@ -83,6 +93,7 @@ func _end_wave() -> void:
 	# Kalan moblar ölüm efektiyle silinir; skor ve altın vermez
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		_game_manager.kill_enemy(enemy, false, false)
+	get_tree().call_group("enemy_bullet", "queue_free")
 
 	# Toplanmayan altınlar sönerek kaybolur; son karede öldürülenlerinki ertelenmiş eklendiği için bir kare bekle
 	await get_tree().process_frame
@@ -94,7 +105,10 @@ func _end_wave() -> void:
 		tween.tween_callback(coin.queue_free)
 
 	await get_tree().create_timer(CLEANUP_TIME, false).timeout
+	_open_shop()
 
+
+func _open_shop() -> void:
 	state = State.SHOP
 	_game_manager.set_hud_visibility(false)
 	get_tree().paused = true
@@ -121,3 +135,5 @@ func _update_wave_text() -> void:
 	if wave_text:
 		var seconds := ceili(time_left)
 		wave_text.text = (tr("DALGA %d") % wave) + "  %d:%02d" % [floori(seconds / 60.0), seconds % 60]
+	if wave_progress:
+		wave_progress.value = time_left / wave_duration(wave) * 100.0

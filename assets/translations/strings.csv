@@ -7,6 +7,10 @@ MENÜ,MENÜ,MENU
 TEKRAR DENE,TEKRAR DENE,TRY AGAIN
 OYUN DURDU,OYUN DURDU,GAME PAUSED
 ÖLDÜN,ÖLDÜN,YOU DIED
+Öldürme: %d   Altın: %d   Süre: %s,Öldürme: %d   Altın: %d   Süre: %s,Kills: %d   Gold: %d   Time: %s
+YENİ REKOR!,YENİ REKOR!,NEW RECORD!
+UCUBE YIĞINI,UCUBE YIĞINI,FREAK PILE
+EN İYİ: DALGA %d,EN İYİ: DALGA %d,BEST: WAVE %d
 SKOR: %d,SKOR: %d,SCORE: %d
 MARKET,MARKET,SHOP
 SONRAKİ WAVE,SONRAKİ DALGA,NEXT WAVE
@@ -29,6 +33,13 @@ Can Doldur,Can Doldur,Heal
 2 can doldurur,2 can doldurur,Restores 2 health
 Dash,Dash,Dash
 Dash bekleme süresi -0.15 sn,Dash süresi -0.15 sn,Dash cooldown -0.15 s
+Yetenekler,Yetenekler,Skills
+Bariyer Süresi,Bariyer Süresi,Barrier Time
+Kalkan süresi +0.5 sn,Kalkan süresi +0.5 sn,Shield time +0.5 s
+Bariyer,Bariyer,Barrier
+Bariyer bekleme süresi -2 sn,Bekleme -2 sn,Barrier cooldown -2 s
+Atom Bombası,Atom Bombası,Nuke
+Bomba bekleme süresi -8 sn,Bekleme -8 sn,Nuke cooldown -8 s
 Atış Hızı,Atış Hızı,Fire Rate
 Atışlar arası süre -0.02 sn,Atış aralığı -0.02 sn,Shot delay -0.02 s
 Mermi Adedi,Mermi Adedi,Bullet Count
@@ -44,3 +55,9 @@ Kılıç Boyutu,Kılıç Boyutu,Saber Size
 Kılıç boyutu +%20,Kılıç boyutu +%20,Saber size +20%
 Yörünge,Yörünge,Orbit
 Dönüş yarıçapı +0.3,Dönüş yarıçapı +0.3,Orbit radius +0.3
+Yıldırım,Yıldırım,Lightning
+"Yıldırımı açar, sonra +1 sekme","Yıldırımı açar, sonra +1 sekme","Unlocks it, then +1 chain"
+Çakma Hızı,Çakma Hızı,Strike Rate
+Çakma aralığı -0.25 sn,Çakma aralığı -0.25 sn,Strike delay -0.25 s
+Menzil,Menzil,Range
+Yıldırım menzili +1,Yıldırım menzili +1,Lightning range +1
