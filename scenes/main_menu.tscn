@@ -105,7 +105,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-scale = Vector2(2.4, 2.4)
+scale = Vector2(2.2, 2.2)
 mouse_filter = 2
 
 [node name="Background" type="Panel" parent="UI/Canvas" unique_id=1872976312]
