@@ -17,7 +17,7 @@ Hold out against hordes of monsters until each wave's timer runs out, collect th
 5. **Shop:** buy upgrades with your gold, then press **NEXT WAVE**.
 6. When you die, the Game Over screen shows the wave you reached plus kills, gold collected and play time. Your best wave is saved and shown on the main menu; gold and upgrades only last for the current run.
 
-A **golem** (mini boss) appears halfway through every 3rd wave.
+A **golem** (mini boss) appears halfway through every 3rd wave. Every 10th wave the **Freak Pile** boss rises out of the ground a quarter of the way in: it alternates a ring of orbs and an aimed volley, enrages at half health (faster, more orbs) and survives the nuke (it only takes a quarter of its health). Its health bar is shown at the top of the screen.
 
 ### Controls
 

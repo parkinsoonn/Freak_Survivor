@@ -1,4 +1,4 @@
--- Dalga süresi çubuğu (16x6, 9-slice; kenar payı 2 piksel = x4 sheet'te 8). Kare 0: boş çubuk, kare 1: dolgu.
+-- Dalga süresi çubuğu (16x6, 9-slice; kenar payı 2 piksel = x4 sheet'te 8). Kare 0: boş çubuk, kare 1: dolgu, kare 2: boss dolgusu.
 -- Çalıştırma: aseprite -b --script-param out=<klasör> --script hud_timer_bar.lua
 
 local OUT = app.params["out"]
@@ -17,4 +17,10 @@ UI.rect(fill, 1, 1, W - 2, H - 2, "y")
 UI.rect(fill, 1, 1, W - 2, 1, "c")
 UI.rect(fill, 1, H - 2, W - 2, 1, "o")
 
-UI.export(OUT, "hud_timer_bar", W, H, { { name = "bar", frames = { empty, fill }, ms = 100 } }, { 4 })
+-- Boss can barı dolgusu: kırmızı
+local boss = UI.grid(W, H)
+UI.rect(boss, 1, 1, W - 2, H - 2, "r")
+UI.rect(boss, 1, 1, W - 2, 1, "p")
+UI.rect(boss, 1, H - 2, W - 2, 1, "R")
+
+UI.export(OUT, "hud_timer_bar", W, H, { { name = "bar", frames = { empty, fill, boss }, ms = 100 } }, { 4 })

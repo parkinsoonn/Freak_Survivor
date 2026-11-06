@@ -1,7 +1,8 @@
 {"frames":[
   {"filename":"bar_0","frame":{"x":0,"y":0,"w":16,"h":6},"duration":100},
-  {"filename":"bar_1","frame":{"x":16,"y":0,"w":16,"h":6},"duration":100}
+  {"filename":"bar_1","frame":{"x":16,"y":0,"w":16,"h":6},"duration":100},
+  {"filename":"bar_2","frame":{"x":32,"y":0,"w":16,"h":6},"duration":100}
 ],
-"meta":{"app":"Aseprite","image":"hud_timer_bar_sheet.png","format":"RGBA8888","size":{"w":32,"h":6},"frameSize":{"w":16,"h":6},"layout":"one row per tag","frameTags":[
-  {"name":"bar","from":0,"to":1,"direction":"forward","row":0,"durations":[100,100]}
+"meta":{"app":"Aseprite","image":"hud_timer_bar_sheet.png","format":"RGBA8888","size":{"w":48,"h":6},"frameSize":{"w":16,"h":6},"layout":"one row per tag","frameTags":[
+  {"name":"bar","from":0,"to":2,"direction":"forward","row":0,"durations":[100,100,100]}
 ]}}

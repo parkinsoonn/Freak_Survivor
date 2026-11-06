@@ -192,7 +192,10 @@ func _perform_nuke() -> void:
 
 	if _game_manager:
 		for enemy in get_tree().get_nodes_in_group("enemy"):
-			_game_manager.kill_enemy(enemy, false)
+			if enemy.has_method("on_nuke"):
+				enemy.on_nuke() # Boss tek bombayla ölmez
+			else:
+				_game_manager.kill_enemy(enemy, false)
 
 	# Tek tek ses/sarsıntı yerine tek büyük patlama
 	if _camera: _camera.trigger_shake(0.5, 0.6)

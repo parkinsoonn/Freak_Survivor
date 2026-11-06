@@ -16,9 +16,17 @@ extends Node
 ## Her kaçıncı wave'in ortasında bir kez golem çıkar
 @export var mini_boss_every := 5
 
+@export_group("Büyük Boss")
+@export var boss_scene: PackedScene
+## Her kaçıncı wave'in ilk çeyreğinde boss çıkar
+@export var boss_every := 10
+## Belirme animasyonu görünsün diye oyuncuya daha yakın çıkar (birim)
+@export var boss_spawn_radius := 7.0
+
 var _timer := 0.0
 var _wave_time := 0.0
 var _boss_time := -1.0 # Bu wave'de golemin çıkacağı an; -1 = yok
+var _big_boss_time := -1.0
 var _player: Node2D
 var _start_interval := 0.0
 var _pool: Array[PackedScene] = [] # Bu dalgada çıkabilecek düşmanlar
@@ -46,6 +54,7 @@ func start_wave(wave: int, duration: float) -> void:
 	_timer = 0.0
 	_wave_time = 0.0
 	_boss_time = duration / 2.0 if wave % mini_boss_every == 0 else -1.0
+	_big_boss_time = duration / 4.0 if wave % boss_every == 0 else -1.0
 	set_process(true)
 
 
@@ -63,6 +72,9 @@ func _process(delta: float) -> void:
 	if _boss_time >= 0.0 and _wave_time >= _boss_time:
 		_spawn(mini_boss_scene)
 		_boss_time = -1.0
+	if _big_boss_time >= 0.0 and _wave_time >= _big_boss_time:
+		_spawn(boss_scene, boss_spawn_radius)
+		_big_boss_time = -1.0
 
 
 func _spawn_enemy() -> void:
@@ -71,11 +83,11 @@ func _spawn_enemy() -> void:
 	_spawn(_pool.pick_random())
 
 
-func _spawn(scene: PackedScene) -> void:
+func _spawn(scene: PackedScene, radius := spawn_radius) -> void:
 	if not is_instance_valid(_player) or scene == null:
 		return
 
 	var random_direction := Vector2.from_angle(randf() * TAU)
 	var enemy: Node2D = scene.instantiate()
-	enemy.position = _player.global_position + random_direction * spawn_radius * Settings.UNIT
+	enemy.position = _player.global_position + random_direction * radius * Settings.UNIT
 	get_parent().add_child(enemy)
