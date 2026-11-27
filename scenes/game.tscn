@@ -38,33 +38,23 @@
 [ext_resource type="Script" uid="uid://xdrxluq70tc7" path="res://scripts/wave_manager.gd" id="s_wave"]
 [ext_resource type="Texture2D" uid="uid://6obdnfa1rbfc" path="res://assets/sprites/ui/wave_banner_sheet.png" id="t_banner"]
 [ext_resource type="Texture2D" uid="uid://bdoyq3xt6v41c" path="res://assets/sprites/skills/barrier_icon_sheet.png" id="t_barrier"]
+[ext_resource type="Texture2D" uid="uid://d00lgtmm12a0k" path="res://assets/sprites/ui/boss_plate_sheet_x4.png" id="t_boss_plate"]
 [ext_resource type="Texture2D" uid="uid://o36njjm125y2" path="res://assets/sprites/pickups/gold_coin_sheet.png" id="t_coin"]
 [ext_resource type="Texture2D" uid="uid://gqcwagvpyrn5" path="res://assets/sprites/nisangah.png" id="t_cursor"]
-[ext_resource type="Texture2D" uid="uid://d0ddee4trh6ik" path="res://assets/sprites/ui/skill_icons_sheet.png" id="t_skill_icons"]
 [ext_resource type="Texture2D" uid="uid://ds2fpnj0ooh7k" path="res://assets/sprites/map/zemin_ucube.png" id="t_ground"]
 [ext_resource type="Texture2D" uid="uid://cw8a46dfphycs" path="res://assets/sprites/ui/health_bar_sheet_x4.png" id="t_health"]
 [ext_resource type="Texture2D" uid="uid://c7j0e41s2wq1e" path="res://assets/sprites/ui/health_heart_sheet_x4.png" id="t_heart"]
-[ext_resource type="Texture2D" uid="uid://d00lgtmm12a0k" path="res://assets/sprites/ui/boss_plate_sheet_x4.png" id="t_boss_plate"]
-[ext_resource type="Texture2D" uid="uid://cjlpe27qsfe5q" path="res://assets/sprites/ui/icon_button_sheet_x4.png" id="t_icon_button"]
 [ext_resource type="Texture2D" uid="uid://ct30xd8ogmv61" path="res://assets/sprites/ui/hud_panel_sheet_x4.png" id="t_hud_panel"]
+[ext_resource type="Texture2D" uid="uid://cjlpe27qsfe5q" path="res://assets/sprites/ui/icon_button_sheet_x4.png" id="t_icon_button"]
 [ext_resource type="Texture2D" uid="uid://bl1d7fivd24vm" path="res://assets/sprites/ui/key_badge_sheet_x4.png" id="t_key_badge"]
 [ext_resource type="Texture2D" uid="uid://cq668c0va2x6i" path="res://assets/sprites/ui/market_panel_sheet_x4.png" id="t_market_panel"]
 [ext_resource type="Texture2D" uid="uid://dw51gu41xv65m" path="res://assets/sprites/ui/next_wave_button_sheet.png" id="t_next_wave"]
 [ext_resource type="Texture2D" uid="uid://dwts7mtultequ" path="res://assets/sprites/asker.png" id="t_player"]
+[ext_resource type="Texture2D" uid="uid://d0ddee4trh6ik" path="res://assets/sprites/ui/skill_icons_sheet.png" id="t_skill_icons"]
 [ext_resource type="Texture2D" uid="uid://du57u3hama3lt" path="res://assets/sprites/ui/hud_timer_bar_sheet_x4.png" id="t_timer_bar"]
 
 [sub_resource type="RectangleShape2D" id="player_shape"]
 size = Vector2(54.17, 68.04)
-
-[sub_resource type="Curve" id="dash_width"]
-_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="dash_color"]
-colors = PackedColorArray(0.7019608, 0.9019608, 1, 0, 0.7019608, 0.9019608, 1, 0.6)
-
-[sub_resource type="CircleShape2D" id="pickup_shape"]
-radius = 128.0
 
 [sub_resource type="AtlasTexture" id="health_bar"]
 atlas = ExtResource("t_health")
@@ -78,6 +68,20 @@ region = Rect2(64, 0, 64, 24)
 atlas = ExtResource("t_health")
 region = Rect2(128, 0, 64, 24)
 
+[sub_resource type="Curve" id="dash_width"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="dash_color"]
+colors = PackedColorArray(0.7019608, 0.9019608, 1, 0, 0.7019608, 0.9019608, 1, 0.6)
+
+[sub_resource type="CircleShape2D" id="pickup_shape"]
+radius = 128.0
+
+[sub_resource type="AtlasTexture" id="timer_bar_empty"]
+atlas = ExtResource("t_timer_bar")
+region = Rect2(0, 0, 64, 24)
+
 [sub_resource type="AtlasTexture" id="heart"]
 atlas = ExtResource("t_heart")
 region = Rect2(0, 0, 44, 40)
@@ -86,37 +90,9 @@ region = Rect2(0, 0, 44, 40)
 atlas = ExtResource("t_coin")
 region = Rect2(8, 8, 16, 16)
 
-[sub_resource type="AtlasTexture" id="timer_bar_empty"]
-atlas = ExtResource("t_timer_bar")
-region = Rect2(0, 0, 64, 24)
-
 [sub_resource type="AtlasTexture" id="timer_bar_fill"]
 atlas = ExtResource("t_timer_bar")
 region = Rect2(64, 0, 64, 24)
-
-[sub_resource type="AtlasTexture" id="boss_bar_fill"]
-atlas = ExtResource("t_timer_bar")
-region = Rect2(128, 0, 64, 24)
-
-[sub_resource type="AtlasTexture" id="banner_intro"]
-atlas = ExtResource("t_banner")
-region = Rect2(0, 0, 180, 45)
-
-[sub_resource type="Gradient" id="cooldown_shade_color"]
-colors = PackedColorArray(0, 0, 0, 0.7, 0, 0, 0, 0.7)
-
-[sub_resource type="GradientTexture2D" id="cooldown_shade"]
-gradient = SubResource("cooldown_shade_color")
-width = 96
-height = 96
-
-[sub_resource type="AtlasTexture" id="dash_icon"]
-atlas = ExtResource("t_skill_icons")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="nuke_icon"]
-atlas = ExtResource("t_skill_icons")
-region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="boss_plate"]
 content_margin_left = 40.0
@@ -128,6 +104,30 @@ texture_margin_left = 32.0
 texture_margin_top = 16.0
 texture_margin_right = 32.0
 texture_margin_bottom = 16.0
+
+[sub_resource type="AtlasTexture" id="boss_bar_fill"]
+atlas = ExtResource("t_timer_bar")
+region = Rect2(128, 0, 64, 24)
+
+[sub_resource type="AtlasTexture" id="banner_intro"]
+atlas = ExtResource("t_banner")
+region = Rect2(0, 0, 180, 45)
+
+[sub_resource type="AtlasTexture" id="dash_icon"]
+atlas = ExtResource("t_skill_icons")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="Gradient" id="cooldown_shade_color"]
+colors = PackedColorArray(0, 0, 0, 0.7, 0, 0, 0, 0.7)
+
+[sub_resource type="GradientTexture2D" id="cooldown_shade"]
+gradient = SubResource("cooldown_shade_color")
+width = 96
+height = 96
+
+[sub_resource type="AtlasTexture" id="nuke_icon"]
+atlas = ExtResource("t_skill_icons")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="banner_clean"]
 atlas = ExtResource("t_banner")
@@ -262,7 +262,7 @@ shape = SubResource("player_shape")
 [node name="Health" type="Node" parent="Player" unique_id=288893415 node_paths=PackedStringArray("health_bar")]
 script = ExtResource("s_health")
 health_bar = NodePath("../../UI/Healthbar")
-fill_textures = [SubResource("health_bar"), SubResource("health_bar_mid"), SubResource("health_bar_low")]
+fill_textures = Array[Texture2D]([SubResource("health_bar"), SubResource("health_bar_mid"), SubResource("health_bar_low")])
 
 [node name="SaberOrbit" type="Node2D" parent="Player" unique_id=164857793]
 script = ExtResource("s_saber_orbit")
@@ -320,7 +320,7 @@ stretch_margin_bottom = 8
 texture_under = SubResource("timer_bar_empty")
 texture_progress = SubResource("health_bar")
 
-[node name="Heart" type="TextureRect" parent="UI/Healthbar"]
+[node name="Heart" type="TextureRect" parent="UI/Healthbar" unique_id=977235697]
 z_index = 1
 layout_mode = 0
 offset_left = -36.0
@@ -331,10 +331,10 @@ mouse_filter = 2
 texture = SubResource("heart")
 
 [node name="StatsPanel" type="NinePatchRect" parent="UI" unique_id=707476515]
-offset_left = 835.0
-offset_top = 133.0
-offset_right = 1095.0
-offset_bottom = 245.0
+offset_left = 1648.0
+offset_top = 9.0
+offset_right = 1908.0
+offset_bottom = 121.0
 texture = ExtResource("t_hud_panel")
 patch_margin_left = 20
 patch_margin_top = 20
@@ -420,14 +420,15 @@ texture_under = SubResource("timer_bar_empty")
 texture_progress = SubResource("timer_bar_fill")
 
 [node name="BossBar" type="Control" parent="UI" unique_id=1796910388 node_paths=PackedStringArray("bar")]
-visible = false
 layout_mode = 3
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -400.0
-offset_top = 264.0
-offset_right = 400.0
-offset_bottom = 344.0
+offset_left = -396.0
+offset_top = 142.0
+offset_right = 404.0
+offset_bottom = 222.0
+grow_horizontal = 2
 mouse_filter = 2
 script = ExtResource("s_boss_bar")
 bar = NodePath("Bar")
@@ -712,7 +713,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.10980392, 0.10980392, 0.10980392, 0.7)
 
-[node name="Frame" type="NinePatchRect" parent="UI/PausePanel"]
+[node name="Frame" type="NinePatchRect" parent="UI/PausePanel" unique_id=1974721093]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -728,7 +729,7 @@ patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
 
-[node name="Ribbon" type="TextureRect" parent="UI/PausePanel"]
+[node name="Ribbon" type="TextureRect" parent="UI/PausePanel" unique_id=248908454]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -819,7 +820,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.10980392, 0.10980392, 0.10980392, 0.7)
 
-[node name="Frame" type="NinePatchRect" parent="UI/GameOverPanel"]
+[node name="Frame" type="NinePatchRect" parent="UI/GameOverPanel" unique_id=278469216]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -835,7 +836,7 @@ patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
 
-[node name="Ribbon" type="TextureRect" parent="UI/GameOverPanel"]
+[node name="Ribbon" type="TextureRect" parent="UI/GameOverPanel" unique_id=932448172]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
