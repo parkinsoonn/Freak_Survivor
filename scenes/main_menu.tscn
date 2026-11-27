@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dxrvpijyyr1e3" path="res://scripts/main_menu_controller.gd" id="s_menu"]
 [ext_resource type="Script" uid="uid://bht0umigatto2" path="res://scripts/tint_button.gd" id="s_tint"]
 [ext_resource type="Texture2D" uid="uid://bw4o6ladgf7q6" path="res://assets/sprites/logo.png" id="t_logo"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/QUIT_PLAY_blank.png" id="t_quit_play"]
+[ext_resource type="Texture2D" uid="uid://byqdycabrw433" path="res://assets/sprites/ui/QUIT_PLAY_blank.png" id="t_quit_play"]
 [ext_resource type="Texture2D" uid="uid://cubkqyp3o7bui" path="res://assets/sprites/hoparlor.png" id="t_speaker"]
 
 [sub_resource type="StyleBoxFlat" id="menu_panel"]
@@ -105,6 +105,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(2.2, 2.2)
 mouse_filter = 2
 
@@ -114,19 +116,26 @@ offset_left = -400.0
 offset_top = -225.0
 offset_right = 400.0
 offset_bottom = 225.0
+scale = Vector2(1.0009273, 1)
 theme_override_styles/panel = SubResource("menu_panel")
 
 [node name="Logo" type="TextureRect" parent="UI/Canvas" unique_id=604854620]
 layout_mode = 0
-offset_left = -75.0
-offset_top = -172.0
-offset_right = 75.0
-offset_bottom = -22.0
+offset_left = -58.636364
+offset_top = -128.63635
+offset_right = 91.36363
+offset_bottom = 21.363647
+scale = Vector2(0.86360466, 0.8809146)
 texture = SubResource("logo")
 expand_mode = 1
 
 [node name="DifficultySelector" type="Control" parent="UI/Canvas" unique_id=720499453]
 anchors_preset = 0
+offset_left = 4.545456
+offset_top = 19.999987
+offset_right = 4.545456
+offset_bottom = 19.999987
+scale = Vector2(0.86360466, 0.8809146)
 mouse_filter = 2
 
 [node name="PrevButton" type="Button" parent="UI/Canvas/DifficultySelector" unique_id=718896027]
@@ -177,21 +186,24 @@ script = ExtResource("s_tint")
 
 [node name="PlayButton" type="TextureButton" parent="UI/Canvas" unique_id=396641837]
 layout_mode = 0
-offset_left = -68.71
-offset_top = 47.76
-offset_right = 67.51
-offset_bottom = 106.24
+offset_left = -55.982727
+offset_top = 67.03272
+offset_right = 80.237274
+offset_bottom = 125.512726
+scale = Vector2(0.86360466, 0.8809146)
 texture_normal = SubResource("play")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
-[node name="Label" type="Label" parent="UI/Canvas/PlayButton"]
+[node name="Label" type="Label" parent="UI/Canvas/PlayButton" unique_id=1476187990]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -5
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "OYNA"
 horizontal_alignment = 1
@@ -199,21 +211,24 @@ vertical_alignment = 1
 
 [node name="QuitButton" type="TextureButton" parent="UI/Canvas" unique_id=583334500]
 layout_mode = 0
-offset_left = -68.71
-offset_top = 120.74
-offset_right = 67.51
-offset_bottom = 177.66
+offset_left = -55.982727
+offset_top = 140.01273
+offset_right = 80.237274
+offset_bottom = 196.93274
+scale = Vector2(0.86360466, 0.8809146)
 texture_normal = SubResource("quit")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
-[node name="Label" type="Label" parent="UI/Canvas/QuitButton"]
+[node name="Label" type="Label" parent="UI/Canvas/QuitButton" unique_id=1745212709]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -5
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "ÇIKIŞ"
 horizontal_alignment = 1
@@ -221,21 +236,22 @@ vertical_alignment = 1
 
 [node name="SpeakerButton" type="TextureButton" parent="UI/Canvas" unique_id=574917705]
 layout_mode = 0
-offset_left = 232.01
-offset_top = -219.51
-offset_right = 280.19
-offset_bottom = -170.7
+offset_left = 256.36365
+offset_top = -230.0
+offset_right = 304.54364
+offset_bottom = -181.19
 texture_normal = ExtResource("t_speaker")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("s_tint")
 
-[node name="LanguageButton" type="Button" parent="UI/Canvas"]
+[node name="LanguageButton" type="Button" parent="UI/Canvas" unique_id=310488609]
+auto_translate_mode = 2
 layout_mode = 0
-offset_left = -388.0
-offset_top = -219.0
-offset_right = -328.0
-offset_bottom = -183.0
+offset_left = -22.72728
+offset_top = -196.81818
+offset_right = 37.27272
+offset_bottom = -160.81818
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -244,20 +260,19 @@ theme_override_styles/normal = SubResource("no_focus")
 theme_override_styles/pressed = SubResource("no_focus")
 theme_override_styles/hover = SubResource("no_focus")
 theme_override_styles/focus = SubResource("no_focus")
-auto_translate_mode = 2
 text = "TR"
 script = ExtResource("s_tint")
 
-[node name="DevWaveSelector" type="Control" parent="UI/Canvas"]
-visible = false
+[node name="DevWaveSelector" type="Control" parent="UI/Canvas" unique_id=1345868113]
 anchors_preset = 0
-offset_left = -388.0
-offset_top = -176.0
-offset_right = -132.0
-offset_bottom = -140.0
+offset_left = -422.72726
+offset_top = -229.54546
+offset_right = -166.72726
+offset_bottom = -193.54546
+scale = Vector2(0.83370614, 0.88931525)
 mouse_filter = 2
 
-[node name="PrevButton" type="Button" parent="UI/Canvas/DevWaveSelector"]
+[node name="PrevButton" type="Button" parent="UI/Canvas/DevWaveSelector" unique_id=28110151]
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 36.0
@@ -272,19 +287,19 @@ theme_override_styles/focus = SubResource("no_focus")
 text = "<"
 script = ExtResource("s_tint")
 
-[node name="Label" type="Label" parent="UI/Canvas/DevWaveSelector"]
+[node name="Label" type="Label" parent="UI/Canvas/DevWaveSelector" unique_id=552396903]
+auto_translate_mode = 2
 layout_mode = 0
 offset_left = 30.0
 offset_right = 226.0
 offset_bottom = 36.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
-auto_translate_mode = 2
 text = "TEST DALGA 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NextButton" type="Button" parent="UI/Canvas/DevWaveSelector"]
+[node name="NextButton" type="Button" parent="UI/Canvas/DevWaveSelector" unique_id=1324657673]
 layout_mode = 0
 offset_left = 226.0
 offset_right = 256.0
@@ -302,10 +317,10 @@ script = ExtResource("s_tint")
 
 [node name="VolumeSlider" type="HSlider" parent="UI/Canvas" unique_id=459086305]
 layout_mode = 0
-offset_left = 283.82
-offset_top = -205.4
-offset_right = 383.98
-offset_bottom = -185.4
+offset_left = 313.63635
+offset_top = -214.54544
+offset_right = 413.79636
+offset_bottom = -194.54544
 theme_override_icons/grabber = SubResource("knob")
 theme_override_icons/grabber_highlight = SubResource("knob_hover")
 theme_override_styles/slider = SubResource("slider_track")
@@ -316,17 +331,16 @@ step = 0.001
 
 [node name="Credits" type="Label" parent="UI/Canvas" unique_id=897085123]
 layout_mode = 0
-offset_left = 243.92
-offset_top = 163.44
-offset_right = 520.08
-offset_bottom = 252.56
+offset_left = 275.9091
+offset_top = 171.36365
+offset_right = 432.4436
+offset_bottom = 237.01456
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "by  parkinson
  and  oridantes"
 
-[node name="BestWave" type="Label" parent="UI/Canvas"]
-visible = false
+[node name="BestWave" type="Label" parent="UI/Canvas" unique_id=745078457]
 layout_mode = 0
 offset_left = -388.0
 offset_top = 182.0

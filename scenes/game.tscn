@@ -4,9 +4,10 @@
 [ext_resource type="AudioStream" uid="uid://ckyqkptskdven" path="res://assets/audio/death.mp3" id="a_game_over"]
 [ext_resource type="AudioStream" uid="uid://vdtxa3vrfkkh" path="res://assets/audio/bg_music.mp3" id="a_music"]
 [ext_resource type="AudioStream" uid="uid://buh1nuysfoowx" path="res://assets/audio/gun_shot.mp3" id="a_shot"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/skills/barrier_frames.tres" id="f_barrier"]
+[ext_resource type="SpriteFrames" uid="uid://bejl4di0xm3f7" path="res://assets/sprites/skills/barrier_frames.tres" id="f_barrier"]
 [ext_resource type="SpriteFrames" uid="uid://b2eu3ynbcowb" path="res://assets/sprites/map/decor_frames.tres" id="f_decor"]
 [ext_resource type="SpriteFrames" uid="uid://tcwcr1csembq" path="res://assets/sprites/merchant/merchant_frames.tres" id="f_merchant"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/boss_ucube.tscn" id="p_boss"]
 [ext_resource type="PackedScene" path="res://scenes/bullet.tscn" id="p_bullet"]
 [ext_resource type="PackedScene" path="res://scenes/death_effect.tscn" id="p_death_effect"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/fare.tscn" id="p_fare"]
@@ -14,21 +15,20 @@
 [ext_resource type="PackedScene" path="res://scenes/gold.tscn" id="p_gold"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/golem.tscn" id="p_golem"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/goz.tscn" id="p_goz"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/nisanci.tscn" id="p_nisanci"]
-[ext_resource type="PackedScene" path="res://scenes/lightning_spark.tscn" id="p_spark"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/boss_ucube.tscn" id="p_boss"]
-[ext_resource type="Script" path="res://scripts/boss_bar.gd" id="s_boss_bar"]
-[ext_resource type="Script" path="res://scripts/lightning_caster.gd" id="s_lightning"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/patlayan.tscn" id="p_patlayan"]
 [ext_resource type="PackedScene" path="res://scenes/miknatis.tscn" id="p_magnet"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/mumyavari.tscn" id="p_mumyavari"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/nisanci.tscn" id="p_nisanci"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/patlayan.tscn" id="p_patlayan"]
 [ext_resource type="PackedScene" path="res://scenes/isin_kilici.tscn" id="p_saber"]
+[ext_resource type="PackedScene" path="res://scenes/lightning_spark.tscn" id="p_spark"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/zombi.tscn" id="p_zombi"]
 [ext_resource type="Script" uid="uid://dqucgx4cag7j7" path="res://scripts/infinite_background.gd" id="s_background"]
+[ext_resource type="Script" uid="uid://coxe0ctqll5hy" path="res://scripts/boss_bar.gd" id="s_boss_bar"]
 [ext_resource type="Script" uid="uid://c3byfsqsl0y3p" path="res://scripts/camera_controller.gd" id="s_camera"]
 [ext_resource type="Script" uid="uid://dnmdaicvkp3wd" path="res://scripts/decor_scatter.gd" id="s_decor"]
 [ext_resource type="Script" uid="uid://cpavgu8xtb7rm" path="res://scripts/game_manager.gd" id="s_game_manager"]
 [ext_resource type="Script" uid="uid://bjerw6sbaljy0" path="res://scripts/player_health.gd" id="s_health"]
+[ext_resource type="Script" uid="uid://2jbgnmnb5xmr" path="res://scripts/lightning_caster.gd" id="s_lightning"]
 [ext_resource type="Script" uid="uid://b30be7vkr64uk" path="res://scripts/player_controller.gd" id="s_player"]
 [ext_resource type="Script" uid="uid://blfmk0v3kupmj" path="res://scripts/saber_orbit.gd" id="s_saber_orbit"]
 [ext_resource type="Script" uid="uid://b6ptapypslfvx" path="res://scripts/shop_panel.gd" id="s_shop"]
@@ -38,20 +38,20 @@
 [ext_resource type="Script" uid="uid://xdrxluq70tc7" path="res://scripts/wave_manager.gd" id="s_wave"]
 [ext_resource type="Texture2D" uid="uid://6obdnfa1rbfc" path="res://assets/sprites/ui/wave_banner_sheet.png" id="t_banner"]
 [ext_resource type="Texture2D" uid="uid://bdoyq3xt6v41c" path="res://assets/sprites/skills/barrier_icon_sheet.png" id="t_barrier"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud_panel_sheet_x4.png" id="t_hud_panel"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud_timer_bar_sheet_x4.png" id="t_timer_bar"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/key_badge_sheet_x4.png" id="t_key_badge"]
 [ext_resource type="Texture2D" uid="uid://o36njjm125y2" path="res://assets/sprites/pickups/gold_coin_sheet.png" id="t_coin"]
 [ext_resource type="Texture2D" uid="uid://gqcwagvpyrn5" path="res://assets/sprites/nisangah.png" id="t_cursor"]
 [ext_resource type="Texture2D" uid="uid://b7ob32c6hvrn5" path="res://assets/sprites/dasharkaplan.png" id="t_dash"]
 [ext_resource type="Texture2D" uid="uid://ds2fpnj0ooh7k" path="res://assets/sprites/map/zemin_ucube.png" id="t_ground"]
 [ext_resource type="Texture2D" uid="uid://dwqd8gug0ai4n" path="res://assets/sprites/healthBar.png" id="t_health"]
+[ext_resource type="Texture2D" uid="uid://ct30xd8ogmv61" path="res://assets/sprites/ui/hud_panel_sheet_x4.png" id="t_hud_panel"]
+[ext_resource type="Texture2D" uid="uid://bl1d7fivd24vm" path="res://assets/sprites/ui/key_badge_sheet_x4.png" id="t_key_badge"]
 [ext_resource type="Texture2D" uid="uid://cq668c0va2x6i" path="res://assets/sprites/ui/market_panel_sheet_x4.png" id="t_market_panel"]
 [ext_resource type="Texture2D" uid="uid://dr4tnhauy440a" path="res://assets/sprites/ui/MENU_RESUME_blank.png" id="t_menu_resume"]
 [ext_resource type="Texture2D" uid="uid://dw51gu41xv65m" path="res://assets/sprites/ui/next_wave_button_sheet.png" id="t_next_wave"]
 [ext_resource type="Texture2D" uid="uid://c3nyjpkpj755l" path="res://assets/sprites/atom_bomba.png" id="t_nuke"]
 [ext_resource type="Texture2D" uid="uid://dwts7mtultequ" path="res://assets/sprites/asker.png" id="t_player"]
 [ext_resource type="Texture2D" uid="uid://cubkqyp3o7bui" path="res://assets/sprites/hoparlor.png" id="t_speaker"]
+[ext_resource type="Texture2D" uid="uid://du57u3hama3lt" path="res://assets/sprites/ui/hud_timer_bar_sheet_x4.png" id="t_timer_bar"]
 [ext_resource type="Texture2D" uid="uid://c5pq5gojmmf6o" path="res://assets/sprites/ui/TRY_AGAIN_blank.png" id="t_try_again"]
 
 [sub_resource type="RectangleShape2D" id="player_shape"]
@@ -75,10 +75,6 @@ region = Rect2(60, 650, 460, 110)
 atlas = ExtResource("t_health")
 region = Rect2(60, 30, 460, 110)
 
-[sub_resource type="AtlasTexture" id="banner_intro"]
-atlas = ExtResource("t_banner")
-region = Rect2(0, 0, 180, 45)
-
 [sub_resource type="AtlasTexture" id="coin_icon"]
 atlas = ExtResource("t_coin")
 region = Rect2(8, 8, 16, 16)
@@ -94,6 +90,10 @@ region = Rect2(64, 0, 64, 24)
 [sub_resource type="AtlasTexture" id="boss_bar_fill"]
 atlas = ExtResource("t_timer_bar")
 region = Rect2(128, 0, 64, 24)
+
+[sub_resource type="AtlasTexture" id="banner_intro"]
+atlas = ExtResource("t_banner")
+region = Rect2(0, 0, 180, 45)
 
 [sub_resource type="Gradient" id="cooldown_shade_color"]
 colors = PackedColorArray(0, 0, 0, 0.7, 0, 0, 0, 0.7)
@@ -289,7 +289,7 @@ health_bar = NodePath("../../UI/Healthbar")
 script = ExtResource("s_saber_orbit")
 saber_scene = ExtResource("p_saber")
 
-[node name="LightningCaster" type="Node2D" parent="Player"]
+[node name="LightningCaster" type="Node2D" parent="Player" unique_id=392622246]
 script = ExtResource("s_lightning")
 spark_scene = ExtResource("p_spark")
 
@@ -338,12 +338,11 @@ nine_patch_stretch = true
 texture_under = SubResource("health_bar_empty")
 texture_progress = SubResource("health_bar")
 
-[node name="StatsPanel" type="NinePatchRect" parent="UI"]
-offset_left = 54.0
-offset_top = 150.0
-offset_right = 314.0
-offset_bottom = 262.0
-mouse_filter = 2
+[node name="StatsPanel" type="NinePatchRect" parent="UI" unique_id=707476515]
+offset_left = 835.0
+offset_top = 133.0
+offset_right = 1095.0
+offset_bottom = 245.0
 texture = ExtResource("t_hud_panel")
 patch_margin_left = 20
 patch_margin_top = 20
@@ -351,6 +350,7 @@ patch_margin_right = 20
 patch_margin_bottom = 20
 
 [node name="ScoreText" type="Label" parent="UI/StatsPanel" unique_id=466480194]
+layout_mode = 0
 offset_left = 22.0
 offset_top = 12.0
 offset_right = 240.0
@@ -359,7 +359,30 @@ theme_override_colors/font_color = Color(0.11, 0.11, 0.11, 1)
 theme_override_font_sizes/font_size = 36
 text = "SCORE: 0"
 
-[node name="WavePanel" type="NinePatchRect" parent="UI"]
+[node name="GoldCounter" type="HBoxContainer" parent="UI/StatsPanel" unique_id=578054199]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 58.0
+offset_right = 240.0
+offset_bottom = 98.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="UI/StatsPanel/GoldCounter" unique_id=2132548618]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("coin_icon")
+expand_mode = 1
+
+[node name="GoldText" type="Label" parent="UI/StatsPanel/GoldCounter" unique_id=565070169]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.11, 0.11, 0.11, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+
+[node name="WavePanel" type="NinePatchRect" parent="UI" unique_id=272329845]
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
@@ -367,7 +390,6 @@ offset_left = -240.0
 offset_top = 12.0
 offset_right = 240.0
 offset_bottom = 120.0
-mouse_filter = 2
 texture = ExtResource("t_hud_panel")
 patch_margin_left = 20
 patch_margin_top = 20
@@ -386,7 +408,7 @@ theme_override_font_sizes/font_size = 48
 text = "WAVE 1  0:20"
 horizontal_alignment = 1
 
-[node name="WaveProgress" type="TextureProgressBar" parent="UI/WavePanel"]
+[node name="WaveProgress" type="TextureProgressBar" parent="UI/WavePanel" unique_id=1263958161]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -405,10 +427,9 @@ stretch_margin_bottom = 8
 texture_under = SubResource("timer_bar_empty")
 texture_progress = SubResource("timer_bar_fill")
 
-[node name="BossBar" type="Control" parent="UI" node_paths=PackedStringArray("bar")]
+[node name="BossBar" type="Control" parent="UI" unique_id=1796910388 node_paths=PackedStringArray("bar")]
 visible = false
 layout_mode = 3
-anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -400.0
@@ -419,7 +440,7 @@ mouse_filter = 2
 script = ExtResource("s_boss_bar")
 bar = NodePath("Bar")
 
-[node name="Name" type="Label" parent="UI/BossBar"]
+[node name="Name" type="Label" parent="UI/BossBar" unique_id=2093318005]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -431,7 +452,7 @@ theme_override_font_sizes/font_size = 40
 text = "UCUBE YIĞINI"
 horizontal_alignment = 1
 
-[node name="Bar" type="TextureProgressBar" parent="UI/BossBar"]
+[node name="Bar" type="TextureProgressBar" parent="UI/BossBar" unique_id=65454735]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -469,28 +490,6 @@ theme_override_font_sizes/font_size = 128
 text = "WAVE 1"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="GoldCounter" type="HBoxContainer" parent="UI/StatsPanel" unique_id=578054199]
-offset_left = 22.0
-offset_top = 58.0
-offset_right = 240.0
-offset_bottom = 98.0
-mouse_filter = 2
-theme_override_constants/separation = 10
-
-[node name="Icon" type="TextureRect" parent="UI/StatsPanel/GoldCounter" unique_id=2132548618]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 2
-texture = SubResource("coin_icon")
-expand_mode = 1
-
-[node name="GoldText" type="Label" parent="UI/StatsPanel/GoldCounter" unique_id=565070169]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.11, 0.11, 0.11, 1)
-theme_override_font_sizes/font_size = 36
-text = "0"
 
 [node name="DashIcon" type="TextureRect" parent="UI" unique_id=353393938]
 anchors_preset = -1
@@ -530,7 +529,7 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="KeyBadge" type="NinePatchRect" parent="UI/DashIcon"]
+[node name="KeyBadge" type="NinePatchRect" parent="UI/DashIcon" unique_id=2019661802]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -541,14 +540,13 @@ offset_left = -48.0
 offset_top = 8.0
 offset_right = 48.0
 offset_bottom = 48.0
-mouse_filter = 2
 texture = ExtResource("t_key_badge")
 patch_margin_left = 12
 patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="UI/DashIcon/KeyBadge"]
+[node name="Label" type="Label" parent="UI/DashIcon/KeyBadge" unique_id=1734891140]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -561,6 +559,7 @@ theme_override_font_sizes/font_size = 28
 text = "Shift"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="NukeIcon" type="TextureRect" parent="UI" unique_id=1025224972]
 anchors_preset = -1
 anchor_left = 0.5
@@ -599,7 +598,7 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="KeyBadge" type="NinePatchRect" parent="UI/NukeIcon"]
+[node name="KeyBadge" type="NinePatchRect" parent="UI/NukeIcon" unique_id=400338954]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -610,14 +609,13 @@ offset_left = -24.0
 offset_top = 8.0
 offset_right = 24.0
 offset_bottom = 48.0
-mouse_filter = 2
 texture = ExtResource("t_key_badge")
 patch_margin_left = 12
 patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="UI/NukeIcon/KeyBadge"]
+[node name="Label" type="Label" parent="UI/NukeIcon/KeyBadge" unique_id=821154625]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -630,6 +628,7 @@ theme_override_font_sizes/font_size = 28
 text = "Q"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="BarrierIcon" type="TextureRect" parent="UI" unique_id=397288835]
 anchors_preset = -1
 anchor_left = 0.5
@@ -668,7 +667,7 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="KeyBadge" type="NinePatchRect" parent="UI/BarrierIcon"]
+[node name="KeyBadge" type="NinePatchRect" parent="UI/BarrierIcon" unique_id=2125639203]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -679,14 +678,13 @@ offset_left = -24.0
 offset_top = 8.0
 offset_right = 24.0
 offset_bottom = 48.0
-mouse_filter = 2
 texture = ExtResource("t_key_badge")
 patch_margin_left = 12
 patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="UI/BarrierIcon/KeyBadge"]
+[node name="Label" type="Label" parent="UI/BarrierIcon/KeyBadge" unique_id=459055282]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -699,6 +697,7 @@ theme_override_font_sizes/font_size = 28
 text = "E"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="NukeFlash" type="ColorRect" parent="UI" unique_id=1991056432]
 visible = false
 anchors_preset = 15
@@ -859,7 +858,7 @@ text = "WAVE 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SummaryPanel" type="NinePatchRect" parent="UI/GameOverPanel"]
+[node name="SummaryPanel" type="NinePatchRect" parent="UI/GameOverPanel" unique_id=2107725023]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -869,14 +868,13 @@ offset_left = -420.0
 offset_top = -90.0
 offset_right = 420.0
 offset_bottom = 70.0
-mouse_filter = 2
 texture = ExtResource("t_hud_panel")
 patch_margin_left = 20
 patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="SummaryText" type="Label" parent="UI/GameOverPanel/SummaryPanel"]
+[node name="SummaryText" type="Label" parent="UI/GameOverPanel/SummaryPanel" unique_id=1872495917]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
