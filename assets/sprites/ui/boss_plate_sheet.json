@@ -1,0 +1,6 @@
+{"frames":[
+  {"filename":"plate_0","frame":{"x":0,"y":0,"w":48,"h":14},"duration":100}
+],
+"meta":{"app":"Aseprite","image":"boss_plate_sheet.png","format":"RGBA8888","size":{"w":48,"h":14},"frameSize":{"w":48,"h":14},"layout":"one row per tag","frameTags":[
+  {"name":"plate","from":0,"to":0,"direction":"forward","row":0,"durations":[100]}
+]}}

@@ -10,11 +10,10 @@ var current_health := 0
 var _invincible_timer := 0.0
 
 @export_group("UI Ayarları")
-## healthBar.png: alt katman boş bar, üst katman dolu bar; value = doluluk pikseli
+## Can barı; value = can yüzdesi (0-100)
 @export var health_bar: TextureProgressBar
-## Bar dokusunda yeşil şeridin başladığı x ve genişliği (kalbin sağı)
-@export var bar_fill_start := 120.0
-@export var bar_fill_width := 310.0
+## Dolgu dokuları: %60 üstü, %30-60, %30 altı (health_bar_sheet: yeşil, altın, kırmızı)
+@export var fill_textures: Array[Texture2D] = []
 
 var is_invincible := false
 
@@ -68,10 +67,13 @@ func increase_max_health(amount: int) -> void:
 	_update_health_ui()
 
 
-# Can oranı kalbin sağındaki şeride yayılır; can 0 ise kalp de boşalır
+# Bar can oranı kadar dolar; renk orana göre yeşil → altın → kırmızı
 func _update_health_ui() -> void:
 	if health_bar:
-		health_bar.value = 0.0 if current_health <= 0 else bar_fill_start + bar_fill_width * current_health / max_health
+		var ratio := float(current_health) / max_health
+		health_bar.value = 100.0 * ratio
+		if fill_textures.size() == 3:
+			health_bar.texture_progress = fill_textures[0 if ratio > 0.6 else 1 if ratio > 0.3 else 2]
 
 
 func _die() -> void:

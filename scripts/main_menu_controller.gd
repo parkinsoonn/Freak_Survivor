@@ -2,6 +2,10 @@ extends Node
 
 @export_group("Ayarlar")
 @export var volume_slider: Range
+## Ses butonu; glifi ses kapalıyken sound_off_icon olur
+@export var speaker_button: Button
+@export var sound_on_icon: Texture2D
+@export var sound_off_icon: Texture2D
 
 @export var music: AudioStreamPlayer
 
@@ -35,6 +39,7 @@ func _ready() -> void:
 
 	if saved_volume == 0.0: _is_muted = true
 	else: _last_volume = saved_volume
+	_update_speaker_icon()
 
 	_update_difficulty_text()
 	_update_language_text()
@@ -101,6 +106,12 @@ func set_volume(volume: float) -> void:
 		_last_volume = volume
 	else:
 		_is_muted = true
+	_update_speaker_icon()
+
+
+func _update_speaker_icon() -> void:
+	if speaker_button:
+		speaker_button.icon = sound_off_icon if Settings.volume == 0.0 else sound_on_icon
 
 
 func toggle_mute() -> void:
@@ -113,6 +124,7 @@ func toggle_mute() -> void:
 		Settings.volume = 0.0
 
 	if volume_slider: volume_slider.set_value_no_signal(Settings.volume)
+	_update_speaker_icon()
 
 
 func play_game() -> void:

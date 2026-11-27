@@ -1,0 +1,14 @@
+{"frames":[
+  {"filename":"button_0","frame":{"x":0,"y":0,"w":16,"h":16},"duration":100},
+  {"filename":"button_1","frame":{"x":16,"y":0,"w":16,"h":16},"duration":100},
+  {"filename":"button_2","frame":{"x":32,"y":0,"w":16,"h":16},"duration":100},
+  {"filename":"button_3","frame":{"x":48,"y":0,"w":16,"h":16},"duration":100},
+  {"filename":"glyphs_0","frame":{"x":0,"y":16,"w":16,"h":16},"duration":100},
+  {"filename":"glyphs_1","frame":{"x":16,"y":16,"w":16,"h":16},"duration":100},
+  {"filename":"glyphs_2","frame":{"x":32,"y":16,"w":16,"h":16},"duration":100},
+  {"filename":"glyphs_3","frame":{"x":48,"y":16,"w":16,"h":16},"duration":100}
+],
+"meta":{"app":"Aseprite","image":"icon_button_sheet.png","format":"RGBA8888","size":{"w":64,"h":32},"frameSize":{"w":16,"h":16},"layout":"one row per tag","frameTags":[
+  {"name":"button","from":0,"to":3,"direction":"forward","row":0,"durations":[100,100,100,100]},
+  {"name":"glyphs","from":4,"to":7,"direction":"forward","row":1,"durations":[100,100,100,100]}
+]}}
