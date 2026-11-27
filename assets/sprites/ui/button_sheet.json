@@ -1,0 +1,19 @@
+{"frames":[
+  {"filename":"primary_0","frame":{"x":0,"y":0,"w":24,"h":14},"duration":100},
+  {"filename":"primary_1","frame":{"x":24,"y":0,"w":24,"h":14},"duration":100},
+  {"filename":"primary_2","frame":{"x":48,"y":0,"w":24,"h":14},"duration":100},
+  {"filename":"primary_3","frame":{"x":72,"y":0,"w":24,"h":14},"duration":100},
+  {"filename":"secondary_0","frame":{"x":0,"y":14,"w":24,"h":14},"duration":100},
+  {"filename":"secondary_1","frame":{"x":24,"y":14,"w":24,"h":14},"duration":100},
+  {"filename":"secondary_2","frame":{"x":48,"y":14,"w":24,"h":14},"duration":100},
+  {"filename":"secondary_3","frame":{"x":72,"y":14,"w":24,"h":14},"duration":100},
+  {"filename":"danger_0","frame":{"x":0,"y":28,"w":24,"h":14},"duration":100},
+  {"filename":"danger_1","frame":{"x":24,"y":28,"w":24,"h":14},"duration":100},
+  {"filename":"danger_2","frame":{"x":48,"y":28,"w":24,"h":14},"duration":100},
+  {"filename":"danger_3","frame":{"x":72,"y":28,"w":24,"h":14},"duration":100}
+],
+"meta":{"app":"Aseprite","image":"button_sheet.png","format":"RGBA8888","size":{"w":96,"h":42},"frameSize":{"w":24,"h":14},"layout":"one row per tag","frameTags":[
+  {"name":"primary","from":0,"to":3,"direction":"forward","row":0,"durations":[100,100,100,100]},
+  {"name":"secondary","from":4,"to":7,"direction":"forward","row":1,"durations":[100,100,100,100]},
+  {"name":"danger","from":8,"to":11,"direction":"forward","row":2,"durations":[100,100,100,100]}
+]}}
